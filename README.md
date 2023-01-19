@@ -2,8 +2,16 @@
 
 bash나 zsh과 같은 간단한 쉘 만들기
 
+## 동작 단계
 
-## The Syntax Tree Parser
+1. 명령어 입력 (readline)
+2. 어휘 분석 (lexcial analysis)
+3. 문법 분석 (syntax analysis)
+4. 실행 (Execution)
+
+## 어휘 분석 (Lexical Analysis)
+
+## 문법 분석 (Syntax Analysis)
 
 The grammer symbols
 ```
@@ -24,6 +32,8 @@ The grammer symbols
  <simple_command>::=    <pathname>
                  |    <simple_command>  <token>
 ```
+
+## 실행 (Execution)
 
 ## 참고자료
 
