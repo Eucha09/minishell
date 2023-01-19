@@ -18,8 +18,8 @@ The grammer symbols
  <command_line>		::=	<command>
                  	|	<command_line> '|' <command>
  
- <command>			::=	<simple_command>
-					|	<simple_command> <redirect_list>
+ <command>		::=	<simple_command>
+			|	<simple_command> <redirect_list>
  
  <redirect_list>	::=	<io_redirect>
                  	|	<redirect_list> <io_redirect>
