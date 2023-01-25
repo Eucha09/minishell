@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 19:07:56 by yim               #+#    #+#             */
-/*   Updated: 2023/01/25 19:07:57 by yim              ###   ########.fr       */
+/*   Updated: 2023/01/25 19:11:28 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,9 @@ void	cd(char *str, char **envp)
 	check_cd_error(&cwd, envp, &str);
 	str_slash = ft_strjoin("/", str);
 	c_dir = ft_strjoin(cwd, str_slash);
-	printf ("%s\n", c_dir);
 	result = chdir(c_dir);
 	if (result == CODE_ERROR)
 		perror("cd error");
-	getcwd(cwd, 1024);
-	printf ("%s\n", cwd);
 	free (cwd);
 	free (c_dir);
 	free (str_slash);
