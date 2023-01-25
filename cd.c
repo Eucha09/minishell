@@ -6,26 +6,26 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 19:07:56 by yim               #+#    #+#             */
-/*   Updated: 2023/01/25 19:35:31 by yim              ###   ########.fr       */
+/*   Updated: 2023/01/25 19:48:10 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_cd(char *cwd, char *c_dir, char *str_slash)
+static void	free_cd(char *cwd, char *c_dir, char *str_slash)
 {
 	free (cwd);
 	free (c_dir);
 	free (str_slash);
 }
 
-void	free_cd_error(char *str, char *cwd)
+static void	free_cd_error(char *str, char *cwd)
 {
 	free (cwd);
 	perror(str);
 }
 
-char	*find_home(char **envp)
+static char	*find_home(char **envp)
 {
 	int		i;
 	char	*home;
@@ -40,7 +40,7 @@ char	*find_home(char **envp)
 	return (home);
 }
 
-int	check_cd_error(char **cwd, char **envp, char **str)
+static int	check_cd(char **cwd, char **envp, char **str)
 {
 	char	*home;
 
@@ -78,7 +78,7 @@ void	cd(char *str, char **envp)
 		return (perror("malloc error"));
 	ft_memset(cwd, 0, sizeof(char) * 1024);
 	getcwd(cwd, sizeof(char) * 1024);
-	if (check_cd_error(&cwd, envp, &str) == CODE_ERROR)
+	if (check_cd(&cwd, envp, &str) == CODE_ERROR)
 		return (free_cd_error("malloc error", cwd));
 	str_slash = ft_strjoin("/", str);
 	if (str_slash == NULL)
