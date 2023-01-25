@@ -15,22 +15,22 @@ bash나 zsh과 같은 간단한 쉘 만들기
 
 The grammer symbols
 ```
- <command_line>    ::=    <command>
-                 |    <command_line> '|' <command>
+ <command_line>		::=	<command>
+                 	|	<command_line> '|' <command>
  
- <command>        ::=    <simple_command>
-                 |    <simple_command> <redirect_list>
+ <command>		::=	<simple_command>
+			|	<simple_command> <redirect_list>
  
- <redirect_list>    ::= <io_redirect>
-                 |    <redirect_list> <io_redirect>
+ <redirect_list>	::=	<io_redirect>
+                 	|	<redirect_list> <io_redirect>
  
- <io_redirect>    ::= '<' <filename>
-                 |    '>' <filename>
-                 |    '>>' <filename>
-                 |    '<<' <here_end>
+ <io_redirect>		::=	'<' <filename>
+                 	|	'>' <filename>
+                 	|	'>>' <filename>
+                 	|	'<<' <here_end>
                              
- <simple_command>::=    <pathname>
-                 |    <simple_command>  <token>
+ <simple_command>	::=	<pathname>
+                 	|	<simple_command>  <token>
 ```
 
 ## 실행 (Execution)
