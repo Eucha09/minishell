@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 15:25:26 by yim               #+#    #+#             */
-/*   Updated: 2023/01/26 15:01:26 by yim              ###   ########.fr       */
+/*   Updated: 2023/01/26 15:57:12 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@
 
 //builtins
 void	cd(char *str, char **envp);
+int		code_error(char *str);
 void	pwd(void);
 #endif
