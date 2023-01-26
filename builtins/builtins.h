@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/26 15:58:29 by yim               #+#    #+#             */
-/*   Updated: 2023/01/26 16:18:14 by yim              ###   ########.fr       */
+/*   Created: 2023/01/25 15:25:26 by yim               #+#    #+#             */
+/*   Updated: 2023/01/26 17:11:25 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef BUILTINS_H
+# define BUILTINS_H
 
-void	echo(char *str, int flag)
-{
-	ft_putstr_fd(str, 1);
-	if (flag != TRUE)
-		write (1, "\n", 1);
-}
+# include "../minishell.h"
+
+# define CODE_ERROR -1
+# define CODE_OK 0
+# define TRUE 1
+# define FALSE 0
+
+//builtins
+void	cd(char *str, char **envp);
+int		code_error(char *str);
+void	pwd(void);
+#endif

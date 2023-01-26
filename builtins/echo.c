@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/26 17:10:22 by yim               #+#    #+#             */
-/*   Updated: 2023/01/26 17:13:33 by yim              ###   ########.fr       */
+/*   Created: 2023/01/26 15:58:29 by yim               #+#    #+#             */
+/*   Updated: 2023/01/26 17:08:42 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "builtins.h"
 
-# include <stdio.h> //check
-# include <unistd.h>
-# include <string.h>
-# include "libft/libft.h"
-# include "builtins/builtins.h"
-
-#endif
+void	echo(char *str, int flag)
+{
+	ft_putstr_fd(str, 1);
+	if (flag != TRUE)
+		write (1, "\n", 1);
+}

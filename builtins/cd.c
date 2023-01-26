@@ -6,11 +6,11 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 19:07:56 by yim               #+#    #+#             */
-/*   Updated: 2023/01/26 15:57:20 by yim              ###   ########.fr       */
+/*   Updated: 2023/01/26 17:08:38 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "builtins.h"
 
 static void	free_cd(char *cwd, char *c_dir, char *str_slash)
 {
