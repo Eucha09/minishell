@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 15:25:26 by yim               #+#    #+#             */
-/*   Updated: 2023/01/25 19:05:45 by yim              ###   ########.fr       */
+/*   Updated: 2023/01/26 15:01:26 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # define CODE_OK 0
 # define TRUE 1
 # define FALSE 0
-//cd
+
+//builtins
 void	cd(char *str, char **envp);
+void	pwd(void);
 #endif

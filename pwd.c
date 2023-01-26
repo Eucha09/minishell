@@ -1,12 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/25 19:38:27 by yim               #+#    #+#             */
-/*   Updated: 2023/01/25 19:38:30 by yim              ###   ########.fr       */
+/*   Created: 2023/01/26 14:56:07 by yim               #+#    #+#             */
+/*   Updated: 2023/01/26 15:08:13 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minishell.h"
+
+void	pwd(void)
+{
+	char	*cwd;
+
+	cwd = (char *)malloc(sizeof(char) * 1024);
+	if (cwd == NULL)
+		return (perror("malloc error"));
+	ft_memset(cwd, 0, sizeof(char) * 1024);
+	getcwd(cwd, sizeof(char) * 1024);
+	ft_putstr_fd(cwd, 1);
+	write(1, "\n", 1);
+	free(cwd);
+}
