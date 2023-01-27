@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 19:07:56 by yim               #+#    #+#             */
-/*   Updated: 2023/01/27 14:45:05 by yim              ###   ########.fr       */
+/*   Updated: 2023/01/27 15:57:42 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,11 @@ static void	free_cd(char *cwd, char *c_dir, char *str_slash)
 	free (str_slash);
 }
 
-static int	free_cd_error(char *str, char *cwd)
+static int	free_cd_error(char *str, char *cwd, char *str_slash)
 {
 	free (cwd);
+	if (str_slash != NULL)
+		free(str_slash);
 	if (str != NULL)
 		perror(str);
 	return (CODE_ERROR);
@@ -84,18 +86,16 @@ int	cd(char *str, char **envp)
 	ft_memset(cwd, 0, sizeof(char) * 1024);
 	getcwd(cwd, sizeof(char) * 1024);
 	if (check_cd(&cwd, envp, &str) == CODE_ERROR)
-		return (free_cd_error(NULL, cwd));
+		return (free_cd_error(NULL, cwd, NULL));
 	str_slash = ft_strjoin("/", str);
 	if (str_slash == NULL)
-		return (free_cd_error("malloc error", cwd));
+		return (free_cd_error("malloc error", cwd, NULL));
 	c_dir = ft_strjoin(cwd, str_slash);
 	if (c_dir == NULL)
-	{
-		free (str_slash);
-		return (free_cd_error("malloc error", cwd));
-	}
+		return (free_cd_error("malloc error", cwd, str_slash));
 	result = chdir(c_dir);
 	if (result == CODE_ERROR)
 		perror("cd");
 	free_cd (cwd, c_dir, str_slash);
+	return (CODE_OK);
 }

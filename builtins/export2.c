@@ -1,27 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   export2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/26 14:56:07 by yim               #+#    #+#             */
-/*   Updated: 2023/01/27 21:03:17 by yim              ###   ########.fr       */
+/*   Created: 2023/01/27 19:31:32 by yim               #+#    #+#             */
+/*   Updated: 2023/01/27 20:48:08 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-int	pwd(void)
+int	check_ep_first(char *str)
 {
-	char	*cwd;
-
-	cwd = (char *)malloc(sizeof(char) * 1024);
-	if (cwd == NULL)
-		return (code_error("malloc error"));
-	ft_memset(cwd, 0, sizeof(char) * 1024);
-	getcwd(cwd, sizeof(char) * 1024);
-	printf("%s\n", cwd);
-	free(cwd);
+	if (!ft_isalpha(str[0]))
+	{
+		if (str[0] != '_')
+			return (CODE_ERROR);
+	}
 	return (CODE_OK);
+}
+
+char	*before_equal(char *str)
+{
+	int		i;
+	char	*result;
+
+	i = 0;
+	while (!(str[i] == '=' || str[i] == '\0'))
+		i++;
+	result = ft_substr(str, 0, i);
+	return (result);
+}
+
+int	ft_strcmp(char *s1, char *s2)
+{
+	int	i;
+
+	i = 0;
+	while (s1[i] || s2[i])
+	{
+		if (s1[i] != s2[i])
+			return (s1[i] - s2[i]);
+		else
+			i++;
+	}
+	return (0);
 }

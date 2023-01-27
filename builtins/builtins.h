@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 15:25:26 by yim               #+#    #+#             */
-/*   Updated: 2023/01/27 14:40:57 by yim              ###   ########.fr       */
+/*   Updated: 2023/01/27 20:49:10 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,14 @@
 # define TRUE 1
 # define FALSE 0
 
-//builtins
-int		cd(char *str, char **envp);
+//error
 int		code_error(char *str);
-void	pwd(void);
+//cd
+int		cd(char *str, char **envp);
+int		pwd(void);
+//export
+int		ft_strcmp(char *s1, char *s2);
+char	*before_equal(char *str);
+int		check_ep_first(char *str);
+int		export(char ***envp, char *str);
 #endif
