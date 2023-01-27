@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 14:57:00 by yim               #+#    #+#             */
-/*   Updated: 2023/01/27 20:48:02 by yim              ###   ########.fr       */
+/*   Updated: 2023/01/27 21:16:24 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	change_envp(char ***envp, char *str)
 			free(envp_key);
 			free(str_key);
 			(*envp)[i] = str;
+			return ;
 		}
 		free(envp_key);
 		i++;
@@ -94,7 +95,7 @@ void	add_envp(char ***envp, char *str)
 	while (--i >= 0)
 		new_envp[i] = (*envp)[i];
 	// free(*envp);
-	// 나중에 envp인자 받자마자 malloc해서 복사해두고 메인 마지막에서 free?
+	// 나중에 envp인자 받자마자 malloc해서 복사해두고 메인 마지막에서 free? !!!!!처리해야됨!!!!!
 	*envp = new_envp;
 }
 

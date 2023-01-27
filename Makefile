@@ -6,7 +6,7 @@ AR          = ar -rcs
 RM          = rm -f
 LIBS		= libft/libft.a
 SRCS		= builtins/cd.c builtins/pwd.c builtins/echo.c builtins/builtins_error.c \
-			test_main.c
+			builtins/export.c builtins/export2.c test_main.c
 SRCS_BONUS  = 
 OBJS        = $(SRCS:.c=.o)
 OBJS_BONUS  = $(SRCS_BONUS:.c=.o)

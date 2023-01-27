@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 15:25:26 by yim               #+#    #+#             */
-/*   Updated: 2023/01/27 20:49:10 by yim              ###   ########.fr       */
+/*   Updated: 2023/01/27 21:08:04 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int		code_error(char *str);
 int		cd(char *str, char **envp);
 int		pwd(void);
 //export
+int		print_envp(char **envp);
 int		ft_strcmp(char *s1, char *s2);
 char	*before_equal(char *str);
 int		check_ep_first(char *str);
