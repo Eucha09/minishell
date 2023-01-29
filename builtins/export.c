@@ -15,23 +15,29 @@
 int	print_envp(char **envp)
 {
 	int		i;
+	char	**sort_envp;
 	char	*tmp;
 	char	*tmp2;
 
-	i = 0;
-	while (envp[i])
+	sort_envp = sorting_envp(envp);
+	if (sort_envp == NULL)
+		return (code_error("malloc error"));
+	i = -1;
+	while (sort_envp[++i])
 	{
-		tmp = find_key(envp[i]);
-		if (tmp == NULL)
-			return (code_error("malloc error"));
-		tmp2 = ft_strchr(envp[i], '=');
+		tmp2 = ft_strchr(sort_envp[i], '=');
 		if (tmp2 == NULL)
-			printf("declare -x %s", envp[i]);
+			printf("declare -x %s\n", sort_envp[i]);
 		else
+		{
+			tmp = find_key(sort_envp[i]);
+			if (tmp == NULL)
+				return (code_error("malloc error"));
 			printf("declare -x %s=\"%s\"\n", tmp, tmp2 + 1);
-		free (tmp);
-		i++;
+			free (tmp);
+		}
 	}
+	free (sort_envp);
 	return (CODE_OK);
 }
 

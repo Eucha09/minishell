@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 19:07:56 by yim               #+#    #+#             */
-/*   Updated: 2023/01/27 15:57:42 by yim              ###   ########.fr       */
+/*   Updated: 2023/01/29 21:33:39 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static int	check_cd(char **cwd, char **envp, char **str)
 	return (CODE_OK);
 }
 
-int	cd(char *str, char **envp)
+int	cd(char **envp, char *str)
 {
 	char	*cwd;
 	char	*c_dir;
