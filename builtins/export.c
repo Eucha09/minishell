@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 14:57:00 by yim               #+#    #+#             */
-/*   Updated: 2023/01/27 21:16:24 by yim              ###   ########.fr       */
+/*   Updated: 2023/01/29 17:14:21by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ int	print_envp(char **envp)
 	i = 0;
 	while (envp[i])
 	{
-		tmp = before_equal(envp[i]);
+		tmp = find_key(envp[i]);
+		if (tmp == NULL)
+			return (code_error("malloc error"));
 		tmp2 = ft_strchr(envp[i], '=');
 		if (tmp2 == NULL)
 			printf("declare -x %s", envp[i]);
@@ -33,28 +35,33 @@ int	print_envp(char **envp)
 	return (CODE_OK);
 }
 
-void	change_envp(char ***envp, char *str)
+int	ep_change_envp(char **envp, char *str)
 {
 	int		i;
 	char	*envp_key;
 	char	*str_key;
 
 	i = 0;
-	str_key = before_equal(str);
-	while ((*envp)[i])
+	str_key = find_key(str);
+	if (str_key == NULL)
+		return (code_error("malloc error"));
+	while (envp[i])
 	{
-		envp_key = before_equal((*envp)[i]);
+		envp_key = find_key(envp[i]);
+		if (str_key == NULL)
+			return (code_error("malloc error"));
 		if (!ft_strcmp(str_key, envp_key))
 		{
 			free(envp_key);
 			free(str_key);
-			(*envp)[i] = str;
-			return ;
+			envp[i] = str;
+			return (CODE_OK);
 		}
 		free(envp_key);
 		i++;
 	}
 	free(str_key);
+	return (CODE_OK);
 }
 
 int	check_key_double(char **envp, char *str)
@@ -64,15 +71,15 @@ int	check_key_double(char **envp, char *str)
 	int		i;
 
 	i = 0;
-	str_key = before_equal(str);
+	str_key = find_key(str);
 	while (envp[i])
 	{
-		envp_key = before_equal(envp[i]);
+		envp_key = find_key(envp[i]);
 		if (!ft_strcmp(envp_key, str_key))
 		{
 			free(envp_key);
 			free(str_key);
-			return (TRUE);
+			return (i + 1);
 		}
 		free(envp_key);
 		i++;
@@ -81,39 +88,28 @@ int	check_key_double(char **envp, char *str)
 	return (FALSE);
 }
 
-void	add_envp(char ***envp, char *str)
+void	add_envp(char **envp, char *str)
 {
 	int		i;
-	char	**new_envp;
 
-	i = 0;
-	while ((*envp)[i])
+	while (envp[i])
 		i++;
-	new_envp = (char **)malloc(sizeof(char *) * (i + 2));
-	new_envp[i] = str;
-	new_envp[i + 1] = NULL;
-	while (--i >= 0)
-		new_envp[i] = (*envp)[i];
-	// free(*envp);
-	// 나중에 envp인자 받자마자 malloc해서 복사해두고 메인 마지막에서 free? !!!!!처리해야됨!!!!!
-	*envp = new_envp;
+	envp[i] = str;
+	envp[i + 1] = NULL;
 }
 
-//export만 쳤을 경우, 즉 str가 NULL일 경우 envp 출력
-//key값의 첫 글자가 _와 영어가 아니면 "export: not an identifier"오류 1 return
-//key값이 있는 경우 value 바꿈, 만약 value가 없을 경우 무시
-//key값이 없는 경우 envp에 추가
-int	export(char ***envp, char *str)
+int	export(char **envp, char *str)
 {
 	if (str == NULL)
-		return (print_envp(*envp));
+		return (print_envp(envp));
 	if (check_ep_first(str) == CODE_ERROR)
 		return (code_error("export: not an identifier"));
-	if (check_key_double(*envp, str))
+	if (check_key_double(envp, str))
 	{
 		if (!ft_strchr(str, '='))
 			return (CODE_OK);
-		change_envp(envp, str);
+		if (ep_change_envp(envp, str) == CODE_ERROR)
+			return (CODE_ERROR);
 	}
 	else
 		add_envp(envp, str);

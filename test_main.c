@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 15:31:09 by yim               #+#    #+#             */
-/*   Updated: 2023/01/27 21:16:50 by yim              ###   ########.fr       */
+/*   Updated: 2023/01/29 17:50:00 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 
 int	main(int argc, char **argv, char **envp)
 {
-	print_envp(envp);
 	printf("\n-----------------------------------------------\n");
-	export(&envp, "hi");
-	export(&envp, "hi=hello");
-	export(&envp, "kk=hello");
-	print_envp(envp);
+	env(envp);
+	export(envp, "C=hello");
+	export(envp, "hhhhh=hello");
+	export(envp, "kk=hello");
+	export(envp, "kkk=hello");
 	printf("\n-----------------------------------------------\n");
+	export(envp, NULL);
 }

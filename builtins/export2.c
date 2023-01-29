@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 19:31:32 by yim               #+#    #+#             */
-/*   Updated: 2023/01/27 20:48:08 by yim              ###   ########.fr       */
+/*   Updated: 2023/01/29 18:29:51 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	check_ep_first(char *str)
 	return (CODE_OK);
 }
 
-char	*before_equal(char *str)
+char	*find_key(char *str)
 {
 	int		i;
 	char	*result;
@@ -31,6 +31,8 @@ char	*before_equal(char *str)
 	while (!(str[i] == '=' || str[i] == '\0'))
 		i++;
 	result = ft_substr(str, 0, i);
+	if (result == NULL)
+		return (NULL);
 	return (result);
 }
 
@@ -48,3 +50,15 @@ int	ft_strcmp(char *s1, char *s2)
 	}
 	return (0);
 }
+
+// int	*sorting_envp(char **envp)
+// {
+// 	int	i;
+// 	int	*index_arr;
+
+// 	i = 0;
+// 	while (envp[i])
+// 		i++;
+// 	index_arr = (int *)malloc(sizeof(int) * i);
+	
+// }

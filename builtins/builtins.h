@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 15:25:26 by yim               #+#    #+#             */
-/*   Updated: 2023/01/27 21:08:04 by yim              ###   ########.fr       */
+/*   Updated: 2023/01/29 17:12:18 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,13 @@ int		pwd(void);
 //export
 int		print_envp(char **envp);
 int		ft_strcmp(char *s1, char *s2);
-char	*before_equal(char *str);
+char	*find_key(char *str);
 int		check_ep_first(char *str);
-int		export(char ***envp, char *str);
+int		check_key_double(char **envp, char *str);
+int		export(char **envp, char *str);
+int		ep_find_sort(char **envp, char *str);
+//env
+int		env(char **envp);
+//unset
+int		unset(char **envp, char *str);
 #endif
