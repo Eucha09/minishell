@@ -76,11 +76,15 @@ int	check_key_double(char **envp, char *str)
 	char	*str_key;
 	int		i;
 
-	i = 0;
 	str_key = find_key(str);
+	i = 0;
+	if (str_key == NULL)
+		return (-1);
 	while (envp[i])
 	{
 		envp_key = find_key(envp[i]);
+		if (envp_key == NULL)
+			free_code_error(str_key, -1);
 		if (!ft_strcmp(envp_key, str_key))
 		{
 			free(envp_key);
@@ -110,6 +114,8 @@ int	export(char **envp, char *str)
 		return (print_envp(envp));
 	if (check_ep_first(str) == CODE_ERROR)
 		return (code_error("export: not an identifier"));
+	if (check_key_double(envp, str) == -1)
+		return (code_error("malloc error"));
 	if (check_key_double(envp, str))
 	{
 		if (!ft_strchr(str, '='))
