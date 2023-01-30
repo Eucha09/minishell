@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 19:31:32 by yim               #+#    #+#             */
-/*   Updated: 2023/01/29 21:28:18 by yim              ###   ########.fr       */
+/*   Updated: 2023/01/30 14:27:57 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,11 @@ char	**sorting_envp(char **envp)
 	sort_envp = (char **)malloc (sizeof(char *) * (i + 1));
 	if (sort_envp == NULL)
 		return (NULL);
-	while (i-- >= 0)
+	while (i >= 0)
+	{
 		sort_envp[i] = envp[i];
+		i--;
+	}
 	sorting_envp2(&sort_envp);
 	return (sort_envp);
 }
