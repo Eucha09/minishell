@@ -6,12 +6,11 @@
 /*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:40:03 by eujeong           #+#    #+#             */
-/*   Updated: 2023/01/27 15:32:46 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/01/30 16:53:33 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "lexer.h"
 
 void	sh_exit(int code)
 {
@@ -22,6 +21,7 @@ void	sh_exit(int code)
 int	main(int argc, char *argv[], char *envp[])
 {
 	t_lexer	lexer;
+	t_astnode* astree;
 	char	*line;
 	(void)argc;
 	(void)argv;
@@ -52,6 +52,11 @@ int	main(int argc, char *argv[], char *envp[])
 			cur = cur->next;
 		}
 
+		if (parse(&lexer, &astree)) {
+			// 실행
+		}
+
+		astnode_delete(astree);
 		lexer_clear(&lexer);
 	}
 }

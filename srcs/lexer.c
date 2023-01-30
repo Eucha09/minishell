@@ -6,7 +6,7 @@
 /*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:45:53 by jeong-euich       #+#    #+#             */
-/*   Updated: 2023/01/27 15:41:28 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/01/29 21:23:27 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_token	*toknew(int size)
 		return (NULL);
 	}
 	ft_memset(tok->data, 0, size + 1);
-	tok->type = TYPE_TOKEN;
+	tok->type = TOKEN;
 	tok->next = NULL;
 	return (tok);
 }
@@ -57,12 +57,12 @@ int	gettok_pipe(char *str, t_lexer *lexer)
 		return (1);
 	if (str[0] == '|')
 		tok->data[0] = str[0];
-	tok->type = TYPE_PIPE;
+	tok->type = TOKEN_PIPE;
 	lstadd_tok(lexer, tok);
 	return (1);
 }
 
-int	gettok_redirect_in(char *str, t_lexer *lexer)
+int	gettok_lesser(char *str, t_lexer *lexer)
 {
 	t_token	*tok;
 
@@ -70,15 +70,20 @@ int	gettok_redirect_in(char *str, t_lexer *lexer)
 	if (tok == NULL)
 		return (1);
 	if (str[0] == '<')
+	{
 		tok->data[0] = str[0];
+		tok->type = TOKEN_LESS;
+	}
 	if (str[1] == '<')
+	{
 		tok->data[1] = str[1];
-	tok->type = TYPE_REDIRECT_IN;
+		tok->type = TOKEN_DLESS;
+	}
 	lstadd_tok(lexer, tok);
 	return (ft_strlen(tok->data));
 }
 
-int	gettok_redirect_out(char *str, t_lexer *lexer)
+int	gettok_greater(char *str, t_lexer *lexer)
 {
 	t_token	*tok;
 
@@ -86,10 +91,15 @@ int	gettok_redirect_out(char *str, t_lexer *lexer)
 	if (tok == NULL)
 		return (1);
 	if (str[0] == '>')
+	{
 		tok->data[0] = str[0];
+		tok->type = TOKEN_GREAT;
+	}
 	if (str[1] == '>')
+	{
 		tok->data[1] = str[1];
-	tok->type = TYPE_REDIRECT_OUT;
+		tok->type = TOKEN_DGREAT;
+	}
 	lstadd_tok(lexer, tok);
 	return (ft_strlen(tok->data));
 }
@@ -135,9 +145,9 @@ void	lexer_build(char *str, int size, t_lexer *lexer)
 		if (str[i] == '|')
 			i += gettok_pipe(str + i, lexer);
 		else if (str[i] == '<')
-			i += gettok_redirect_in(str + i, lexer);
+			i += gettok_lesser(str + i, lexer);
 		else if (str[i] == '>')
-			i += gettok_redirect_out(str + i, lexer);
+			i += gettok_greater(str + i, lexer);
 		else
 		{
 			i += gettok(str + i, size - i, lexer);

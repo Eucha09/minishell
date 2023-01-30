@@ -29,22 +29,25 @@ ex) echo "hello world" > file1
 [Shell Grammar Rules](https://pubs.opengroup.org/onlinepubs/009604499/utilities/xcu_chap02.html#tag_02_10_02)를 참고해 필요한 부분만 가져와 아래와 같이 정의하였다.
 
 ```
- <command_line>		::=	<command>
-                 	|	<command_line> '|' <command>
+ <command_line>		::=	<command> '|' <command_line>
+ 			|	<command>
  
- <command>		::=	<simple_command>
-			|	<simple_command> <redirect_list>
+ <command>		::=	<simple_command> <redirect_list>
+			|	<simple_command>
  
- <redirect_list>	::=	<io_redirect>
-                 	|	<redirect_list> <io_redirect>
+ <redirect_list>	::=	<io_redirect> <redirect_list>
+			|	<io_redirect>
  
- <io_redirect>		::=	'<' <filename>
-                 	|	'>' <filename>
-                 	|	'>>' <filename>
-                 	|	'<<' <here_end>
+ <io_redirect>		::=	'>' <filename>
+			|	'<' <filename>
+			|	'>>' <filename>
+			|	'<<' <here_end>
                              
- <simple_command>	::=	<pathname>
-                 	|	<simple_command>  <token>
+ <simple_command>	::=	<cmdpath> <arg_list>
+			|	<cmdpath>
+
+ <arg_list>		::=	<arg> <arg_list>
+			|	<arg>
 ```
 
 ### 구문 트리 Parse Tree
@@ -54,8 +57,8 @@ ex) echo "hello world" > file1
 ```c
 typedef struct s_astnode
 {
-    int					type;
-    char				*data;
+    int			type;
+    char		*data;
     struct s_astnode*	left;
     struct s_astnode*	right;
 

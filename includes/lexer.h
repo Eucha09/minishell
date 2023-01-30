@@ -6,7 +6,7 @@
 /*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 16:03:39 by eujeong           #+#    #+#             */
-/*   Updated: 2023/01/27 15:40:30 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/01/29 21:22:54 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 
 # include "libft.h"
 
-# define TYPE_TOKEN			0
-# define TYPE_PIPE			'|'
-# define TYPE_REDIRECT_IN	'<'
-# define TYPE_REDIRECT_OUT	'>'
+# define TOKEN			0
+# define TOKEN_PIPE		1
+# define TOKEN_LESS		2
+# define TOKEN_DLESS	3
+# define TOKEN_GREAT	4
+# define TOKEN_DGREAT	5
 
 typedef struct s_token
 {
