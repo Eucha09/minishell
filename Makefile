@@ -6,6 +6,7 @@
 # RM          = rm -f
 # LIBS		= libft/libft.a
 # SRCS		= builtins/cd.c builtins/pwd.c builtins/echo.c builtins/builtins_error.c \
+# 			builtins/export.c builtins/export2.c builtins/env.c builtins/unset.c \
 # 			test_main.c
 # SRCS_BONUS  = 
 # OBJS        = $(SRCS:.c=.o)

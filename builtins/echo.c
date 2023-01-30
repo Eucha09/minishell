@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:58:29 by yim               #+#    #+#             */
-/*   Updated: 2023/01/27 14:48:59 by yim              ###   ########.fr       */
+/*   Updated: 2023/01/27 15:41:04 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	echo(char *str, int flag)
 {
-	ft_putstr_fd(str, 1);
+	printf("%s", str);
 	if (flag != TRUE)
-		write (1, "\n", 1);
+		printf("\n");
 	return (CODE_OK);
 }

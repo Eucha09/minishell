@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/26 14:56:07 by yim               #+#    #+#             */
-/*   Updated: 2023/01/30 14:34:51 by yim              ###   ########.fr       */
+/*   Created: 2023/01/27 21:30:52 by yim               #+#    #+#             */
+/*   Updated: 2023/01/29 21:53:50 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-int	pwd(void)
+int	env(char **envp)
 {
-	char	*cwd;
+	int	i;
 
-	cwd = (char *)malloc(sizeof(char) * 1024);
-	if (cwd == NULL)
-		return (code_error("malloc error"));
-	ft_memset(cwd, 0, sizeof(char) * 1024);
-	getcwd(cwd, sizeof(char) * 1024);
-	printf("%s\n", cwd);
-	free(cwd);
+	i = 0;
+	while (envp[i])
+	{
+		if (ft_strchr(envp[i], '='))
+			printf("%s\n", envp[i]);
+		i++;
+	}
 	return (CODE_OK);
 }
