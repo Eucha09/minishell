@@ -1,18 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd.c                                              :+:      :+:    :+:   */
+/*   execute.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/30 15:48:18 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/02 13:49:55 by eujeong          ###   ########.fr       */
+/*   Created: 2023/01/30 17:06:14 by eujeong           #+#    #+#             */
+/*   Updated: 2023/02/02 13:52:57 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#ifndef EXECUTE_H
+# define EXECUTE_H
 
-t_astnode	*cmd(t_token **curtok)
-{
-	return (simplecmd(curtok));
-}
+# include "astree.h"
+# include "command.h"
+
+void	execute(t_astnode *astree, char *envp[]);
+
+#endif

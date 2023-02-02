@@ -6,7 +6,7 @@
 /*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:40:03 by eujeong           #+#    #+#             */
-/*   Updated: 2023/01/30 16:53:33 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/02 14:14:48 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,10 @@ int	main(int argc, char *argv[], char *envp[])
 			printf("token data %s type %d\n", cur->data, cur->type);
 			cur = cur->next;
 		}
-
+		
 		if (parse(&lexer, &astree)) {
-			// 실행
+			execute(astree, envp);
 		}
-
 		astnode_delete(astree);
 		lexer_clear(&lexer);
 	}

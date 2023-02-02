@@ -59,10 +59,11 @@ re:
 # 			srcs/parser/parser.c\
 # 			srcs/parser/cmdline.c\
 # 			srcs/parser/cmd.c\
-# 			srcs/parser/redirect_list.c\
-# 			srcs/parser/io_redirect.c\
 # 			srcs/parser/simple_cmd.c\
-# 			srcs/parser/arg_list.c\
+# 			srcs/parser/cmd_prefix.c\
+# 			srcs/parser/cmd_suffix.c\
+# 			srcs/parser/io_redirect.c\
+# 			srcs/execute.c\
 #             srcs/signal.c
 # OBJECTS = $(SOURCES:.c=.o)
 

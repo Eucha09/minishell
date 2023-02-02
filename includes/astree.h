@@ -6,7 +6,7 @@
 /*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 20:44:20 by eujeong           #+#    #+#             */
-/*   Updated: 2023/01/30 15:05:54 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/02 13:49:35 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,14 @@
 
 # include <stdlib.h>
 
-# define NODE_PIPE			(1 << 0)
-# define NODE_REDIRECTS		(1 << 1)
-# define NODE_REDIRECT_IN	(1 << 2)
-# define NODE_DREDIRECT_IN	(1 << 3)
-# define NODE_REDIRECT_OUT	(1 << 4)
-# define NODE_DREDIRECT_OUT	(1 << 5)
-# define NODE_CMDPATH		(1 << 6)
-# define NODE_ARG			(1 << 7)
-//# define NODE_DATA		(1 << 7)
+# define NODE_PIPE			1
+# define NODE_SIMPLE_CMD	2
+# define NODE_CMD_PREFIX	3
+# define NODE_CMD_SUFFIX	4
+# define NODE_REDIRECT_IN	5
+# define NODE_DREDIRECT_IN	6
+# define NODE_REDIRECT_OUT	7
+# define NODE_DREDIRECT_OUT	8
 
 typedef struct s_astnode
 {

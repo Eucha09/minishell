@@ -6,7 +6,7 @@
 /*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 20:40:28 by eujeong           #+#    #+#             */
-/*   Updated: 2023/01/30 16:50:31 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/01/30 20:28:36 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_astnode	*astnode_new(void)
 void	astnode_attach(t_astnode *root, t_astnode *left, t_astnode *right)
 {
 	if (root == NULL)
-		//에러
+		;//에러
 	root->left = left;
 	root->right = right;
 }
@@ -37,7 +37,7 @@ void	astnode_attach(t_astnode *root, t_astnode *left, t_astnode *right)
 void	astnode_init(t_astnode *node, char *data, int type)
 {
 	if (node == NULL)
-		//에러
+		;//에러
 	node->data = data;
 	node->type = type;
 }

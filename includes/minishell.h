@@ -6,7 +6,7 @@
 /*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 15:02:19 by eujeong           #+#    #+#             */
-/*   Updated: 2023/01/30 16:49:49 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/01/30 20:25:36 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include "libft.h"
 # include "lexer.h"
 # include "parser.h"
+# include "execute.h"
 
 void	set_signal(void);
 

@@ -29,25 +29,37 @@ ex) echo "hello world" > file1
 [Shell Grammar Rules](https://pubs.opengroup.org/onlinepubs/009604499/utilities/xcu_chap02.html#tag_02_10_02)를 참고해 필요한 부분만 가져와 아래와 같이 정의하였다.
 
 ```
- <command_line>		::=	<command> '|' <command_line>
+<command_line>		::=	<command> '|' <command_line>
  			|	<command>
  
- <command>		::=	<simple_command> <redirect_list>
-			|	<simple_command>
+<command>		::=	<simple_command>
+
+<simple_command>	::=	<cmd_prefix> <cmd_word> <cmd_suffix>
+			|	<cmd_prefix> <cmd_word>
+			|	<cmd_prefix>
+			|	<cmd_name> <cmd_suffix>
+			|	<cmd_name>
  
- <redirect_list>	::=	<io_redirect> <redirect_list>
+<cmd_name>		::=	WORD
+
+<cmd_word>		::=	WORD
+
+<cmd_prefix>	::=	<io_redirect> <cmd_prefix>
 			|	<io_redirect>
- 
- <io_redirect>		::=	'>' <filename>
+
+<cmd_suffix>	::= <io_redirect> <cmd_suffix>
+			|	<io_redirect>
+			|	WORD <cmd_suffix>
+			|	WORD
+
+<io_redirect>		::=	'>' <filename>
 			|	'<' <filename>
 			|	'>>' <filename>
 			|	'<<' <here_end>
-                             
- <simple_command>	::=	<cmdpath> <arg_list>
-			|	<cmdpath>
 
- <arg_list>		::=	<arg> <arg_list>
-			|	<arg>
+<filename>		::=	WORD
+
+<here_end>		::= WORD
 ```
 
 ### 구문 트리 Parse Tree
@@ -65,9 +77,21 @@ typedef struct s_astnode
 }	t_astnode;
 ```
 
+### 구문 트리 예
+
+```< file1 cat -e | grep "hello world" > file2```
+
+<div align="center">
+  <img src="parse_tree1.png" width="500"/>
+</div>
+
+<div align="center">
+  <img src="parse_tree2.png" width="500"/>
+</div>
+
 ## 실행 (Execution)
 
-## 빌트인 함수 구현 (Implement the builtins)
+## 빌트인 함수 (Implement the builtins)
 
 ## 참고자료
 

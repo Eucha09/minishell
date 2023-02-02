@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd.c                                              :+:      :+:    :+:   */
+/*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/30 15:48:18 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/02 13:49:55 by eujeong          ###   ########.fr       */
+/*   Created: 2023/02/02 14:04:20 by eujeong           #+#    #+#             */
+/*   Updated: 2023/02/02 14:05:23 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "command.h"
 
-t_astnode	*cmd(t_token **curtok)
+void	command_init(t_command *cmd)
 {
-	return (simplecmd(curtok));
+	// t_command 초기화
+	
 }
