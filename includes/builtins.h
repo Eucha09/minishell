@@ -6,14 +6,14 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 15:25:26 by yim               #+#    #+#             */
-/*   Updated: 2023/01/29 21:45:55 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/02 19:46:05 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTINS_H
 # define BUILTINS_H
 
-# include "../minishell.h"
+# include "minishell.h"
 
 # define CODE_ERROR 1
 # define CODE_OK 0

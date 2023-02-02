@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 15:02:19 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/02 16:46:16 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/02 19:58:09 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include "lexer.h"
 # include "parser.h"
 # include "execute.h"
+# include "builtins.h"
 
 void	set_signal(void);
 

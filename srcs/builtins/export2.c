@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 19:31:32 by yim               #+#    #+#             */
-/*   Updated: 2023/01/30 14:27:57 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/02 21:22:39 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,19 @@
 
 int	check_ep_first(char *str)
 {
+	int	i;
+
+	i = 0;
 	if (!ft_isalpha(str[0]))
 	{
 		if (str[0] != '_')
 			return (CODE_ERROR);
+	}
+	while (str[i])
+	{
+		if (!ft_isalpha(str[i]) && !ft_isalnum(str[i]) && str[i] != '_')
+			return (CODE_ERROR);
+		i++;
 	}
 	return (CODE_OK);
 }
