@@ -6,7 +6,7 @@
 /*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:04:20 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/02 14:05:23 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/02 16:26:25 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,5 @@
 void	command_init(t_command *cmd)
 {
 	// t_command 초기화
-	
+	(void)cmd;
 }

@@ -6,11 +6,16 @@
 /*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:40:03 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/02 14:14:48 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/02 16:29:39 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void leaks()
+{	
+  system("leaks minishell");
+}
 
 void	sh_exit(int code)
 {
@@ -20,6 +25,7 @@ void	sh_exit(int code)
 
 int	main(int argc, char *argv[], char *envp[])
 {
+	atexit(&leaks);
 	t_lexer	lexer;
 	t_astnode* astree;
 	char	*line;

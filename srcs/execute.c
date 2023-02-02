@@ -6,7 +6,7 @@
 /*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 17:05:54 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/02 14:13:07 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/02 16:25:19 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	execute_ioredirect(t_astnode *astree, t_command *cmd, char *envp[])
 	if (astree == NULL)
 		return ;
 	// type에 따라 redirection 처리
+	(void)cmd;
+	(void)envp;
 	if (astree->type == NODE_REDIRECT_OUT) // > filename
 	{
 		ft_printf("redirect out > %s\n", astree->data);
