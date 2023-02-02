@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 17:05:54 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/02 17:40:33 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/02 19:28:47 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void	execute_cmdsuffix(t_astnode *astree, t_command *cmd, char *envp[])
 	execute_ioredirect(astree->left, cmd, envp);
 
 	// cmd 인자에 대한 처리
-	if (astree->data != NULL) // temp
-		ft_printf("%s ", astree->data);
+	// if (astree->data != NULL) // temp
+	// 	ft_printf("%s ", astree->data);
 	
 	execute_cmdsuffix(astree->right, cmd, envp);
 }
@@ -62,15 +62,15 @@ void	execute_simplecmd(t_astnode *astree, t_command *cmd, char *envp[])
 		return ;
 	execute_cmdprefix(astree->left, cmd, envp);
 
-	// cmdpath 에 대한 처리
-	if (astree->data != NULL) // temp
-		ft_printf("%s ", astree->data);
+	// // cmdpath 에 대한 처리
+	// if (astree->data != NULL) // temp
+	// 	ft_printf("%s ", astree->data);
 	
 	execute_cmdsuffix(astree->right, cmd, envp);
 
 	// 실행
 	//command(cmd); forkdifweijiewij execve();
-	ft_printf("\n");
+	// ft_printf("\n");
 }
 
 void	execute_command(t_astnode *astree, t_command *cmd, char *envp[])
@@ -89,10 +89,11 @@ void	execute_cmdline(t_astnode *astree, t_command *cmd, char *envp[])
 		return ;
 	if (astree->type == NODE_PIPE)
 	{
+		cmd->pipe++;
 		// pipe에 대한 처리
-		
+
 		execute_command(astree->left, cmd, envp);
-		
+
 		execute_cmdline(astree->right, cmd, envp);
 	}
 	else // 빌트인이면 빌트인 실행?

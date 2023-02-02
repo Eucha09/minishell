@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:40:03 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/02 16:29:39 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/02 19:27:29 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void leaks()
-{	
-  system("leaks minishell");
-}
+// void leaks()
+// {	
+//   system("leaks minishell");
+// }
 
 void	sh_exit(int code)
 {
@@ -25,7 +25,7 @@ void	sh_exit(int code)
 
 int	main(int argc, char *argv[], char *envp[])
 {
-	atexit(&leaks);
+	//atexit(&leaks);
 	t_lexer	lexer;
 	t_astnode* astree;
 	char	*line;
@@ -50,13 +50,13 @@ int	main(int argc, char *argv[], char *envp[])
 		free(line);
 
 		// temp print lexer list
-		ft_printf("lexer tok_cnt %d\n", lexer.tok_cnt);
-		t_token *cur = lexer.list_tok;
-		while(cur)
-		{
-			printf("token data %s type %d\n", cur->data, cur->type);
-			cur = cur->next;
-		}
+		// ft_printf("lexer tok_cnt %d\n", lexer.tok_cnt);
+		// t_token *cur = lexer.list_tok;
+		// while(cur)
+		// {
+		// 	printf("token data %s type %d\n", cur->data, cur->type);
+		// 	cur = cur->next;
+		// }
 		
 		if (parse(&lexer, &astree)) {
 			execute(astree, envp);
