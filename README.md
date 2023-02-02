@@ -44,10 +44,10 @@ ex) echo "hello world" > file1
 
 <cmd_word>		::=	WORD
 
-<cmd_prefix>	::=	<io_redirect> <cmd_prefix>
+<cmd_prefix>		::=	<io_redirect> <cmd_prefix>
 			|	<io_redirect>
 
-<cmd_suffix>	::= <io_redirect> <cmd_suffix>
+<cmd_suffix>		::=	<io_redirect> <cmd_suffix>
 			|	<io_redirect>
 			|	WORD <cmd_suffix>
 			|	WORD
@@ -77,13 +77,18 @@ typedef struct s_astnode
 }	t_astnode;
 ```
 
-### 구문 트리 예
+### 구문 분석 예 
 
 ```< file1 cat -e | grep "hello world" > file2```
 
+위 명령어를 입력하면 아래 그림과 같이 재귀적으로 하강 파싱을 한다.   
+구문에 문제가 있을 시 ```Syntax Error```를 발생시키고 문제가 없을 시에는 구문 트리를 생성하게 된다.
+
 <div align="center">
-  <img src="parse_tree1.png" width="500"/>
+  <img src="parse_tree1.png" width="700"/>
 </div>
+
+아래 그림은 구문에 문제가 없을 시 생성되는 실제 트리의 형태이다.
 
 <div align="center">
   <img src="parse_tree2.png" width="500"/>
@@ -91,7 +96,11 @@ typedef struct s_astnode
 
 ## 실행 (Execution)
 
+구문 트리까지 생성되었다면 실행 파트에선 트리를 순회하며 명령어들을 실행시켜주면 된다.
+
 ## 빌트인 함수 (Implement the builtins)
+
+
 
 ## 참고자료
 
