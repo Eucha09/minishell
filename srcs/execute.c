@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 17:05:54 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/02 16:25:19 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/02 17:40:33 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,21 @@ void	execute_ioredirect(t_astnode *astree, t_command *cmd, char *envp[])
 	if (astree == NULL)
 		return ;
 	// type에 따라 redirection 처리
-	(void)cmd;
 	(void)envp;
+	if (cmd->file_in_fd != 0)
+		close (cmd->file_in_fd);
+	if (cmd->file_out_fd != 0)
+		close (cmd->file_out_fd);
 	if (astree->type == NODE_REDIRECT_OUT) // > filename
-	{
-		ft_printf("redirect out > %s\n", astree->data);
-	}
+		cmd->file_out_fd = open(astree->data, O_RDWR | O_CREAT | O_TRUNC, 0644);
 	else if (astree->type == NODE_DREDIRECT_OUT) // >> filename
-	{
-		ft_printf("redirect out >> %s\n", astree->data);
-	}
+		cmd->file_out_fd = open(astree->data, O_RDWR | O_CREAT | O_APPEND, 0644);
 	else if (astree->type == NODE_REDIRECT_IN) // < filename
-	{
-		ft_printf("redirect in < %s\n", astree->data);
-	}
+		cmd->file_in_fd = open(astree->data, O_RDWR);
 	else if (astree->type == NODE_DREDIRECT_IN) // << here_end
-	{
-		ft_printf("redirect out << %s\n", astree->data);
-	}
+		cmd->file_in_fd = make_here_doc(astree->data);
+	if (cmd->file_in_fd == -1 || cmd->file_out_fd == -1)
+		perror("minishell");
 }
 
 void	execute_cmdsuffix(t_astnode *astree, t_command *cmd, char *envp[])

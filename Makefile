@@ -49,10 +49,10 @@
 CFLAGS = -Wall -Wextra -Werror
 NAME = minishell
 INCLUDES = includes
-#READLINE_LIB = -L${HOME}/.brew/opt/readline/lib
-#READLINE_INC = -I${HOME}/.brew/opt/readline/include
-READLINE_LIB = -L/opt/homebrew/opt/readline/lib
-READLINE_INC = -I/opt/homebrew/opt/readline/include
+READLINE_LIB = -L${HOME}/.brew/opt/readline/lib
+READLINE_INC = -I${HOME}/.brew/opt/readline/include
+# READLINE_LIB = -L/opt/homebrew/opt/readline/lib
+# READLINE_INC = -I/opt/homebrew/opt/readline/include
 SOURCES =   srcs/main.c\
             srcs/lexer.c\
 			srcs/astree.c\
@@ -65,7 +65,8 @@ SOURCES =   srcs/main.c\
 			srcs/parser/io_redirect.c\
 			srcs/execute.c\
 			srcs/command.c\
-            srcs/signal.c
+            srcs/signal.c\
+			srcs/here_doc.c
 OBJECTS = $(SOURCES:.c=.o)
 
 all : $(NAME)
