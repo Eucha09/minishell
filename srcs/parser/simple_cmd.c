@@ -6,7 +6,7 @@
 /*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:48:36 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/02 13:50:11 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/03 19:12:06 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_astnode	*simplecmd1(t_token **curtok)
 	cmdprefixnode = cmdprefix(curtok);
 	if (cmdprefixnode == NULL)
 		return (NULL);
+	ft_printf("simplecmd %d %s\n", (*curtok)->type, (*curtok)->data);
 	if (!term(curtok, TOKEN, &cmdpath))
 	{
 		astnode_delete(cmdprefixnode);

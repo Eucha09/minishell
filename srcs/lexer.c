@@ -6,7 +6,7 @@
 /*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:45:53 by jeong-euich       #+#    #+#             */
-/*   Updated: 2023/01/29 21:23:27 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/03 19:25:05 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ void	lexer_build(char *str, int size, t_lexer *lexer)
 			i += gettok_lesser(str + i, lexer);
 		else if (str[i] == '>')
 			i += gettok_greater(str + i, lexer);
-		else
+		else if (str[i])
 		{
 			i += gettok(str + i, size - i, lexer);
 			lexer->tok_cnt++;

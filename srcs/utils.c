@@ -1,43 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal.c                                           :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/17 15:01:52 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/03 20:05:23 by eujeong          ###   ########.fr       */
+/*   Created: 2023/02/03 17:15:34 by eujeong           #+#    #+#             */
+/*   Updated: 2023/02/03 19:45:53 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	sig_handler(int sig)
+void	print_minishell(void)
 {
-	if (sig == SIGINT)
-	{
-		ft_putchar_fd('\n', 1);
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-	}
-}
+	int		fd;
+	char	*line;
 
-void	set_signal(int mode)
-{
-	if (mode == 0)
+	fd = open("ascii_art", O_RDONLY);
+	while (1)
 	{
-		signal(SIGINT, sig_handler);
-		signal(SIGQUIT, SIG_IGN);
+		line = get_next_line(fd);
+		if (line == NULL)
+			break;
+		ft_printf(COLOR_CYAN"%s"COLOR_RESET, line);
+		free(line);
 	}
-	else if (mode == 1)
-	{
-		signal(SIGINT, SIG_IGN);
-		signal(SIGQUIT, SIG_IGN);
-	}
-	else if (mode == 2)
-	{
-		signal(SIGINT, SIG_DFL);
-		signal(SIGQUIT, SIG_DFL);
-	}
+	ft_printf("\n");
+	close(fd);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:40:03 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/02 19:27:29 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/03 20:05:39 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ int	main(int argc, char *argv[], char *envp[])
 	(void)argv;
 	(void)envp;
 
-	set_signal();
-	ft_putstr_fd("hello minishell!\n", 1);
+	set_signal(0);
+	print_minishell();
 	while (1)
 	{
-		line = readline("minishell $ ");
+		line = readline(COLOR_BLUE PROMPT COLOR_RESET);
 		if (line == NULL)
 			sh_exit(0);
 		if (ft_strlen(line) == 0)
@@ -49,18 +49,19 @@ int	main(int argc, char *argv[], char *envp[])
 		lexer_build(line, ft_strlen(line), &lexer);
 		free(line);
 
-		// temp print lexer list
+		//temp print lexer list
 		// ft_printf("lexer tok_cnt %d\n", lexer.tok_cnt);
 		// t_token *cur = lexer.list_tok;
 		// while(cur)
 		// {
-		// 	printf("token data %s type %d\n", cur->data, cur->type);
+		// 	ft_printf("token data %s type %d\n", cur->data, cur->type);
 		// 	cur = cur->next;
 		// }
 		
 		if (parse(&lexer, &astree)) {
 			execute(astree, envp);
 		}
+
 		astnode_delete(astree);
 		lexer_clear(&lexer);
 	}
