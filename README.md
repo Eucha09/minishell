@@ -2,6 +2,8 @@
 
 bash나 zsh과 같은 간단한 쉘 만들기
 
+<img src="images/minishell_screen.png" width="500"/>
+
 ## 동작 단계
 
 1. 명령어 입력 (readline)
@@ -85,13 +87,13 @@ typedef struct s_astnode
 구문에 문제가 있을 시 ```Syntax Error```를 발생시키고 문제가 없을 시에는 구문 트리를 생성하게 된다.
 
 <div align="center">
-  <img src="parse_tree1.png" width="700"/>
+  <img src="images/parse_tree1.png" width="700"/>
 </div>
 
 아래 그림은 구문에 문제가 없을 시 생성되는 실제 트리의 형태이다.
 
 <div align="center">
-  <img src="parse_tree2.png" width="500"/>
+  <img src="images/parse_tree2.png" width="500"/>
 </div>
 
 ## 실행 (Execution)
