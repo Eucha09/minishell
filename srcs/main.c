@@ -6,7 +6,7 @@
 /*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:40:03 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/03 20:05:39 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/04 13:09:37 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,12 @@ int	main(int argc, char *argv[], char *envp[])
 	char	*line;
 	(void)argc;
 	(void)argv;
-	(void)envp;
 
 	set_signal(0);
 	print_minishell();
 	while (1)
 	{
-		line = readline(COLOR_BLUE PROMPT COLOR_RESET);
+		line = readline(COLOR_GREEN PROMPT COLOR_RESET);
 		if (line == NULL)
 			sh_exit(0);
 		if (ft_strlen(line) == 0)
@@ -61,7 +60,6 @@ int	main(int argc, char *argv[], char *envp[])
 		if (parse(&lexer, &astree)) {
 			execute(astree, envp);
 		}
-
 		astnode_delete(astree);
 		lexer_clear(&lexer);
 	}

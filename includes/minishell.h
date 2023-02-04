@@ -6,7 +6,7 @@
 /*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 15:02:19 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/03 20:05:33 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/04 13:09:17 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@
 # include "builtins.h"
 
 # define PROMPT			"minishell $ "
-# define COLOR_BLUE		"\033[94;1m"
-# define COLOR_CYAN		"\033[96;1m"
+# define COLOR_GREEN	"\033[32;1m"
 # define COLOR_RESET	"\033[0m"
 
 void	print_minishell(void);

@@ -2,7 +2,7 @@
 
 bash나 zsh과 같은 간단한 쉘 만들기
 
-<img src="images/minishell_screen.png" width="500"/>
+<img src="images/minishell.png" width="500"/>
 
 ## 동작 단계
 
