@@ -27,7 +27,8 @@ SOURCES =   srcs/main.c\
 			srcs/builtins/export.c\
 			srcs/builtins/export2.c\
 			srcs/builtins/pwd.c\
-			srcs/builtins/unset.c
+			srcs/builtins/unset.c\
+			srcs/path.c
 
 
 OBJECTS = $(SOURCES:.c=.o)

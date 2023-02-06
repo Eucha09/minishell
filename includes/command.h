@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 21:50:11 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/03 20:33:08 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/06 16:49:13 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,11 @@ typedef struct s_command
 	int		file_in_fd;
 	int		file_out_fd;
 	int		argc;
-	int		total_argc;
-	char	*cmd_path;
+	int		error_code;
+	char	*access_path;
 	char	**path;
 	char	**cmd;
+	// int		error;
 	// 여기 원하는거 추가
 	// 명령어 경로
 	// 파이프
@@ -34,7 +35,7 @@ typedef struct s_command
 	// 등등
 }	t_command;
 
-void	command_init(t_command *cmd, int num, char *envp[]);
+void	command_init(t_command *cmd, char *envp[]);
 int		get_argc(t_astnode *astree);
 
 #endif

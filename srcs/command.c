@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:04:20 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/03 20:30:55 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/06 16:48:02 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,17 @@ void	find_path(t_command *cmd, char *envp[])
 		i++;
 	}
 	cmd->path = ft_split(tmp_path, ':');
+	// if (cmd->path == NULL)
+	// {
+	// 	cmd->error = 1; || return (1);
+	// 	perror("malloc error");
+	// }
 }
 
 void	command_init(t_command *cmd, char *envp[])
 {
 	// t_command 초기화
 	ft_memset(cmd, 0, sizeof(t_command));
-	cmd->cmd = (char **)malloc(sizeof(char *) * cmd->total_argc);
 	find_path(cmd, envp);
 }
 

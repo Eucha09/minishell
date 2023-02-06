@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 17:05:54 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/03 20:31:03 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/06 16:56:46 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	execute_cmdsuffix(t_astnode *astree, t_command *cmd, char *envp[])
 	
 	// 2중배열에 1칸씩 증가하면서 넣기
 	// cmd 인자에 대한 처리
-	(cmd->cmd)[cmd->argc] = astree->data;
+	cmd->cmd[cmd->argc] = astree->data;
 	cmd->argc++;
 	// if (astree->data != NULL) // temp
 	// 	ft_printf("%s ", astree->data);
@@ -60,15 +60,9 @@ void	execute_cmdsuffix(t_astnode *astree, t_command *cmd, char *envp[])
 void	execute_cmdprefix(t_astnode *astree, t_command *cmd, char *envp[])
 {
 	if (astree == NULL)
- 		return ;
+		return ;
 	execute_ioredirect(astree->left, cmd, envp);
 	execute_cmdprefix(astree->right, cmd, envp);
-}
-
-void	find_access_path(char *simplecmd, t_command *cmd)
-{
-	if (access (simplecmd, F_OK) == TRUE)
-		cmd->cmd_path = ft_strdup(simplecmd);
 }
 
 void	execute_simplecmd(t_astnode *astree, t_command *cmd, char *envp[])
@@ -96,8 +90,9 @@ void	execute_command(t_astnode *astree, t_command *cmd, char *envp[])
 {
 	if (astree == NULL)
 		return ;
+	cmd->cmd = (char **)malloc (sizeof(char *) * (get_argc(astree) + 1));
 	execute_simplecmd(astree, cmd, envp);
-	printf("argc %d\n", get_argc(astree));
+	// cmd->file_in_fd == -1 || cmd->file_out_fd == -1 return ;
 	// path 에 대한 처리 -> 못찾으면 바로 return;
 	// pipe가 있는지 확인, 있으면 파이프 해서 실행
 	// cmd->pipe 값 하나 내리기
@@ -135,5 +130,5 @@ void	execute(t_astnode *astree, char *envp[])
 	command_init(&cmd, envp);
 	execute_cmdline(astree, &cmd, envp);
 	//wait_all();
-	// (cmd->cmd, cmd->path, cmd->cmd_path(split), cmd) free하기기
+	// (cmd->cmd, cmd->path(split), cmd->access_path) free하기기
 }
