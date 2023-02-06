@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 21:50:11 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/06 16:49:13 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/06 19:13:07 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ typedef struct s_command
 	int		file_out_fd;
 	int		argc;
 	int		error_code;
-	char	*access_path;
 	char	**path;
 	char	**cmd;
 	// int		error;
