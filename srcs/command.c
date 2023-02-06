@@ -13,10 +13,28 @@
 #include "command.h"
 #include "libft.h"
 
-void	command_init(t_command *cmd)
+void	find_path(t_command *cmd, char *envp[])
+{
+	int		i;
+	char	*tmp_path;
+	char	**path;
+
+	i = 0;
+	while (envp[i])
+	{
+		if (ft_strncmp("PATH=", envp[i], 5) == 0)
+			tmp_path = envp[i] + 5;
+		i++;
+	}
+	cmd->path = ft_split(tmp_path, ':');
+}
+
+void	command_init(t_command *cmd, char *envp[])
 {
 	// t_command 초기화
 	ft_memset(cmd, 0, sizeof(t_command));
+	cmd->cmd = (char **)malloc(sizeof(char *) * cmd->total_argc);
+	find_path(cmd, envp);
 }
 
 int	get_argc(t_astnode *astree)

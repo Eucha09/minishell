@@ -46,9 +46,11 @@ void	execute_cmdsuffix(t_astnode *astree, t_command *cmd, char *envp[])
 	if (astree == NULL)
 		return ;
 	execute_ioredirect(astree->left, cmd, envp);
-
+	
 	// 2중배열에 1칸씩 증가하면서 넣기
 	// cmd 인자에 대한 처리
+	(cmd->cmd)[cmd->argc] = astree->data;
+	cmd->argc++;
 	// if (astree->data != NULL) // temp
 	// 	ft_printf("%s ", astree->data);
 	
@@ -63,6 +65,12 @@ void	execute_cmdprefix(t_astnode *astree, t_command *cmd, char *envp[])
 	execute_cmdprefix(astree->right, cmd, envp);
 }
 
+void	find_access_path(char *simplecmd, t_command *cmd)
+{
+	if (access (simplecmd, F_OK) == TRUE)
+		cmd->cmd_path = ft_strdup(simplecmd);
+}
+
 void	execute_simplecmd(t_astnode *astree, t_command *cmd, char *envp[])
 {
 	if (astree == NULL)
@@ -71,6 +79,12 @@ void	execute_simplecmd(t_astnode *astree, t_command *cmd, char *envp[])
 	// if (astree->data != NULL) // temp
 	// 	ft_printf("%s ", astree->data);
 	
+	//cmd->cmd 이중배열의 가장 첫번째 인자 넣고 이후 suffix로 반복해서 넣음
+	(cmd->cmd)[cmd->argc] = astree->data;
+	cmd->argc++;
+	//cmd->path 찾는 과정 필요
+	find_access_path(astree->data, cmd);
+	//awk일 경우 처리는 어떻게?
 	execute_cmdsuffix(astree->right, cmd, envp);
 
 	// 실행
@@ -111,12 +125,15 @@ void	execute_cmdline(t_astnode *astree, t_command *cmd, char *envp[])
 		execute_command(astree, cmd, envp);
 }
 
+//cmd 이중배열에 넣을 개수 구해서 num 인자로 받기
 void	execute(t_astnode *astree, char *envp[])
 {
 	t_command	cmd;
 
-	// 2중 배열 malloc 선언
-	command_init(&cmd);
+	// 2중 배열 malloc 선언 command_init에서 실행
+	//맨 처음 환경변수로 받은 path를 ':' 기준으로 split해서 보관
+	command_init(&cmd, envp);
 	execute_cmdline(astree, &cmd, envp);
 	//wait_all();
+	// (cmd->cmd, cmd->path, cmd->cmd_path(split), cmd) free하기기
 }

@@ -25,6 +25,7 @@ typedef struct s_command
 	int		argc;
 	int		total_argc;
 	char	*cmd_path;
+	char	**path;
 	char	**cmd;
 	// 여기 원하는거 추가
 	// 명령어 경로
@@ -33,7 +34,7 @@ typedef struct s_command
 	// 등등
 }	t_command;
 
-void	command_init(t_command *cmd);
+void	command_init(t_command *cmd, int num, char *envp[]);
 int		get_argc(t_astnode *astree);
 
 #endif
