@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 15:02:19 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/06 20:59:59 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/06 21:38:08 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <fcntl.h>
 # include <signal.h>
 # include "libft.h"
+# include "command.h"
 # include "lexer.h"
 # include "parser.h"
 # include "execute.h"

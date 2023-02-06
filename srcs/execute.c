@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 17:05:54 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/06 20:50:39 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/06 21:43:33 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	execute_cmdsuffix(t_astnode *astree, t_command *cmd, char *envp[])
 	
 	// 2중배열에 1칸씩 증가하면서 넣기
 	// cmd 인자에 대한 처리
-	cmd->cmd[cmd->argc] = ft_strdup(astree->data);
+	(cmd->cmd)[cmd->argc] = ft_strdup(astree->data);
 	cmd->argc++;
 	// if (astree->data != NULL) // temp
 	// 	ft_printf("%s ", astree->data);
@@ -74,7 +74,7 @@ void	execute_simplecmd(t_astnode *astree, t_command *cmd, char *envp[])
 	// 	ft_printf("%s ", astree->data);
 	
 	//cmd->cmd 이중배열의 가장 첫번째 인자 넣고 이후 suffix로 반복해서 넣음
-	cmd->cmd[0] = ft_strdup(astree->data);
+	(cmd->cmd)[0] = ft_strdup(astree->data);
 	if (cmd->cmd[0] == NULL)
 	{
 		printf ("malloc error");
@@ -83,6 +83,8 @@ void	execute_simplecmd(t_astnode *astree, t_command *cmd, char *envp[])
 	cmd->argc++;
 	//cmd->path 찾는 과정
 	find_access_path(astree->data, cmd);
+	// if (cmd->cmd != NULL)
+	// 	printf ("%s\n", (cmd->cmd)[0]);
 	if (cmd->cmd == NULL)
 		return ;
 	execute_cmdsuffix(astree->right, cmd, envp);

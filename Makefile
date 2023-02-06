@@ -5,7 +5,7 @@ READLINE_LIB = -L${HOME}/.brew/opt/readline/lib
 READLINE_INC = -I${HOME}/.brew/opt/readline/include
 # READLINE_LIB = -L/opt/homebrew/opt/readline/lib
 # READLINE_INC = -I/opt/homebrew/opt/readline/include
-SOURCES =   test_main.c\
+SOURCES =   srcs/main.c\
             srcs/lexer.c\
 			srcs/astree.c\
 			srcs/parser/parser.c\

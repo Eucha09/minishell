@@ -36,16 +36,11 @@ char	**dup_envp(char *envp[])
 
 int	main(int argc, char **argv, char **envp)
 {
+	t_command cmd;
 	char	**d_envp;
 
-	d_envp = dup_envp(envp);
-	export(d_envp, "hi=hello");
-	export(d_envp, "a=b");
-	export(d_envp, NULL);
-	unset(d_envp, "HOME");
-	unset(d_envp, "hi");
-	env(d_envp);
-	free_double_array(d_envp);
+	find_access_path(argv[1], &cmd);
+	printf("%s\n", cmd.cmd[0]);
 	system("leaks minishell");
 	
 }

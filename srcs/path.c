@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:45:07 by yim               #+#    #+#             */
-/*   Updated: 2023/02/06 19:24:47 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/06 21:41:28 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ int	find_access_path2(t_command *cmd, char *simplecmd)
 			return (free_return(tmp_path, NULL, -2));
 		if (access (tmp_after_path, F_OK) == 0)
 		{
-			free (cmd->cmd[0]);
-			cmd->cmd[0] = ft_strdup(tmp_after_path);
-			if (cmd->cmd[0] == NULL)
+			free ((cmd->cmd)[0]);
+			(cmd->cmd)[0] = ft_strdup(tmp_after_path);
+			if ((cmd->cmd)[0] == NULL)
 				return (free_return(tmp_path, tmp_after_path, -2));
 			return (free_return (tmp_path, tmp_after_path, 0));
 		}
