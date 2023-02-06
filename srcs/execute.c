@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 17:05:54 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/06 19:25:50 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/06 20:00:12 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,15 @@ void	execute_simplecmd(t_astnode *astree, t_command *cmd, char *envp[])
 	// ft_printf("\n");
 }
 
+int	cmd_error_check(t_command *cmd)
+{
+	if (cmd->file_in_fd == -1 || cmd->file_out_fd == -1)
+		return (1);
+	if (cmd->cmd == NULL)
+		return (1);
+	return (0);
+}
+
 void	execute_command(t_astnode *astree, t_command *cmd, char *envp[])
 {
 	if (astree == NULL)
@@ -101,6 +110,8 @@ void	execute_command(t_astnode *astree, t_command *cmd, char *envp[])
 	execute_simplecmd(astree, cmd, envp);
 	// cmd->file_in_fd == -1 || cmd->file_out_fd == -1 return ;
 	// path 에 대한 처리 -> 못찾으면 바로 return;
+	if (cmd_error_check(cmd))
+		return ;
 	// pipe가 있는지 확인, 있으면 파이프 해서 실행
 	// cmd->pipe 값 하나 내리기
 	// 리다이렉션 있으면 파이프 닫고 리다이렉션으로 처리
@@ -132,10 +143,8 @@ void	execute(t_astnode *astree, char *envp[])
 {
 	t_command	cmd;
 
-	// 2중 배열 malloc 선언 command_init에서 실행
-	//맨 처음 환경변수로 받은 path를 ':' 기준으로 split해서 보관
 	command_init(&cmd, envp);
 	execute_cmdline(astree, &cmd, envp);
 	//wait_all();
-	// (cmd->cmd, cmd->path, cmd->access_path) free하기기
+	// (cmd->cmd, cmd->path, cmd->access_path) free하기
 }
