@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 21:33:54 by yim               #+#    #+#             */
-/*   Updated: 2023/01/29 21:38:30 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/06 21:33:14 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,11 @@ void	us_delete_envp(char **envp, char *str)
 	delete_index = (check_key_double(envp, str) - 1);
 	while (envp[delete_index + 1])
 	{
-		envp[delete_index] = envp[delete_index + 1];
+		free (envp[delete_index]);
+		envp[delete_index] = ft_strdup(envp[delete_index + 1]);
 		delete_index++;
 	}
+	free (envp[delete_index]);
 	envp[delete_index] = NULL;
 }
 

@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:40:03 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/06 17:31:48 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/06 20:56:46 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,38 @@ void	sh_exit(int code)
 	exit(code);
 }
 
+char	**dup_envp(char *envp[])
+{
+	int		i;
+	char	**d_envp;
+
+	i = 0;
+	d_envp = (char **)malloc(sizeof(char *) * 250);
+	if (d_envp == NULL)
+		return (NULL);
+	while (envp[i])
+	{
+		d_envp[i] = ft_strdup(envp[i]);
+		i++;
+	}
+	d_envp[i] = NULL;
+	return (d_envp);
+}
+
 int	main(int argc, char *argv[], char *envp[])
 {
 	//atexit(&leaks);
 	t_lexer	lexer;
 	t_astnode* astree;
 	char	*line;
+	char	**d_envp;
 	(void)argc;
 	(void)argv;
 
+	//나중에 free, return을 해야하나?
+	d_envp = dup_envp(envp);
+	if (d_envp == NULL)
+		return (0);
 	set_signal(0);
 	print_minishell();
 	while (1)
@@ -58,7 +81,7 @@ int	main(int argc, char *argv[], char *envp[])
 		// }
 		
 		if (parse(&lexer, &astree)) {
-			execute(astree, envp);
+			execute(astree, d_envp);
 		}
 		astnode_delete(astree);
 		lexer_clear(&lexer);

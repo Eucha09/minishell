@@ -58,9 +58,9 @@ int	ep_change_envp(char **envp, char *str)
 			return (code_error("malloc error"));
 		if (!ft_strcmp(str_key, envp_key))
 		{
-			free(envp_key);
-			free(str_key);
-			envp[i] = str;
+			free_return(envp_key, str_key, 0);
+			free (envp[i]);
+			envp[i] = ft_strdup(str);
 			return (CODE_OK);
 		}
 		free(envp_key);
@@ -104,7 +104,12 @@ void	add_envp(char **envp, char *str)
 
 	while (envp[i])
 		i++;
-	envp[i] = str;
+	if (i > 241)
+	{
+		printf ("envp max error");
+		return ;
+	}
+	envp[i] = ft_strdup(str);
 	envp[i + 1] = NULL;
 }
 
