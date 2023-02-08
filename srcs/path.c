@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:45:07 by yim               #+#    #+#             */
-/*   Updated: 2023/02/08 14:44:32 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/08 20:05:16 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,6 @@ void	find_access_path(char *simplecmd, t_command *cmd)
 		printf ("malloc error");
 	else if (error_num == -1)
 	{
-		free_double_array(cmd->cmd);
-		cmd->cmd = NULL;
 		cmd->error_code = 127;
 		printf ("command not found : %s\n", simplecmd);
 	}
