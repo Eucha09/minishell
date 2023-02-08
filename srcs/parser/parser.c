@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 20:40:31 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/03 19:45:12 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/08 20:44:28 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	term(t_token **curtok, int tok_type, char **buffer)
 	return (0);
 }
 
-int parse(t_lexer *lexer, t_astnode **astree)
+int	parse(t_lexer *lexer, t_astnode **astree)
 {
 	t_token	*curtok;
 

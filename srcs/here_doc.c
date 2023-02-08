@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 17:24:38 by yim               #+#    #+#             */
-/*   Updated: 2023/02/08 19:39:22 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/08 20:57:32 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	make_here_doc2(char *limiter, int fd)
 	{
 		while (1)
 		{
-			ft_putstr_fd("heredoc> ", 2);
+			ft_putstr_fd("> ", 2);
 			line = get_next_line(STDIN_FILENO);
 			if (line == NULL || ft_strcmp(line, limiter) == 0)
 			{
@@ -67,5 +67,6 @@ int	make_here_doc(char *limiter_bf)
 		unlink("tmp_here_doc");
 		return (-1);
 	}
+	unlink("tmp_here_doc");
 	return (fd);
 }

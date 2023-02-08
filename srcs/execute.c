@@ -79,13 +79,17 @@ void	execute_command(t_astnode *astree, t_command *cmd, char *envp[])
 	cmd->cmd = (char **)malloc (sizeof(char *) * (get_argc(astree) + 1));
 	if (cmd->cmd == NULL)
 		return ;
+	ft_memset(cmd->cmd, 0, sizeof(char *) * (get_argc(astree) + 1));
 	execute_simplecmd(astree, cmd, envp);
 	if (cmd_error_check(cmd))
 		return ;
-	if (check_builtins((cmd->cmd)[0]) && cmd->pipe_before == 0)
-		excute_builtins(cmd, envp);
-	else
-		execve_command(cmd, envp);
+	if ((cmd->cmd)[0] != NULL)
+	{
+		if (check_builtins((cmd->cmd)[0]) && cmd->pipe_before == 0)
+			excute_builtins(cmd, envp);
+		else
+			execve_command(cmd, envp);
+	}
 	rezero_cmd(cmd);
 }
 

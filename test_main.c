@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+// #include "minishell.h"
 #include <sys/wait.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -18,4 +18,5 @@
 
 int	main(int argc, char **argv, char **envp)
 {
+	unlink("dsfjk");
 }
