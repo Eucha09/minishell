@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:45:07 by yim               #+#    #+#             */
-/*   Updated: 2023/02/06 21:41:28 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/08 14:44:32 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,28 @@ void	free_double_array(char **double_array)
 	while (double_array[i])
 	{
 		free (double_array[i]);
+		double_array[i] = NULL;
 		i++;
 	}
 	free (double_array);
+	double_array = NULL;
+}
+
+int	check_builtins(char *simplecmd)
+{
+	if (!ft_strcmp(simplecmd, "env"))
+		return (1);
+	if (!ft_strcmp(simplecmd, "echo"))
+		return (1);
+	if (!ft_strcmp(simplecmd, "cd"))
+		return (1);
+	if (!ft_strcmp(simplecmd, "export"))
+		return (1);
+	if (!ft_strcmp(simplecmd, "pwd"))
+		return (1);
+	if (!ft_strcmp(simplecmd, "unset"))
+		return (1);
+	return (0);
 }
 
 int	find_access_path2(t_command *cmd, char *simplecmd)
@@ -64,11 +83,14 @@ int	find_access_path2(t_command *cmd, char *simplecmd)
 	return (-1);
 }
 
+
 void	find_access_path(char *simplecmd, t_command *cmd)
 {
 	int	error_num;
 
 	error_num = 0;
+	if (check_builtins(simplecmd))
+		return ;
 	if (access (simplecmd, F_OK) == 0)
 		return ;
 	error_num = find_access_path2(cmd, simplecmd);
