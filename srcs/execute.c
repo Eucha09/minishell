@@ -18,10 +18,6 @@ void	execute_ioredirect(t_astnode *astree, t_command *cmd)
 	if (astree == NULL)
 		return ;
 	// type에 따라 redirection 처리
-	if (cmd->file_in_fd != 0)
-		close (cmd->file_in_fd);
-	if (cmd->file_out_fd != 0)
-		close (cmd->file_out_fd);
 	if (astree->type == NODE_REDIRECT_OUT) // > filename
 		cmd->file_out_fd = open(astree->data, O_RDWR | O_CREAT | O_TRUNC, 0644);
 	else if (astree->type == NODE_DREDIRECT_OUT) // >> filename
@@ -184,13 +180,10 @@ void	execute_cmdline(t_astnode *astree, t_command *cmd, char *envp[])
 	if (astree->type == NODE_PIPE)
 	{
 		cmd->pipe_after = 1;
-		// pipe에 대한 처리
-
 		execute_command(astree->left, cmd, envp);
-
 		execute_cmdline(astree->right, cmd, envp);
 	}
-	else // 빌트인이면 빌트인 실행?
+	else
 	{
 		cmd->pipe_after = 0;
 		execute_command(astree, cmd, envp);
@@ -207,7 +200,6 @@ void	wait_all(void)
 		pid = wait(&temp);
 }
 
-//cmd 이중배열에 넣을 개수 구해서 num 인자로 받기
 void	execute(t_astnode *astree, char *envp[])
 {
 	t_command	cmd;

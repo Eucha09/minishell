@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 13:37:21 by yim               #+#    #+#             */
-/*   Updated: 2023/02/08 16:00:05 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/08 19:25:03 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,27 @@
 void	rezero_cmd(t_command *cmd)
 {
 	free_double_array(cmd->cmd);
+	if (cmd->file_in_fd != 0)
+		close (cmd->file_in_fd);
+	if (cmd->file_out_fd != 0)
+		close (cmd->file_out_fd);
 	cmd->argc = 0;
+	cmd->file_in_fd = 0;
+	cmd->file_out_fd = 0;
 }
 
 int	cmd_error_check(t_command *cmd)
 {
 	if (cmd->file_in_fd == -1 || cmd->file_out_fd == -1)
+	{
+		rezero_cmd(cmd);
 		return (1);
+	}
 	if (cmd->error_code != 0)
+	{
+		rezero_cmd(cmd);
 		return (1);
+	}
 	return (0);
 }
 
