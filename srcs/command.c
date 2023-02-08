@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:04:20 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/06 17:27:01 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/08 19:50:51 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	command_init(t_command *cmd, char *envp[])
 {
 	// t_command 초기화
 	ft_memset(cmd, 0, sizeof(t_command));
+	cmd->argc = 1;
 	find_path(cmd, envp);
 }
 
