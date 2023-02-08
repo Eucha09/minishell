@@ -17,14 +17,14 @@ void	execute_ioredirect(t_astnode *astree, t_command *cmd)
 {
 	if (astree == NULL)
 		return ;
-	// type에 따라 redirection 처리
-	if (astree->type == NODE_REDIRECT_OUT) // > filename
+	if (astree->type == NODE_REDIRECT_OUT)
 		cmd->file_out_fd = open(astree->data, O_RDWR | O_CREAT | O_TRUNC, 0644);
-	else if (astree->type == NODE_DREDIRECT_OUT) // >> filename
-		cmd->file_out_fd = open(astree->data, O_RDWR | O_CREAT | O_APPEND, 0644);
-	else if (astree->type == NODE_REDIRECT_IN) // < filename
+	else if (astree->type == NODE_DREDIRECT_OUT)
+		cmd->file_out_fd = \
+			open(astree->data, O_RDWR | O_CREAT | O_APPEND, 0644);
+	else if (astree->type == NODE_REDIRECT_IN)
 		cmd->file_in_fd = open(astree->data, O_RDWR);
-	else if (astree->type == NODE_DREDIRECT_IN) // << here_end
+	else if (astree->type == NODE_DREDIRECT_IN)
 		cmd->file_in_fd = make_here_doc(astree->data);
 	if (cmd->file_in_fd == -1 || cmd->file_out_fd == -1)
 		perror("minishell");
@@ -35,17 +35,11 @@ void	execute_cmdsuffix(t_astnode *astree, t_command *cmd, char *envp[])
 	if (astree == NULL)
 		return ;
 	execute_ioredirect(astree->left, cmd);
-	
-	// 2중배열에 1칸씩 증가하면서 넣기
-	// cmd 인자에 대한 처리
 	if (astree->data != NULL)
 	{
 		(cmd->cmd)[cmd->argc] = ft_strdup(astree->data);
 		cmd->argc++;
 	}
-	// if (astree->data != NULL) // temp
-	// 	ft_printf("%s ", astree->data);
-	
 	execute_cmdsuffix(astree->right, cmd, envp);
 }
 
@@ -62,10 +56,6 @@ void	execute_simplecmd(t_astnode *astree, t_command *cmd, char *envp[])
 	if (astree == NULL)
 		return ;
 	execute_cmdprefix(astree->left, cmd, envp);
-	// if (astree->data != NULL) // temp
-	// 	ft_printf("%s ", astree->data);
-	
-	//cmd->cmd 이중배열의 가장 첫번째 인자 넣고 이후 suffix로 반복해서 넣음
 	execute_cmdsuffix(astree->right, cmd, envp);
 	if (astree->data != NULL)
 	{
@@ -135,5 +125,5 @@ void	execute(t_astnode *astree, char *envp[])
 	command_init(&cmd, envp);
 	execute_cmdline(astree, &cmd, envp);
 	wait_all();
-	// (cmd->cmd, cmd->path, cmd->access_path) free하기
+	free_double_array(cmd.path);
 }
