@@ -150,27 +150,18 @@ void	execute_command(t_astnode *astree, t_command *cmd, char *envp[])
 	if (cmd->cmd == NULL)
 		return ;
 	execute_simplecmd(astree, cmd, envp);
-	// cmd->file_in_fd == -1 || cmd->file_out_fd == -1 return ;
-	// path 에 대한 처리 -> 못찾으면 바로 returncmd->cmd = (char **)malloc (sizeof(char *) * (get_argc(astree) + 1));
 	if (cmd_error_check(cmd))
 		return ;
-	// printf("%s", (cmd->cmd)[0]);
-	// pipe_before가 없고 빌트인 함수이면 부모 프로세스에서 실행
-	// 빌트인 함수 사용시 다시 출력을 stdout으로 돌려놓기
-	if (check_builtins((cmd->cmd)[0]))
+	if (check_builtins((cmd->cmd)[0]) && cmd->pipe_before == 0)
 	{
 		if (cmd->pipe_before == 0)
 			excute_builtins(cmd, envp);
 	}
 	else
 		execve_command(cmd, envp);
-	// pipe가 있는지 확인, 있으면 파이프 해서 실행
-	// 리다이렉션 있으면 파이프 닫고 리다이렉션으로 처리
-	// 위 상황 외에는 다 fork
-	// command 진짜 실행
-	// cmd->cmd와 cmd->argc 초기화
 	rezero_cmd(cmd);
 }
+
 void	execute_cmdline(t_astnode *astree, t_command *cmd, char *envp[])
 {
 	if (astree == NULL)
