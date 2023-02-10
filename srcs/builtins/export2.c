@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 19:31:32 by yim               #+#    #+#             */
-/*   Updated: 2023/02/06 21:30:47 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/10 17:34:27 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,7 @@ void	sorting_envp2(char ***sort_envp)
 char	**sorting_envp(char **envp)
 {
 	int		i;
-	int		j;
 	char	**sort_envp;
-	char	*tmp;
 
 	i = 0;
 	while (envp[i])

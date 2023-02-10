@@ -41,6 +41,7 @@ int	cmd_error_check(t_command *cmd)
 
 void	excute_builtins2(t_command *cmd, char **envp)
 {
+	(void)envp;
 	// if (!ft_strcmp(simplecmd, "export"))
 	// 	export();
 	// if (!ft_strcmp(simplecmd, "unset"))

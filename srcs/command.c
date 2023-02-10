@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:04:20 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/08 19:50:51 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/10 17:33:35 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	find_path(t_command *cmd, char *envp[])
 {
 	int		i;
 	char	*tmp_path;
-	char	**path;
 
 	i = 0;
 	while (envp[i])
