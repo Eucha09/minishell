@@ -102,6 +102,7 @@ void	add_envp(char **envp, char *str)
 {
 	int		i;
 
+	i = 0;
 	while (envp[i])
 		i++;
 	if (i > 241)
