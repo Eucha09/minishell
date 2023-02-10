@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 17:06:14 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/02 18:20:19 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/08 19:47:09 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,25 @@
 
 # include "astree.h"
 # include "command.h"
+# include "builtins.h"
 # include <fcntl.h>
 # include <stdio.h>
 # include <sys/wait.h>
 
+int		free_return(char *tmp, char *tmp2, int num);
 void	execute(t_astnode *astree, char *envp[]);
+void	find_access_path(char *simplecmd, t_command *cmd);
+int		check_builtins(char *simplecmd);
 //here_doc
 int		make_here_doc(char *limiter_bf);
 int		make_here_doc2(char *limiter, int fd);
+//execve
+void	rezero_cmd(t_command *cmd);
+int		cmd_error_check(t_command *cmd);
+void	excute_builtins(t_command *cmd, char **envp);
+void	execve_command(t_command *cmd, char **envp);
+//free
+void	find_access_path(char *simplecmd, t_command *cmd);
+void	free_double_array(char **double_array);
 
 #endif

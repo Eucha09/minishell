@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 17:15:34 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/04 13:09:25 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/06 19:17:59 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ void	print_minishell(void)
 	{
 		line = get_next_line(fd);
 		if (line == NULL)
-			break;
-		ft_printf(COLOR_GREEN"%s"COLOR_RESET, line);
+			break ;
+		printf(COLOR_GREEN"%s"COLOR_RESET, line);
 		free(line);
 	}
-	ft_printf("\n");
+	printf("\n");
 	close(fd);
 }

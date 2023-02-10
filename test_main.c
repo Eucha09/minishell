@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+// #include "minishell.h"
+#include <sys/wait.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 int	main(int argc, char **argv, char **envp)
 {
-	// export(envp, NULL);
-	printf("\n-----------------------------------------------\n");
-	export(envp, "k!kk2");
-	export(envp, NULL);
-
+	unlink("dsfjk");
 }
