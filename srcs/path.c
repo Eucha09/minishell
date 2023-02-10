@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:45:07 by yim               #+#    #+#             */
-/*   Updated: 2023/02/08 20:05:16 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/10 14:30:14 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	find_access_path(char *simplecmd, t_command *cmd)
 	int	error_num;
 
 	error_num = 0;
-	if (check_builtins(simplecmd))
+	if (check_builtins(simplecmd) && cmd->pipe_before == 0)
 		return ;
 	if (access (simplecmd, F_OK) == 0)
 		return ;

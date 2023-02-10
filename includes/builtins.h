@@ -6,12 +6,12 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 15:25:26 by yim               #+#    #+#             */
-/*   Updated: 2023/02/02 19:46:05 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/10 14:44:39 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTINS_H
-# define BUILTINS_H
+#ifndef FT_BUILTINS_H
+# define FT_BUILTINS_H
 
 # include "minishell.h"
 
@@ -39,4 +39,6 @@ char	**sorting_envp(char **envp);
 int		env(char **envp);
 //unset
 int		unset(char **envp, char *str);
+//echo
+int		echo(char **cmd, int file_out_fd);
 #endif

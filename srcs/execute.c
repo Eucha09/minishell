@@ -84,12 +84,7 @@ void	execute_command(t_astnode *astree, t_command *cmd, char *envp[])
 	if (cmd_error_check(cmd))
 		return ;
 	if ((cmd->cmd)[0] != NULL)
-	{
-		if (check_builtins((cmd->cmd)[0]) && cmd->pipe_before == 0)
-			excute_builtins(cmd, envp);
-		else
-			execve_command(cmd, envp);
-	}
+		execve_command(cmd, envp);
 	rezero_cmd(cmd);
 }
 
