@@ -6,7 +6,7 @@
 /*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:45:53 by jeong-euich       #+#    #+#             */
-/*   Updated: 2023/02/10 17:00:10 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/10 17:19:38 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -264,7 +264,7 @@ int	replace_env(char **str, int pos, int size, char *envp[])
 	int		value_len;
 	int		new_size;
 
-	printf("replace env str %s, pos %d\n", *str, pos);
+	//printf("replace env str %s, pos %d\n", *str, pos);
 	key_len = env_key_len(*str + pos + 1);
 	env_value = get_env_value(*str + pos + 1, key_len, envp);
 	value_len = ft_strlen(env_value);
@@ -281,7 +281,7 @@ int	replace_env(char **str, int pos, int size, char *envp[])
 	ft_strlcat(new_str, (*str) + pos + 1 + key_len, new_size);
 	free(*str);
 	*str = new_str;
-	printf("ret replace %s\n", *str);
+	//printf("ret replace %s\n", *str);
 	return (value_len);
 }
 
@@ -303,7 +303,7 @@ int	expand_str(char **str, int size, char *envp[])
 		else
 			i++;
 	}
-	printf("end expand_str\n");
+	//printf("end expand_str\n");
 	return (i);
 }
 
@@ -326,7 +326,7 @@ int	pos_to_divide(char *str)
 	}
 	while (str[i] == ' ')
 		i++;
-	printf("i %d\n", i);
+	//printf("i %d\n", i);
 	return (i);
 }
 
@@ -350,7 +350,7 @@ void	divide_tok(t_token *tok, int size)
 void	expand_tok(t_token *tok, int size, char *envp[])
 {
 	size = expand_str(&(tok->data), size, envp);
-	printf("new str %s\n", tok->data);
+	//printf("new str %s\n", tok->data);
 	divide_tok(tok, size);
 }
 
@@ -384,21 +384,29 @@ int	gettok(char *str, int size, t_lexer *lexer, char *envp[])
 	return (i);
 }
 
-// void	strip_quotes(t_token *tok)
-// {
-// 	int	i;
-// 	int	j;
+void	strip_quotes(char *str)
+{
+	int		i;
+	int		j;
+	char	quote;
 
-// 	if (tok->type != TOKEN)
-// 		return ;
-// 	i = 0;
-// 	j = 0;
-// 	while (str[i])
-// 	{
-
-// 		i++;
-// 	}
-// }
+	i = 0;
+	j = 0;
+	quote = 0;
+	while (str[i] == ' ')
+		i++;
+	while (str[i] && (str[i] != ' ' || quote != 0))
+	{
+		if ((str[i] == '\'' || str[i] == '\"') && quote == 0)
+			quote = str[i];
+		else if (str[i] == quote)
+			quote = 0;
+		else if (str[i])
+			str[j++] = str[i];
+		i++;
+	}
+	str[j] = '\0';
+}
 
 void	lexer_build(char *str, int size, t_lexer *lexer, char *envp[])
 {
@@ -427,7 +435,7 @@ void	lexer_build(char *str, int size, t_lexer *lexer, char *envp[])
 	cur = lexer->list_tok;
 	while (cur)
 	{
-		//strip_quotes(cur);
+		strip_quotes(cur->data);
 		cur = cur->next;
 	}
 }
