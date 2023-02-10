@@ -6,7 +6,7 @@
 /*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 16:03:39 by eujeong           #+#    #+#             */
-/*   Updated: 2023/01/29 21:22:54 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/05 17:35:41 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct s_lexer
 	int	tok_cnt;
 }	t_lexer;
 
-void	lexer_build(char *str, int size, t_lexer *lexer);
+void	lexer_build(char *str, int size, t_lexer *lexer, char *envp[]);
 void	lexer_clear(t_lexer *lexer);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:40:03 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/04 13:09:37 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/10 15:59:48 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,20 +45,20 @@ int	main(int argc, char *argv[], char *envp[])
 			continue;
 		}
 		add_history(line);
-		lexer_build(line, ft_strlen(line), &lexer);
+		lexer_build(line, ft_strlen(line), &lexer, envp);
 		free(line);
 
 		//temp print lexer list
-		// ft_printf("lexer tok_cnt %d\n", lexer.tok_cnt);
-		// t_token *cur = lexer.list_tok;
-		// while(cur)
-		// {
-		// 	ft_printf("token data %s type %d\n", cur->data, cur->type);
-		// 	cur = cur->next;
-		// }
+		printf("lexer tok_cnt %d\n", lexer.tok_cnt);
+		t_token *cur = lexer.list_tok;
+		while(cur)
+		{
+			printf("token data %s type %d\n", cur->data, cur->type);
+			cur = cur->next;
+		}
 		
 		if (parse(&lexer, &astree)) {
-			execute(astree, envp);
+			//execute(astree, envp);
 		}
 		astnode_delete(astree);
 		lexer_clear(&lexer);
