@@ -114,22 +114,31 @@ void	add_envp(char **envp, char *str)
 	envp[i + 1] = NULL;
 }
 
-int	export(char **envp, char *str)
+int	export(char **envp, char **cmd, int file_out_fd)
 {
-	if (str == NULL)
+	int		i;
+	char	*str;
+
+	i = 1;
+	if (cmd[1] == NULL)
 		return (print_envp(envp));
-	if (check_ep_first(str) == CODE_ERROR)
-		return (code_error("export: not an identifier"));
-	if (check_key_double(envp, str) == -1)
-		return (code_error("malloc error"));
-	if (check_key_double(envp, str))
+	while (cmd[i])
 	{
-		if (!ft_strchr(str, '='))
-			return (CODE_OK);
-		if (ep_change_envp(envp, str) == CODE_ERROR)
-			return (CODE_ERROR);
+		str = cmd[i];
+		if (check_ep_first(str) == CODE_ERROR)
+			return (code_error("export: not an identifier"));
+		if (check_key_double(envp, str) == -1)
+			return (code_error("malloc error"));
+		if (check_key_double(envp, str))
+		{
+			if (!ft_strchr(str, '='))
+				return (CODE_OK);
+			if (ep_change_envp(envp, str) == CODE_ERROR)
+				return (CODE_ERROR);
+		}
+		else
+			add_envp(envp, str);
+		i++;
 	}
-	else
-		add_envp(envp, str);
 	return (CODE_OK);
 }

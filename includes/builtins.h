@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 15:25:26 by yim               #+#    #+#             */
-/*   Updated: 2023/02/10 14:44:39 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/12 15:25:38 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,21 @@ int		code_error(char *str);
 int		free_code_error(char *free_str, int i);
 //cd
 int		cd(char **envp, char *str);
-int		pwd(void);
+int		pwd(int file_out_fd);
 //export
 int		print_envp(char **envp);
 int		ft_strcmp(char *s1, char *s2);
 char	*find_key(char *str);
 int		check_ep_first(char *str);
 int		check_key_double(char **envp, char *str);
-int		export(char **envp, char *str);
 int		ep_find_sort(char **envp, char *str);
 char	**sorting_envp(char **envp);
+int		ep_change_envp(char **envp, char *str);
+int		export(char **envp, char **cmd, int file_out_fd);
 //env
-int		env(char **envp);
+int		env(char **envp, int file_out_fd);
 //unset
-int		unset(char **envp, char *str);
+int		unset(char **envp, char **cmd);
 //echo
 int		echo(char **cmd, int file_out_fd);
 #endif

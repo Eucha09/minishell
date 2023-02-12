@@ -6,22 +6,19 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:56:07 by yim               #+#    #+#             */
-/*   Updated: 2023/01/30 14:34:51 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/12 15:27:17 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-int	pwd(void)
+int	pwd(int file_out_fd)
 {
 	char	*cwd;
 
-	cwd = (char *)malloc(sizeof(char) * 1024);
-	if (cwd == NULL)
-		return (code_error("malloc error"));
-	ft_memset(cwd, 0, sizeof(char) * 1024);
-	getcwd(cwd, sizeof(char) * 1024);
-	printf("%s\n", cwd);
+	cwd = getcwd(NULL, 0);
+	ft_putstr_fd(cwd, file_out_fd);
+	ft_putstr_fd("\n", file_out_fd);
 	free(cwd);
 	return (CODE_OK);
 }

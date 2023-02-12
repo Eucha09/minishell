@@ -41,19 +41,20 @@ int	cmd_error_check(t_command *cmd)
 
 void	excute_builtins2(t_command *cmd, char **envp)
 {
-	(void)envp;
-	// if (!ft_strcmp(simplecmd, "export"))
-	// 	export();
-	// if (!ft_strcmp(simplecmd, "unset"))
-	// 	unset();
-	// if (!ft_strcmp(simplecmd, "env"))
-	// 	env(envp);
-	// if (!ft_strcmp(simplecmd, "cd"))
-	// 	cd();
-	// if (!ft_strcmp(simplecmd, "pwd"))
-	// 	pwd();
 	if (!ft_strcmp((cmd->cmd)[0], "echo"))
 		echo(cmd->cmd, cmd->file_out_fd);
+	if (!ft_strcmp((cmd->cmd)[0], "cd"))
+		cd(envp, (cmd->cmd)[1]);
+	if (!ft_strcmp((cmd->cmd)[0], "pwd"))
+		pwd(cmd->file_out_fd);
+	if (!ft_strcmp((cmd->cmd)[0], "export"))
+		export(envp, cmd->cmd, cmd->file_out_fd);
+	if (!ft_strcmp((cmd->cmd)[0], "unset"))
+		unset(envp, cmd->cmd);
+	if (!ft_strcmp((cmd->cmd)[0], "env"))
+		env(envp, cmd->file_out_fd);
+	// if (!ft_strcmp((cmd->cmd)[0], "exit"))
+	// 	exit();
 }
 
 void	excute_builtins(t_command *cmd, char **envp, int fd[2])
