@@ -12,7 +12,7 @@
 
 #include "builtins.h"
 
-int	print_envp(char **envp)
+int	print_envp(char **envp, int file_out_fd)
 {
 	int		i;
 	char	**sort_envp;
@@ -26,14 +26,18 @@ int	print_envp(char **envp)
 	while (sort_envp[++i])
 	{
 		tmp2 = ft_strchr(sort_envp[i], '=');
+		ft_putstr_fd("declar -x ", file_out_fd);
 		if (tmp2 == NULL)
-			printf("declare -x %s\n", sort_envp[i]);
+			ft_putstr_fd(sort_envp[i], file_out_fd);
 		else
 		{
 			tmp = find_key(sort_envp[i]);
 			if (tmp == NULL)
 				return (code_error("malloc error"));
-			printf("declare -x %s=\"%s\"\n", tmp, tmp2 + 1);
+			ft_putstr_fd(tmp, file_out_fd);
+			ft_putstr_fd("=\"", file_out_fd);
+			ft_putstr_fd(tmp2 + 1, file_out_fd);
+			ft_putstr_fd("\"\n", file_out_fd);
 			free (tmp);
 		}
 	}
@@ -121,7 +125,7 @@ int	export(char **envp, char **cmd, int file_out_fd)
 
 	i = 1;
 	if (cmd[1] == NULL)
-		return (print_envp(envp));
+		return (print_envp(envp, file_out_fd));
 	while (cmd[i])
 	{
 		str = cmd[i];

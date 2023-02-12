@@ -39,7 +39,7 @@ int	cmd_error_check(t_command *cmd)
 	return (0);
 }
 
-void	excute_builtins2(t_command *cmd, char **envp)
+void	excute_builtins(t_command *cmd, char **envp)
 {
 	if (!ft_strcmp((cmd->cmd)[0], "echo"))
 		echo(cmd->cmd, cmd->file_out_fd);
@@ -57,7 +57,7 @@ void	excute_builtins2(t_command *cmd, char **envp)
 	// 	exit();
 }
 
-void	excute_builtins(t_command *cmd, char **envp, int fd[2])
+void	excute_first_builtins(t_command *cmd, char **envp, int fd[2])
 {
 	int	stdout_fd;
 
@@ -68,7 +68,7 @@ void	excute_builtins(t_command *cmd, char **envp, int fd[2])
 		else
 			cmd->file_out_fd = fd[1];
 		cmd->pipe_fd = fd[0];
-		excute_builtins2(cmd, envp);
+		excute_builtins(cmd, envp);
 	}
 	else
 	{
@@ -76,12 +76,33 @@ void	excute_builtins(t_command *cmd, char **envp, int fd[2])
 		{
 			stdout_fd = dup(STDOUT_FILENO);
 			cmd->file_out_fd = stdout_fd;
-			excute_builtins2(cmd, envp);
+			excute_builtins(cmd, envp);
 			close(stdout_fd);
 		}
 		else
-			excute_builtins2(cmd, envp);
+			excute_builtins(cmd, envp);
 	}
+}
+
+void	excute_after_builtins(t_command *cmd, char **envp, int fd[2])
+{
+	if (cmd->pipe_after)
+		close(fd[0]);
+	if (cmd->pipe_before)
+		close(cmd->pipe_fd);
+	if (cmd->file_out_fd)
+	{
+		dup2(cmd->file_out_fd, STDOUT_FILENO);
+		if (cmd->pipe_after)
+			close(fd[1]);
+	}
+	else
+	{
+		if (cmd->pipe_after)
+			dup2(fd[1], STDOUT_FILENO);
+	}
+	excute_builtins(cmd, envp);
+	exit(0);
 }
 
 void	execve_child(t_command *cmd, int fd[2], char **envp)
@@ -113,7 +134,7 @@ void	execve_child(t_command *cmd, int fd[2], char **envp)
 	execve((cmd->cmd)[0], cmd->cmd, envp);
 }
 
-void	excute_not_builtins(t_command *cmd, char **envp, int fd[2])
+void	excute_after_cmd(t_command *cmd, char **envp, int fd[2])
 {
 	pid_t	pid;
 
@@ -121,7 +142,12 @@ void	excute_not_builtins(t_command *cmd, char **envp, int fd[2])
 	if (pid < 0)
 		return (perror("fork error"));
 	else if (pid == 0)
-		execve_child(cmd, fd, envp);
+	{
+		if (check_builtins((cmd->cmd)[0]))
+			excute_after_builtins(cmd, envp, fd);
+		else
+			execve_child(cmd, fd, envp);
+	}
 	else
 	{
 		if (cmd->pipe_before)
@@ -144,7 +170,7 @@ void	execve_command(t_command *cmd, char **envp)
 			return (perror("pipe error"));
 	}
 	if (check_builtins((cmd->cmd)[0]) && cmd->pipe_before == 0)
-		excute_builtins(cmd, envp, fd);
+		excute_first_builtins(cmd, envp, fd);
 	else
-		excute_not_builtins(cmd, envp, fd);
+		excute_after_cmd(cmd, envp, fd);
 }
