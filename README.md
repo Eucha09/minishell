@@ -114,6 +114,14 @@ typedef struct s_astnode
 
 - 빌트인 함수 무조건 내꺼 써야함 echo 같은 특수한 경우 제외 함수가 없음
 
+- unset PATH, ls
+
+- echo ctrl + v tab 하면 스페이스만 나와야되는데 아님
+
+- export 작은 따옴표 적용 안됨
+
+- ‘ 만 쳤을 경우 프로세스가 늘어남
+
 ## 참고자료
 
 - https://velog.io/@sham/minishell%EA%B3%BC-readline#%ED%81%B4%EB%9F%AC%EC%8A%A4%ED%84%B0-%EB%A7%A5-%EA%B8%B0%EC%A4%80-readline-%EC%84%A4%EC%B9%98-%EB%B0%8F-%EC%82%AC%EC%9A%A9 (readline)
