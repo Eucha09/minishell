@@ -12,16 +12,12 @@
 
 #include "builtins.h"
 
-int	print_envp(char **envp, int file_out_fd)
+int	print_envp2(char **envp, int file_out_fd, char **sort_envp)
 {
-	int		i;
-	char	**sort_envp;
 	char	*tmp;
 	char	*tmp2;
+	int		i;
 
-	sort_envp = sorting_envp(envp);
-	if (sort_envp == NULL)
-		return (code_error("malloc error"));
 	i = -1;
 	while (sort_envp[++i])
 	{
@@ -37,9 +33,27 @@ int	print_envp(char **envp, int file_out_fd)
 			ft_putstr_fd(tmp, file_out_fd);
 			ft_putstr_fd("=\"", file_out_fd);
 			ft_putstr_fd(tmp2 + 1, file_out_fd);
-			ft_putstr_fd("\"\n", file_out_fd);
+			ft_putstr_fd("\"", file_out_fd);
 			free (tmp);
 		}
+		ft_putstr_fd("\n", file_out_fd);
+	}
+	return (CODE_OK);
+}
+
+int	print_envp(char **envp, int file_out_fd)
+{
+	char	**sort_envp;
+	char	*tmp;
+	char	*tmp2;
+
+	sort_envp = sorting_envp(envp);
+	if (sort_envp == NULL)
+		return (code_error("malloc error"));
+	if (print_envp2(envp, file_out_fd, sort_envp) == CODE_ERROR)
+	{
+		free (sort_envp);
+		return (CODE_ERROR);
 	}
 	free (sort_envp);
 	return (CODE_OK);
