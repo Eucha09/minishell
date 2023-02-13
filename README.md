@@ -118,8 +118,6 @@ typedef struct s_astnode
 
 - echo ctrl + v tab 하면 스페이스만 나와야되는데 아님
 
-- export 작은 따옴표 적용 안됨
-
 - ‘ 만 쳤을 경우 프로세스가 늘어남
 
 ## 참고자료
