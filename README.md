@@ -112,15 +112,9 @@ typedef struct s_astnode
 
 	ctrl + c 면 ```$minishell $minishell``` 등 read_line이 두개로 중복됨
 
-- 빌트인 함수 무조건 내꺼 써야함 echo 같은 특수한 경우 제외 함수가 없음
-
 - unset PATH, ls
 
 - echo ctrl + v tab 하면 스페이스만 나와야되는데 아님
-
-- export 작은 따옴표 적용 안됨
-
-- ‘ 만 쳤을 경우 프로세스가 늘어남
 
 ## 참고자료
 
