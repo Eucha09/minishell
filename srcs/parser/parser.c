@@ -6,7 +6,7 @@
 /*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 20:40:31 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/10 17:03:17 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/13 18:22:22 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,11 @@ int	parse(t_lexer *lexer, t_astnode **astree)
 {
 	t_token	*curtok;
 
+	if (lexer->list_tok == NULL)
+	{
+		*astree = NULL;
+		return (0);
+	}
 	curtok = lexer->list_tok;
 	*astree = cmdline(&curtok);
 
