@@ -12,7 +12,7 @@
 
 #include "builtins.h"
 
-int	print_envp2(char **envp, int file_out_fd, char **sort_envp)
+int	print_envp2(int file_out_fd, char **sort_envp)
 {
 	char	*tmp;
 	char	*tmp2;
@@ -44,13 +44,11 @@ int	print_envp2(char **envp, int file_out_fd, char **sort_envp)
 int	print_envp(char **envp, int file_out_fd)
 {
 	char	**sort_envp;
-	char	*tmp;
-	char	*tmp2;
 
 	sort_envp = sorting_envp(envp);
 	if (sort_envp == NULL)
 		return (code_error("malloc error"));
-	if (print_envp2(envp, file_out_fd, sort_envp) == CODE_ERROR)
+	if (print_envp2(file_out_fd, sort_envp) == CODE_ERROR)
 	{
 		free (sort_envp);
 		return (CODE_ERROR);

@@ -13,6 +13,16 @@
 #include "execute.h"
 #include "libft.h"
 
+void	wait_all(void)
+{
+	pid_t	pid;
+	int		temp;
+
+	pid = 1;
+	while (pid != -1)
+		pid = wait(&temp);
+}
+
 void	execute_ioredirect(t_astnode *astree, t_command *cmd)
 {
 	if (astree == NULL)
@@ -106,16 +116,6 @@ void	execute_cmdline(t_astnode *astree, t_command *cmd, char *envp[])
 		cmd->pipe_after = 0;
 		execute_command(astree, cmd, envp);
 	}
-}
-
-void	wait_all(void)
-{
-	pid_t	pid;
-	int		temp;
-
-	pid = 1;
-	while (pid != -1)
-		pid = wait(&temp);
 }
 
 void	execute(t_astnode *astree, char *envp[])

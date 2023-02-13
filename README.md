@@ -108,7 +108,7 @@ typedef struct s_astnode
 
 	ctrl + c 면 ```$minishell $minishell``` 등 read_line이 두개로 중복됨
 
-- signal 처리를 here_doc에서도 해야함!
+- 스페이스나 탭만 쳤을 경우 syntax error
 
 ## 참고자료
 

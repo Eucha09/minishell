@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 17:24:38 by yim               #+#    #+#             */
-/*   Updated: 2023/02/13 16:38:18 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/13 16:59:26 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	make_here_doc2(char *limiter, int fd)
 	int		status;
 	pid_t	pid;
 
+	line = NULL;
 	pid = fork();
 	if (pid < 0)
 		return (-1);
