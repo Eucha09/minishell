@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:40:03 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/12 15:35:36 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/13 14:53:31 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	main(int argc, char *argv[], char *envp[])
 		lexer_build(line, ft_strlen(line), &lexer, d_envp);
 		free(line);
 
-		//temp print lexer list
+		// temp print lexer list
 		// printf("lexer tok_cnt %d\n", lexer.tok_cnt);
 		// t_token *cur = lexer.list_tok;
 		// while(cur)

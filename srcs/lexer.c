@@ -6,7 +6,7 @@
 /*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:45:53 by jeong-euich       #+#    #+#             */
-/*   Updated: 2023/02/12 22:13:41 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/13 14:51:22 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,115 +106,20 @@ int	gettok_greater(char *str, t_lexer *lexer)
 	return (ft_strlen(tok->data));
 }
 
-// char	envp_key_len(char *key)
-// {
-// 	int	len;
+int	ft_isspace(char c)
+{
+	if (c == ' ' || c == '\n' || c == '\t'
+		|| c == '\v' || c == '\f' || c == '\r')
+		return (1);
+	return (0);
+}
 
-// 	len = 0;
-// 	if (ft_isdigit(key[0]))
-// 		return (1);
-// 	while (ft_isalnum(key[len]) || key[len] == '_')
-// 		len++;
-// 	return (len);
-// }
-
-// char	*get_envp_value(char *key, int len, char *envp[])
-// {
-// 	int		i;
-// 	char	temp;
-
-// 	temp = key[len];
-// 	key[len++] = '=';
-// 	i = 0;
-// 	while(envp[i])
-// 	{
-// 		if (ft_strncmp(key, envp[i], len) == 0)
-// 		{
-// 			key[len - 1] = temp;
-// 			return (envp[i] + len);
-// 		}
-// 		i++;
-// 	}
-// 	key[len - 1] = temp;
-// 	return (NULL);
-// }
-
-// int	replace_envp_total_size(char *str, int size, char *envp[])
-// {
-// 	int		i;
-// 	int		key_len;
-// 	char	quote;
-// 	char	*envp_value;
-
-// 	i = 0;
-// 	quote = 0;
-// 	while (str[i])
-// 	{
-// 		if ((str[i] == '\'' || str[i] == '\"') && quote == 0)
-// 			quote = str[i];
-// 		else if (str[i] == quote)
-// 			quote = 0;
-// 		else if (str[i] == '$' && (ft_isalnum(str[i + 1] || str[i] == '_')) && quote != '\'')
-// 		{
-// 			key_len = envp_key_len(str + i + 1);
-// 			envp_value = get_envp_value(str + i + 1, key_len, envp);
-// 			if (envp_value != NULL)
-// 				size += ft_strlen(envp_value);
-// 			i += key_len + 1;
-// 		}
-// 		i++;
-// 	}
-// 	return (size);
-// }
-
-// void	insert_envp_value(char *str, int size, char *envp[])
-// {
-	
-// }
-
-// char	*replace_envp(char *str, int size, char *envp[])
-// {
-// 	int		i;
-// 	int		key_len;
-// 	char	quote;
-// 	char	*envp_value;
-// 	char	*new_str;
-	
-// 	size = replace_envp_total_size(str, size, envp);
-// 	new_str = (char *)ft_calloc(sizeof(char), size + 1);
-// 	ft_strlcpy(new_str, str, size + 1);
-// 	i = 0;
-// 	quote = 0;
-// 	while (new_str[i])
-// 	{
-// 		if ((new_str[i] == '\'' || new_str[i] == '\"') && quote == 0)
-// 			quote = str[i];
-// 		else if (new_str[i] == quote)
-// 			quote = 0;
-// 		else if (new_str[i] == '$' && (ft_isalnum(new_str[i + 1] || new_str[i] == '_')) && quote != '\'')
-// 		{
-// 			key_len = envp_key_len(new_str + i + 1);
-// 			envp_value = get_envp_value(new_str + i + 1, key_len, envp);
-// 			if (envp_value != NULL)
-// 			{
-// 				ft_memmove(new_str + i + ft_strlen(envp_value), new_str + i, )
-// 			}
-// 			i += key_len + 1;
-
-
-// 			envp_value = get_envp_value(str + i + 1, envp);
-// 			size += ft_strlen(envp_value);
-// 			temp = new_str;
-// 			new_str = (char *)ft_calloc(sizeof(char), size + 1);
-// 			ft_strlcat(new_str, temp, size + 1);
-// 			ft_strlcat(new_str, envp_value, size + 1);
-// 			free(temp);
-// 		}
-// 		else
-
-// 		i++;
-// 	}
-// }
+int	isprs(char c)
+{
+	if (c == '|' || c == '<' || c == '>' || ft_isspace(c))
+		return (1);
+	return (0);
+}
 
 int	isalnum_(char c)
 {
@@ -367,7 +272,7 @@ int	gettok(char *str, int size, t_lexer *lexer, char *envp[])
 	i = 0;
 	quote = 0;
 	expand = 0;
-	while (str[i] && (str[i] != ' ' || quote != 0))
+	while (str[i] && (!isprs(str[i]) || quote != 0))
 	{
 		if ((str[i] == '\'' || str[i] == '\"') && quote == 0)
 			quote = str[i];
