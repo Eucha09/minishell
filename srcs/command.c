@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:04:20 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/13 14:51:44 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/13 15:00:51 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ void	find_path(t_command *cmd, char *envp[])
 		if (ft_strncmp("PATH=", envp[i], 5) == 0)
 			tmp_path = envp[i] + 5;
 		i++;
+	}
+	if (tmp_path == NULL)
+	{
+		cmd->path = NULL;
+		return ;
 	}
 	cmd->path = ft_split(tmp_path, ':');
 	if (cmd->path == NULL)

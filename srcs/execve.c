@@ -53,8 +53,8 @@ void	excute_builtins(t_command *cmd, char **envp)
 		unset(envp, cmd->cmd);
 	if (!ft_strcmp((cmd->cmd)[0], "env"))
 		env(envp, cmd->file_out_fd);
-	// if (!ft_strcmp((cmd->cmd)[0], "exit"))
-	// 	exit();
+	if (!ft_strcmp((cmd->cmd)[0], "exit"))
+		ft_exit();
 }
 
 void	excute_first_builtins(t_command *cmd, char **envp, int fd[2])
@@ -99,7 +99,10 @@ void	excute_after_builtins(t_command *cmd, char **envp, int fd[2])
 	else
 	{
 		if (cmd->pipe_after)
+		{
 			dup2(fd[1], STDOUT_FILENO);
+			cmd->file_out_fd = fd[1];
+		}
 	}
 	excute_builtins(cmd, envp);
 	exit(0);
@@ -132,6 +135,7 @@ void	execve_child(t_command *cmd, int fd[2], char **envp)
 			dup2(fd[1], STDOUT_FILENO);
 	}
 	execve((cmd->cmd)[0], cmd->cmd, envp);
+	exit(0);
 }
 
 void	excute_after_cmd(t_command *cmd, char **envp, int fd[2])
@@ -143,6 +147,7 @@ void	excute_after_cmd(t_command *cmd, char **envp, int fd[2])
 		return (perror("fork error"));
 	else if (pid == 0)
 	{
+		set_signal(2);
 		if (check_builtins((cmd->cmd)[0]))
 			excute_after_builtins(cmd, envp, fd);
 		else
@@ -150,6 +155,7 @@ void	excute_after_cmd(t_command *cmd, char **envp, int fd[2])
 	}
 	else
 	{
+		set_signal(1);
 		if (cmd->pipe_before)
 			close(cmd->pipe_fd);
 		if (cmd->pipe_after)
@@ -169,7 +175,8 @@ void	execve_command(t_command *cmd, char **envp)
 		if (pipe(fd) == -1)
 			return (perror("pipe error"));
 	}
-	if (check_builtins((cmd->cmd)[0]) && cmd->pipe_before == 0)
+	if (check_builtins((cmd->cmd)[0]) && \
+		cmd->pipe_before == 0 && cmd->pipe_after == 0)
 		excute_first_builtins(cmd, envp, fd);
 	else
 		excute_after_cmd(cmd, envp, fd);

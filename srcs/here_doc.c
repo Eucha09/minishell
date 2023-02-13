@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 17:24:38 by yim               #+#    #+#             */
-/*   Updated: 2023/02/12 15:47:06 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/13 16:59:26 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,32 +15,39 @@
 
 #include "unistd.h"
 
+int	make_here_doc3(char *limiter, int fd, char *line)
+{
+	set_signal(2);
+	while (1)
+	{
+		ft_putstr_fd("> ", 2);
+		line = get_next_line(STDIN_FILENO);
+		if (line == NULL || ft_strcmp(line, limiter) == 0)
+		{
+			free(line);
+			break ;
+		}
+		ft_putstr_fd(line, fd);
+		free(line);
+	}
+	exit(EXIT_SUCCESS);
+}
+
 int	make_here_doc2(char *limiter, int fd)
 {
 	char	*line;
 	int		status;
 	pid_t	pid;
 
+	line = NULL;
 	pid = fork();
 	if (pid < 0)
 		return (-1);
 	if (pid == 0)
-	{
-		while (1)
-		{
-			ft_putstr_fd("> ", 2);
-			line = get_next_line(STDIN_FILENO);
-			if (line == NULL || ft_strcmp(line, limiter) == 0)
-			{
-				free(line);
-				break ;
-			}
-			ft_putstr_fd(line, fd);
-			free(line);
-		}
-		exit(EXIT_SUCCESS);
-	}
+		make_here_doc3(limiter, fd, line);
+	set_signal(1);
 	waitpid(-1, &status, 0);
+	set_signal(0);
 	return (0);
 }
 
