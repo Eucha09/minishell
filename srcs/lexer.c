@@ -6,7 +6,7 @@
 /*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:45:53 by jeong-euich       #+#    #+#             */
-/*   Updated: 2023/02/13 14:51:22 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/13 15:04:01 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,9 +219,9 @@ int	pos_to_divide(char *str)
 
 	i = 0;
 	quote = 0;
-	while (str[i] == ' ')
+	while (ft_isspace(str[i]))
 		i++;
-	while (str[i] && (str[i] != ' ' || quote != 0))
+	while (str[i] && (!ft_isspace(str[i]) || quote != 0))
 	{
 		if ((str[i] == '\'' || str[i] == '\"') && quote == 0)
 			quote = str[i];
@@ -229,7 +229,7 @@ int	pos_to_divide(char *str)
 			quote = 0;
 		i++;
 	}
-	while (str[i] == ' ')
+	while (ft_isspace(str[i]))
 		i++;
 	//printf("i %d\n", i);
 	return (i);
@@ -298,9 +298,9 @@ void	strip_quotes(char *str)
 	i = 0;
 	j = 0;
 	quote = 0;
-	while (str[i] == ' ')
+	while (ft_isspace(str[i]))
 		i++;
-	while (str[i] && (str[i] != ' ' || quote != 0))
+	while (str[i] && (!ft_isspace(str[i]) || quote != 0))
 	{
 		if ((str[i] == '\'' || str[i] == '\"') && quote == 0)
 			quote = str[i];
@@ -323,7 +323,7 @@ void	lexer_build(char *str, int size, t_lexer *lexer, char *envp[])
 	i = 0;
 	while (str[i])
 	{
-		while (str[i] == ' ')
+		while (ft_isspace(str[i]))
 			i++;
 		if (str[i] == '|')
 			i += gettok_pipe(str + i, lexer);
