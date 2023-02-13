@@ -108,6 +108,8 @@ typedef struct s_astnode
 
 	ctrl + c 면 ```$minishell $minishell``` 등 read_line이 두개로 중복됨
 
+- signal 처리를 here_doc에서도 해야함!
+
 ## 참고자료
 
 - https://velog.io/@sham/minishell%EA%B3%BC-readline#%ED%81%B4%EB%9F%AC%EC%8A%A4%ED%84%B0-%EB%A7%A5-%EA%B8%B0%EC%A4%80-readline-%EC%84%A4%EC%B9%98-%EB%B0%8F-%EC%82%AC%EC%9A%A9 (readline)
