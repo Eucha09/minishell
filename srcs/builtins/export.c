@@ -12,9 +12,37 @@
 
 #include "builtins.h"
 
-int	print_envp(char **envp)
+int	print_envp2(char **envp, int file_out_fd, char **sort_envp)
 {
+	char	*tmp;
+	char	*tmp2;
 	int		i;
+
+	i = -1;
+	while (sort_envp[++i])
+	{
+		tmp2 = ft_strchr(sort_envp[i], '=');
+		ft_putstr_fd("declar -x ", file_out_fd);
+		if (tmp2 == NULL)
+			ft_putstr_fd(sort_envp[i], file_out_fd);
+		else
+		{
+			tmp = find_key(sort_envp[i]);
+			if (tmp == NULL)
+				return (code_error("malloc error"));
+			ft_putstr_fd(tmp, file_out_fd);
+			ft_putstr_fd("=\"", file_out_fd);
+			ft_putstr_fd(tmp2 + 1, file_out_fd);
+			ft_putstr_fd("\"", file_out_fd);
+			free (tmp);
+		}
+		ft_putstr_fd("\n", file_out_fd);
+	}
+	return (CODE_OK);
+}
+
+int	print_envp(char **envp, int file_out_fd)
+{
 	char	**sort_envp;
 	char	*tmp;
 	char	*tmp2;
@@ -22,20 +50,10 @@ int	print_envp(char **envp)
 	sort_envp = sorting_envp(envp);
 	if (sort_envp == NULL)
 		return (code_error("malloc error"));
-	i = -1;
-	while (sort_envp[++i])
+	if (print_envp2(envp, file_out_fd, sort_envp) == CODE_ERROR)
 	{
-		tmp2 = ft_strchr(sort_envp[i], '=');
-		if (tmp2 == NULL)
-			printf("declare -x %s\n", sort_envp[i]);
-		else
-		{
-			tmp = find_key(sort_envp[i]);
-			if (tmp == NULL)
-				return (code_error("malloc error"));
-			printf("declare -x %s=\"%s\"\n", tmp, tmp2 + 1);
-			free (tmp);
-		}
+		free (sort_envp);
+		return (CODE_ERROR);
 	}
 	free (sort_envp);
 	return (CODE_OK);
@@ -114,22 +132,31 @@ void	add_envp(char **envp, char *str)
 	envp[i + 1] = NULL;
 }
 
-int	export(char **envp, char *str)
+int	export(char **envp, char **cmd, int file_out_fd)
 {
-	if (str == NULL)
-		return (print_envp(envp));
-	if (check_ep_first(str) == CODE_ERROR)
-		return (code_error("export: not an identifier"));
-	if (check_key_double(envp, str) == -1)
-		return (code_error("malloc error"));
-	if (check_key_double(envp, str))
+	int		i;
+	char	*str;
+
+	i = 1;
+	if (cmd[1] == NULL)
+		return (print_envp(envp, file_out_fd));
+	while (cmd[i])
 	{
-		if (!ft_strchr(str, '='))
-			return (CODE_OK);
-		if (ep_change_envp(envp, str) == CODE_ERROR)
-			return (CODE_ERROR);
+		str = cmd[i];
+		if (check_ep_first(str) == CODE_ERROR)
+			return (code_error("export: not an identifier"));
+		if (check_key_double(envp, str) == -1)
+			return (code_error("malloc error"));
+		if (check_key_double(envp, str))
+		{
+			if (!ft_strchr(str, '='))
+				return (CODE_OK);
+			if (ep_change_envp(envp, str) == CODE_ERROR)
+				return (CODE_ERROR);
+		}
+		else
+			add_envp(envp, str);
+		i++;
 	}
-	else
-		add_envp(envp, str);
 	return (CODE_OK);
 }

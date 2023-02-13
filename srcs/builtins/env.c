@@ -6,13 +6,13 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 21:30:52 by yim               #+#    #+#             */
-/*   Updated: 2023/01/29 21:53:50 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/12 14:56:16 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-int	env(char **envp)
+int	env(char **envp, int file_out_fd)
 {
 	int	i;
 
@@ -20,7 +20,10 @@ int	env(char **envp)
 	while (envp[i])
 	{
 		if (ft_strchr(envp[i], '='))
-			printf("%s\n", envp[i]);
+		{
+			ft_putstr_fd(envp[i], file_out_fd);
+			ft_putstr_fd("\n", file_out_fd);
+		}
 		i++;
 	}
 	return (CODE_OK);

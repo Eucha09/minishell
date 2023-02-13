@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 21:50:11 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/08 15:30:05 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/12 17:48:11 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define COMMAND_H
 
 # include "astree.h"
+# include <stdio.h>
 
 typedef struct s_command
 {
@@ -26,12 +27,6 @@ typedef struct s_command
 	int		error_code;
 	char	**path;
 	char	**cmd;
-	// int		error;
-	// 여기 원하는거 추가
-	// 명령어 경로
-	// 파이프
-	// 리다이렉션
-	// 등등
 }	t_command;
 
 void	command_init(t_command *cmd, char *envp[]);

@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 17:06:14 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/10 13:47:38 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/12 16:33:56 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		make_here_doc2(char *limiter, int fd);
 //execve
 void	rezero_cmd(t_command *cmd);
 int		cmd_error_check(t_command *cmd);
-void	excute_builtins(t_command *cmd, char **envp, int fd[2]);
+void	excute_first_builtins(t_command *cmd, char **envp, int fd[2]);
 void	execve_command(t_command *cmd, char **envp);
 //free
 void	find_access_path(char *simplecmd, t_command *cmd);

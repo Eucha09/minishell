@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:04:20 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/10 17:33:35 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/12 17:47:50 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,15 @@ void	find_path(t_command *cmd, char *envp[])
 		i++;
 	}
 	cmd->path = ft_split(tmp_path, ':');
-	// if (cmd->path == NULL)
-	// {
-	// 	cmd->error = 1; || return (1);
-	// 	perror("malloc error");
-	// }
+	if (cmd->path == NULL)
+	{
+		cmd->error_code = 1;
+		perror("malloc error");
+	}
 }
 
 void	command_init(t_command *cmd, char *envp[])
 {
-	// t_command 초기화
 	ft_memset(cmd, 0, sizeof(t_command));
 	cmd->argc = 1;
 	find_path(cmd, envp);

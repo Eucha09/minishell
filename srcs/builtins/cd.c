@@ -6,17 +6,21 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 19:07:56 by yim               #+#    #+#             */
-/*   Updated: 2023/02/02 19:59:36 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/12 14:48:22 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-static void	free_cd(char *cwd, char *c_dir, char *str_slash)
+static void	free_cd(char *cwd, char *c_dir, char *str_slash, char *str)
 {
-	free (cwd);
-	free (c_dir);
-	free (str_slash);
+	if (cwd != NULL)
+		free (cwd);
+	if (str)
+	{
+		free (c_dir);
+		free (str_slash);
+	}
 }
 
 static int	free_cd_error(char *str, char *cwd, char *str_slash)
@@ -45,25 +49,20 @@ static char	*find_home(char **envp)
 	return (home);
 }
 
-static int	check_cd(char **cwd, char **envp, char **str)
+static int	check_cd(char **cwd, char **c_dir, char **envp, char *str)
 {
 	char	*home;
 
-	if (*str == NULL || (*str)[0] == '~')
+	if (str == NULL)
 	{
 		home = find_home(envp);
 		if (home == NULL)
 			return (code_error("cd: HOME not set"));
-		free (*cwd);
-		*cwd = ft_strdup(home);
-		if (cwd == NULL)
+		*c_dir = ft_strdup(home);
+		if (*c_dir == NULL)
 			return (code_error("malloc error"));
-		if (*str == NULL)
-			*str = "";
-		if (*str != NULL)
-			(*str)++;
 	}
-	if (*str[0] == '/')
+	else if (str[0] == '/')
 	{
 		free (*cwd);
 		*cwd = ft_strdup("/");
@@ -73,29 +72,71 @@ static int	check_cd(char **cwd, char **envp, char **str)
 	return (CODE_OK);
 }
 
+int	cd2(char **str_slash, char **c_dir, char *str, char *cwd)
+{
+	if (str)
+	{
+		*str_slash = ft_strjoin("/", str);
+		if (*str_slash == NULL)
+			return (free_cd_error("malloc error", cwd, NULL));
+		*c_dir = ft_strjoin(cwd, *str_slash);
+		if (*c_dir == NULL)
+			return (free_cd_error("malloc error", cwd, *str_slash));
+	}
+	return (CODE_OK);
+}
+
+void	change_envp(char **envp, char *old_pwd)
+{
+	char	*cwd;
+	char	*tmp;
+	char	*tmp2;
+
+	if (check_key_double(envp, "PWD"))
+	{
+		cwd = getcwd(NULL, 0);
+		if (cwd == NULL)
+			perror ("getcwd error");
+		tmp = "PWD=";
+		tmp2 = ft_strjoin(tmp, cwd);
+		if (tmp2 == NULL)
+			perror ("malloc error");
+		ep_change_envp(envp, tmp2);
+		free_cd(NULL, cwd, tmp2, "free");
+	}
+	if (check_key_double(envp, "OLDPWD"))
+	{
+		tmp = "OLDPWD=";
+		tmp2 = ft_strjoin(tmp, old_pwd);
+		if (tmp2 == NULL)
+			perror ("malloc error");
+		ep_change_envp(envp, tmp2);
+		free (tmp2);
+	}
+}
+
 int	cd(char **envp, char *str)
 {
 	char	*cwd;
 	char	*c_dir;
+	char	*old_pwd;
 	char	*str_slash;
-	int		result;
 
-	cwd = (char *)malloc(sizeof(char) * 1024);
+	cwd = getcwd(NULL, 0);
 	if (cwd == NULL)
-		return (code_error("malloc error"));
-	ft_memset(cwd, 0, sizeof(char) * 1024);
-	getcwd(cwd, sizeof(char) * 1024);
-	if (check_cd(&cwd, envp, &str) == CODE_ERROR)
+		code_error("getcwd: cannot access parent directories");
+	old_pwd = getcwd(NULL, 0);
+	if (old_pwd == NULL)
+		free_cd_error(NULL, cwd, NULL);
+	if (check_cd(&cwd, &c_dir, envp, str) == CODE_ERROR)
 		return (free_cd_error(NULL, cwd, NULL));
-	str_slash = ft_strjoin("/", str);
-	if (str_slash == NULL)
-		return (free_cd_error("malloc error", cwd, NULL));
-	c_dir = ft_strjoin(cwd, str_slash);
-	if (c_dir == NULL)
-		return (free_cd_error("malloc error", cwd, str_slash));
-	result = chdir(c_dir);
-	if (result == CODE_ERROR)
+	if (cd2(&str_slash, &c_dir, str, cwd) == CODE_ERROR)
+		return (CODE_ERROR);
+	if (chdir(c_dir) == 0)
+		change_envp(envp, old_pwd);
+	else
 		perror("cd");
-	free_cd (cwd, c_dir, str_slash);
+	free_cd (cwd, c_dir, str_slash, str);
+	free (old_pwd);
 	return (CODE_OK);
 }

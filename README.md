@@ -102,7 +102,25 @@ typedef struct s_astnode
 
 ## 빌트인 함수 (Implement the builtins)
 
+## 체크사항
 
+- here_doc에서 ```<<end<<end2``` 와 같이 붙여쓸 경우 오류 발생
+
+	떨어져 있을 경우 정상 작동 ```<<end <<end2```
+
+- cat | cat | cat 으로 명령어 기다리다가 ctrl + d 면 정상 종료되지만
+
+	ctrl + c 면 ```$minishell $minishell``` 등 read_line이 두개로 중복됨
+
+- 빌트인 함수 무조건 내꺼 써야함 echo 같은 특수한 경우 제외 함수가 없음
+
+- unset PATH, ls
+
+- echo ctrl + v tab 하면 스페이스만 나와야되는데 아님
+
+- export 작은 따옴표 적용 안됨
+
+- ‘ 만 쳤을 경우 프로세스가 늘어남
 
 ## 참고자료
 
