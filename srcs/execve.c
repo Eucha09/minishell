@@ -54,7 +54,7 @@ void	excute_builtins(t_command *cmd, char **envp)
 	if (!ft_strcmp((cmd->cmd)[0], "env"))
 		env(envp, cmd->file_out_fd);
 	if (!ft_strcmp((cmd->cmd)[0], "exit"))
-		ft_exit();
+		ft_exit(cmd);
 }
 
 void	excute_first_builtins(t_command *cmd, char **envp, int fd[2])

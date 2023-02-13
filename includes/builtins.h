@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 15:25:26 by yim               #+#    #+#             */
-/*   Updated: 2023/02/13 15:52:14 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/13 20:35:28 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,5 @@ int		unset(char **envp, char **cmd);
 //echo
 int		echo(char **cmd, int file_out_fd);
 //exit
-int		ft_exit(void);
+int		ft_exit(t_command *cmd);
 #endif
