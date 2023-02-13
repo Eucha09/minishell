@@ -33,6 +33,7 @@ int	cmd_error_check(t_command *cmd)
 	}
 	if (cmd->error_code != 0)
 	{
+		printf("%d", cmd->error_code);
 		rezero_cmd(cmd);
 		return (1);
 	}

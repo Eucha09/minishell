@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:45:07 by yim               #+#    #+#             */
-/*   Updated: 2023/02/13 14:51:51 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/13 15:13:07 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	find_access_path(char *simplecmd, t_command *cmd)
 		return ;
 	if (access (simplecmd, F_OK) == 0)
 		return ;
-	if (simplecmd[0] == '\0')
+	if (simplecmd[0] == '\0' || cmd->path == NULL)
 	{
 		cmd->error_code = 127;
 		printf ("command not found : %s\n", simplecmd);
