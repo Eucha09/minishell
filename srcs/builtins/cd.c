@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 19:07:56 by yim               #+#    #+#             */
-/*   Updated: 2023/02/12 14:48:22 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/13 20:06:21 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@ static void	free_cd(char *cwd, char *c_dir, char *str_slash, char *str)
 {
 	if (cwd != NULL)
 		free (cwd);
-	if (str)
-	{
+	if (c_dir != NULL)
 		free (c_dir);
+	if (str)
 		free (str_slash);
-	}
 }
 
 static int	free_cd_error(char *str, char *cwd, char *str_slash)
 {
-	free (cwd);
+	if (cwd != NULL)
+		free (cwd);
 	if (str_slash != NULL)
 		free(str_slash);
 	if (str != NULL)
@@ -129,7 +129,7 @@ int	cd(char **envp, char *str)
 	if (old_pwd == NULL)
 		free_cd_error(NULL, cwd, NULL);
 	if (check_cd(&cwd, &c_dir, envp, str) == CODE_ERROR)
-		return (free_cd_error(NULL, cwd, NULL));
+		return (free_cd_error(old_pwd, cwd, NULL));
 	if (cd2(&str_slash, &c_dir, str, cwd) == CODE_ERROR)
 		return (CODE_ERROR);
 	if (chdir(c_dir) == 0)
