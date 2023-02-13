@@ -28,6 +28,7 @@ SOURCES =   srcs/main.c\
 			srcs/builtins/export2.c\
 			srcs/builtins/pwd.c\
 			srcs/builtins/unset.c\
+			srcs/builtins/ft_exit.c\
 			srcs/path.c\
 			srcs/execve.c
 
