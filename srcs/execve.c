@@ -29,13 +29,11 @@ int	cmd_error_check(t_command *cmd)
 {
 	if (cmd->file_in_fd == -1 || cmd->file_out_fd == -1)
 	{
-		cmd->pipe_after = 0;
 		rezero_cmd(cmd);
 		return (1);
 	}
 	if (cmd->error_code != 0)
 	{
-		cmd->pipe_after = 0;
 		rezero_cmd(cmd);
 		return (1);
 	}
@@ -137,7 +135,8 @@ void	execve_child(t_command *cmd, int fd[2], char **envp)
 		if (cmd->pipe_after)
 			dup2(fd[1], STDOUT_FILENO);
 	}
-	execve((cmd->cmd)[0], cmd->cmd, envp);
+	if (!cmd_error_check(cmd))
+		execve((cmd->cmd)[0], cmd->cmd, envp);
 	exit(0);
 }
 

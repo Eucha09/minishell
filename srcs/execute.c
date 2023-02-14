@@ -91,8 +91,6 @@ void	execute_command(t_astnode *astree, t_command *cmd, char *envp[])
 		return ;
 	ft_memset(cmd->cmd, 0, sizeof(char *) * (get_argc(astree) + 1));
 	execute_simplecmd(astree, cmd, envp);
-	if (cmd_error_check(cmd))
-		return ;
 	if ((cmd->cmd)[0] != NULL)
 		execve_command(cmd, envp);
 	rezero_cmd(cmd);
