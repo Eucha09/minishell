@@ -6,7 +6,7 @@
 /*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 16:03:39 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/14 15:54:01 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/14 17:00:14 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,14 @@ void	lstadd_tok(t_lexer *lexer, t_token *tok);
 
 void	expand_tok(t_token *tok, int size, char *envp[]);
 int		expand_str(char **str, int size, char *envp[]);
-int		replace_env(char **str, int pos, int size, char *envp[]);
+int		replace_errno(char **str, int pos, int size);
 void	divide_tok(t_token *tok, int size);
 int		pos_to_divide(char *str);
 
+int		replace_env(char **str, int pos, int size, char *envp[]);
 char	env_key_len(char *key);
 char	*get_env_value(char *key, int len, char *envp[]);
+
 int		ft_isspace(char c);
 int		isprs(char c);
 int		isalnum_(char c);

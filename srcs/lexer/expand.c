@@ -6,33 +6,36 @@
 /*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 13:52:57 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/14 14:19:54 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/14 16:59:08 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-int	replace_env(char **str, int pos, int size, char *envp[])
+extern int	g_errno;
+
+int	replace_errno(char **str, int pos, int size)
 {
 	char	*new_str;
-	char	*env_value;
-	int		key_len;
-	int		value_len;
+	char	*errno_str;
+	int		errno_len;
 	int		new_size;
 
-	key_len = env_key_len(*str + pos + 1);
-	env_value = get_env_value(*str + pos + 1, key_len, envp);
-	value_len = ft_strlen(env_value);
-	new_size = size + value_len + 1;
+	errno_str = ft_itoa(g_errno);
+	if (errno_str == NULL)
+		return (0);
+	errno_len = ft_strlen(errno_str);
+	new_size = size + errno_len + 1;
 	new_str = (char *)malloc(sizeof(char) * new_size);
 	if (new_str == NULL)
 		return (0);
 	ft_strlcpy(new_str, (*str), pos + 1);
-	ft_strlcat(new_str, env_value, new_size);
-	ft_strlcat(new_str, (*str) + pos + 1 + key_len, new_size);
+	ft_strlcat(new_str, errno_str, new_size);
+	ft_strlcat(new_str, (*str) + pos + 2, new_size);
 	free(*str);
+	free(errno_str);
 	*str = new_str;
-	return (value_len);
+	return (errno_len);
 }
 
 int	expand_str(char **str, int size, char *envp[])
@@ -48,7 +51,9 @@ int	expand_str(char **str, int size, char *envp[])
 			quote = (*str)[i];
 		else if ((*str)[i] == quote)
 			quote = 0;
-		if ((*str)[i] == '$' && isalnum_((*str)[i + 1]) && quote != '\'')
+		if ((*str)[i] == '$' && (*str)[i + 1] == '?' && quote != '\'')
+			i += replace_errno(str, i, size);
+		else if ((*str)[i] == '$' && isalnum_((*str)[i + 1]) && quote != '\'')
 			i += replace_env(str, i, size, envp);
 		else
 			i++;
