@@ -108,7 +108,26 @@ void	excute_after_builtins(t_command *cmd, char **envp, int fd[2])
 		}
 	}
 	excute_builtins(cmd, envp);
-	exit(0);
+	exit(g_errno);
+}
+
+void	execve_child2(t_command *cmd, int fd[2], char **envp)
+{
+	if (cmd->file_out_fd)
+	{
+		dup2(cmd->file_out_fd, STDOUT_FILENO);
+		if (cmd->pipe_after)
+			close(fd[1]);
+	}
+	else
+	{
+		if (cmd->pipe_after)
+			dup2(fd[1], STDOUT_FILENO);
+	}
+	if (!cmd_error_check(cmd))
+		execve((cmd->cmd)[0], cmd->cmd, envp);
+	exit(g_errno);
+
 }
 
 void	execve_child(t_command *cmd, int fd[2], char **envp)
@@ -126,20 +145,21 @@ void	execve_child(t_command *cmd, int fd[2], char **envp)
 		if (cmd->pipe_before)
 			dup2(cmd->pipe_fd, STDIN_FILENO);
 	}
-	if (cmd->file_out_fd)
+	execve_child2(cmd, fd, envp);
+}
+
+void	excute_after_cmd2(t_command *cmd, pid_t pid, int fd[2])
+{
+	if (cmd->pipe_after == 0)
+		cmd->pid = (long)pid;
+	set_signal(SIG_EXECVE_PARENT);
+	if (cmd->pipe_before)
+		close(cmd->pipe_fd);
+	if (cmd->pipe_after)
 	{
-		dup2(cmd->file_out_fd, STDOUT_FILENO);
-		if (cmd->pipe_after)
-			close(fd[1]);
+		close(fd[1]);
+		cmd->pipe_fd = fd[0];
 	}
-	else
-	{
-		if (cmd->pipe_after)
-			dup2(fd[1], STDOUT_FILENO);
-	}
-	if (!cmd_error_check(cmd))
-		execve((cmd->cmd)[0], cmd->cmd, envp);
-	exit(0);
 }
 
 void	excute_after_cmd(t_command *cmd, char **envp, int fd[2])
@@ -158,18 +178,7 @@ void	excute_after_cmd(t_command *cmd, char **envp, int fd[2])
 			execve_child(cmd, fd, envp);
 	}
 	else
-	{
-		if (cmd->pipe_after == 0)
-			cmd->pid = (long)pid;
-		set_signal(SIG_EXECVE_PARENT);
-		if (cmd->pipe_before)
-			close(cmd->pipe_fd);
-		if (cmd->pipe_after)
-		{
-			close(fd[1]);
-			cmd->pipe_fd = fd[0];
-		}
-	}
+		excute_after_cmd2(cmd, pid, fd);
 }
 
 void	execve_command(t_command *cmd, char **envp)

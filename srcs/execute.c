@@ -19,16 +19,14 @@ void	wait_all(t_command *cmd)
 {
 	pid_t	pid;
 	int		temp;
-	int		errno;
 
 	pid = 1;
 	while (pid != -1)
 	{
 		pid = wait(&temp);
 		if (pid == cmd->pid)
-			errno = temp;
+			g_errno = WEXITSTATUS(temp);
 	}
-	g_errno = WEXITSTATUS(errno);
 }
 
 void	execute_ioredirect(t_astnode *astree, t_command *cmd)
