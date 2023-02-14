@@ -149,7 +149,7 @@ void	excute_after_cmd(t_command *cmd, char **envp, int fd[2])
 		return (perror("fork error"));
 	else if (pid == 0)
 	{
-		set_signal(2);
+		set_signal(SIG_CHILD_MODE);
 		if (check_builtins((cmd->cmd)[0]))
 			excute_after_builtins(cmd, envp, fd);
 		else
@@ -157,7 +157,7 @@ void	excute_after_cmd(t_command *cmd, char **envp, int fd[2])
 	}
 	else
 	{
-		set_signal(1);
+		set_signal(SIG_EXECVE_MODE);
 		if (cmd->pipe_before)
 			close(cmd->pipe_fd);
 		if (cmd->pipe_after)

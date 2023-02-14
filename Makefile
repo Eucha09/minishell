@@ -1,4 +1,4 @@
-# CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 NAME = minishell
 INCLUDES = includes
 READLINE_LIB = -L${HOME}/.brew/opt/readline/lib
