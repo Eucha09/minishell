@@ -159,6 +159,8 @@ void	excute_after_cmd(t_command *cmd, char **envp, int fd[2])
 	}
 	else
 	{
+		if (cmd->pipe_after == 0)
+			cmd->pid = (long)pid;
 		set_signal(SIG_EXECVE_PARENT);
 		if (cmd->pipe_before)
 			close(cmd->pipe_fd);

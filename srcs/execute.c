@@ -15,15 +15,20 @@
 
 extern int	g_errno;
 
-void	wait_all(void)
+void	wait_all(t_command *cmd)
 {
 	pid_t	pid;
 	int		temp;
+	int		errno;
 
 	pid = 1;
 	while (pid != -1)
+	{
 		pid = wait(&temp);
-	g_errno = temp;
+		if (pid == cmd->pid)
+			errno = temp;
+	}
+	g_errno = WEXITSTATUS(errno);
 }
 
 void	execute_ioredirect(t_astnode *astree, t_command *cmd)
@@ -124,7 +129,7 @@ void	execute(t_astnode *astree, char *envp[])
 
 	command_init(&cmd, envp);
 	execute_cmdline(astree, &cmd, envp);
-	wait_all();
+	wait_all(&cmd);
 	set_signal(SIG_SHELL);
 	free_double_array(cmd.path);
 }
