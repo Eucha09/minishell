@@ -12,6 +12,8 @@
 
 #include "execute.h"
 
+extern int	g_errno;
+
 void	rezero_cmd(t_command *cmd)
 {
 	free_double_array(cmd->cmd);
@@ -43,17 +45,17 @@ int	cmd_error_check(t_command *cmd)
 void	excute_builtins(t_command *cmd, char **envp)
 {
 	if (!ft_strcmp((cmd->cmd)[0], "echo"))
-		echo(cmd->cmd, cmd->file_out_fd);
+		g_errno = echo(cmd->cmd, cmd->file_out_fd);
 	if (!ft_strcmp((cmd->cmd)[0], "cd"))
-		cd(envp, (cmd->cmd)[1]);
+		g_errno = cd(envp, (cmd->cmd)[1]);
 	if (!ft_strcmp((cmd->cmd)[0], "pwd"))
-		pwd(cmd->file_out_fd);
+		g_errno = pwd(cmd->file_out_fd);
 	if (!ft_strcmp((cmd->cmd)[0], "export"))
-		export(envp, cmd->cmd, cmd->file_out_fd);
+		g_errno = export(envp, cmd->cmd, cmd->file_out_fd);
 	if (!ft_strcmp((cmd->cmd)[0], "unset"))
-		unset(envp, cmd->cmd);
+		g_errno = unset(envp, cmd->cmd);
 	if (!ft_strcmp((cmd->cmd)[0], "env"))
-		env(envp, cmd->file_out_fd);
+		g_errno = env(envp, cmd->file_out_fd);
 	if (!ft_strcmp((cmd->cmd)[0], "exit"))
 		ft_exit(cmd);
 }
