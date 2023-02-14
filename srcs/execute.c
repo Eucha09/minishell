@@ -122,6 +122,6 @@ void	execute(t_astnode *astree, char *envp[])
 	command_init(&cmd, envp);
 	execute_cmdline(astree, &cmd, envp);
 	wait_all();
-	set_signal(SIG_SHELL_MODE);
+	set_signal(SIG_SHELL);
 	free_double_array(cmd.path);
 }

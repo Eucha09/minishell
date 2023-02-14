@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 17:24:38 by yim               #+#    #+#             */
-/*   Updated: 2023/02/14 16:14:34 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/14 16:28:32 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 int	make_here_doc3(char *limiter, int fd, char *line)
 {
-	set_signal(SIG_CHILD_MODE);
+	set_signal(SIG_HEREDOC_CHILD);
 	while (1)
 	{
 		ft_putstr_fd("> ", 2);
@@ -45,9 +45,9 @@ int	make_here_doc2(char *limiter, int fd)
 		return (-1);
 	if (pid == 0)
 		make_here_doc3(limiter, fd, line);
-	set_signal(SIG_HEREDOC_MODE);
+	set_signal(SIG_HEREDOC_PARENT);
 	waitpid(-1, &status, 0);
-	set_signal(SIG_SHELL_MODE);
+	set_signal(SIG_SHELL);
 	return (0);
 }
 
