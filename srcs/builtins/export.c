@@ -12,6 +12,8 @@
 
 #include "builtins.h"
 
+extern int	g_errno;
+
 int	print_envp2(int file_out_fd, char **sort_envp)
 {
 	char	*tmp;
@@ -124,6 +126,7 @@ void	add_envp(char **envp, char *str)
 	if (i > 241)
 	{
 		printf ("envp max error");
+		g_errno = 1;
 		return ;
 	}
 	envp[i] = ft_strdup(str);

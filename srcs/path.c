@@ -6,12 +6,14 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:45:07 by yim               #+#    #+#             */
-/*   Updated: 2023/02/13 19:08:08 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/14 16:35:04 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute.h"
 #include "libft.h"
+
+extern int	g_errno;
 
 int	free_return(char *tmp, char *tmp2, int num)
 {
@@ -99,6 +101,7 @@ void	find_access_path(char *simplecmd, t_command *cmd)
 	if ((cmd->cmd)[0][0] == '\0' || cmd->path == NULL)
 	{
 		cmd->error_code = 127;
+		g_errno = 127;
 		printf ("command not found : %s\n", simplecmd);
 		return ;
 	}
@@ -108,6 +111,7 @@ void	find_access_path(char *simplecmd, t_command *cmd)
 	else if (error_num == -1)
 	{
 		cmd->error_code = 127;
+		g_errno = 127;
 		printf ("command not found : %s\n", simplecmd);
 	}
 }
