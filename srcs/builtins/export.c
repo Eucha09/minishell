@@ -133,14 +133,10 @@ void	add_envp(char **envp, char *str)
 	envp[i + 1] = NULL;
 }
 
-int	export(char **envp, char **cmd, int file_out_fd)
+int	export2(int	i, char **cmd, char **envp)
 {
-	int		i;
 	char	*str;
 
-	i = 1;
-	if (cmd[1] == NULL)
-		return (print_envp(envp, file_out_fd));
 	while (cmd[i])
 	{
 		str = cmd[i];
@@ -151,7 +147,10 @@ int	export(char **envp, char **cmd, int file_out_fd)
 		if (check_key_double(envp, str))
 		{
 			if (!ft_strchr(str, '='))
-				return (CODE_OK);
+			{
+				i++;
+				continue ;
+			}
 			if (ep_change_envp(envp, str) == CODE_ERROR)
 				return (CODE_ERROR);
 		}
@@ -159,5 +158,17 @@ int	export(char **envp, char **cmd, int file_out_fd)
 			add_envp(envp, str);
 		i++;
 	}
+	return (CODE_OK);
+}
+
+int	export(char **envp, char **cmd, int file_out_fd)
+{
+	int		i;
+
+	i = 1;
+	if (cmd[1] == NULL)
+		return (print_envp(envp, file_out_fd));
+	if (export2(i, cmd, envp) == CODE_ERROR)
+		return (CODE_ERROR);
 	return (CODE_OK);
 }
