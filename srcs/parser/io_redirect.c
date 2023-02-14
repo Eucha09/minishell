@@ -6,7 +6,7 @@
 /*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:48:25 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/08 20:44:25 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/14 15:57:28 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_astnode	*ioredirect1(t_token **curtok)
 
 	if (!term(curtok, TOKEN_GREAT, NULL))
 		return (NULL);
-	if (!term(curtok, TOKEN, &filename))
+	if (!term(curtok, TOKEN_WORD, &filename))
 		return (NULL);
 	ret = astnode_new();
 	astnode_init(ret, filename, NODE_REDIRECT_OUT);
@@ -33,7 +33,7 @@ t_astnode	*ioredirect2(t_token **curtok)
 
 	if (!term(curtok, TOKEN_LESS, NULL))
 		return (NULL);
-	if (!term(curtok, TOKEN, &filename))
+	if (!term(curtok, TOKEN_WORD, &filename))
 		return (NULL);
 	ret = astnode_new();
 	astnode_init(ret, filename, NODE_REDIRECT_IN);
@@ -47,7 +47,7 @@ t_astnode	*ioredirect3(t_token **curtok)
 
 	if (!term(curtok, TOKEN_DGREAT, NULL))
 		return (NULL);
-	if (!term(curtok, TOKEN, &filename))
+	if (!term(curtok, TOKEN_WORD, &filename))
 		return (NULL);
 	ret = astnode_new();
 	astnode_init(ret, filename, NODE_DREDIRECT_OUT);
@@ -61,7 +61,7 @@ t_astnode	*ioredirect4(t_token **curtok)
 
 	if (!term(curtok, TOKEN_DLESS, NULL))
 		return (NULL);
-	if (!term(curtok, TOKEN, &here_end))
+	if (!term(curtok, TOKEN_WORD, &here_end))
 		return (NULL);
 	ret = astnode_new();
 	astnode_init(ret, here_end, NODE_DREDIRECT_IN);

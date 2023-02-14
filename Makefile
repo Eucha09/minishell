@@ -6,7 +6,11 @@ READLINE_INC = -I${HOME}/.brew/opt/readline/include
 # READLINE_LIB = -L/opt/homebrew/opt/readline/lib
 # READLINE_INC = -I/opt/homebrew/opt/readline/include
 SOURCES =   srcs/main.c\
-            srcs/lexer.c\
+            srcs/lexer/lexer.c\
+			srcs/lexer/token.c\
+			srcs/lexer/gettok.c\
+			srcs/lexer/expand.c\
+			srcs/lexer/lexer_utils.c\
 			srcs/astree.c\
 			srcs/parser/parser.c\
 			srcs/parser/cmdline.c\

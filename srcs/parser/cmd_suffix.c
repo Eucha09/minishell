@@ -6,7 +6,7 @@
 /*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 11:51:39 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/08 20:44:22 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/14 15:57:20 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_astnode	*cmdsuffix3(t_token **curtok)
 	t_astnode	*ret;
 	char		*arg;
 
-	if (!term(curtok, TOKEN, &arg))
+	if (!term(curtok, TOKEN_WORD, &arg))
 		return (NULL);
 	cmdsuffixnode = cmdsuffix(curtok);
 	if (cmdsuffixnode == NULL)
@@ -72,7 +72,7 @@ t_astnode	*cmdsuffix4(t_token **curtok)
 	t_astnode	*ret;
 	char		*arg;
 
-	if (!term(curtok, TOKEN, &arg))
+	if (!term(curtok, TOKEN_WORD, &arg))
 		return (NULL);
 	ret = astnode_new();
 	astnode_init(ret, arg, NODE_CMD_SUFFIX);
