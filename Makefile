@@ -10,6 +10,7 @@ SOURCES =   srcs/main.c\
 			srcs/lexer/token.c\
 			srcs/lexer/gettok.c\
 			srcs/lexer/expand.c\
+			srcs/lexer/env_expand.c\
 			srcs/lexer/lexer_utils.c\
 			srcs/astree.c\
 			srcs/parser/parser.c\

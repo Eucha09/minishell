@@ -6,13 +6,11 @@
 /*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:57:14 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/14 16:58:22 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/14 17:02:46 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
-
-extern int	g_errno;
 
 char	env_key_len(char *key)
 {
@@ -68,28 +66,4 @@ int	replace_env(char **str, int pos, int size, char *envp[])
 	free(*str);
 	*str = new_str;
 	return (value_len);
-}
-
-int	replace_errno(char **str, int pos, int size)
-{
-	char	*new_str;
-	char	*errno_str;
-	int		errno_len;
-	int		new_size;
-
-	errno_str = ft_itoa(g_errno);
-	if (errno_str == NULL)
-		return (0);
-	errno_len = ft_strlen(errno_str);
-	new_size = size + errno_len + 1;
-	new_str = (char *)malloc(sizeof(char) * new_size);
-	if (new_str == NULL)
-		return (0);
-	ft_strlcpy(new_str, (*str), pos + 1);
-	ft_strlcat(new_str, errno_str, new_size);
-	ft_strlcat(new_str, (*str) + pos + 2, new_size);
-	free(*str);
-	free(errno_str);
-	*str = new_str;
-	return (errno_len);
 }
