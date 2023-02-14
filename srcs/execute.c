@@ -90,7 +90,6 @@ void	execute_command(t_astnode *astree, t_command *cmd, char *envp[])
 	if (cmd->cmd == NULL)
 		return ;
 	ft_memset(cmd->cmd, 0, sizeof(char *) * (get_argc(astree) + 1));
-
 	execute_simplecmd(astree, cmd, envp);
 	if (cmd_error_check(cmd))
 		return ;
@@ -121,6 +120,8 @@ void	execute_cmdline(t_astnode *astree, t_command *cmd, char *envp[])
 void	execute(t_astnode *astree, char *envp[])
 {
 	t_command	cmd;
+	int			fd;
+	int			fd2;
 
 	command_init(&cmd, envp);
 	execute_cmdline(astree, &cmd, envp);

@@ -22,17 +22,20 @@ void	rezero_cmd(t_command *cmd)
 	cmd->argc = 1;
 	cmd->file_in_fd = 0;
 	cmd->file_out_fd = 0;
+	cmd->error_code = 0;
 }
 
 int	cmd_error_check(t_command *cmd)
 {
 	if (cmd->file_in_fd == -1 || cmd->file_out_fd == -1)
 	{
+		cmd->pipe_after = 0;
 		rezero_cmd(cmd);
 		return (1);
 	}
 	if (cmd->error_code != 0)
 	{
+		cmd->pipe_after = 0;
 		rezero_cmd(cmd);
 		return (1);
 	}
