@@ -13,6 +13,8 @@
 #include "execute.h"
 #include "libft.h"
 
+extern int	g_errno;
+
 void	wait_all(void)
 {
 	pid_t	pid;
@@ -21,6 +23,7 @@ void	wait_all(void)
 	pid = 1;
 	while (pid != -1)
 		pid = wait(&temp);
+	g_errno = temp;
 }
 
 void	execute_ioredirect(t_astnode *astree, t_command *cmd)
