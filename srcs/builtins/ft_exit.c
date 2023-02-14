@@ -45,6 +45,5 @@ void	ft_exit(t_command *cmd)
 		ft_putstr_fd("exit: too many arguments\n", 2);
 	}
 	if (check_digit(cmd) || !((cmd->cmd)[1] != NULL && (cmd->cmd)[2] != NULL))
-		exit(0);
-	return (0);
+		exit(ft_atoi((cmd->cmd)[1]));
 }
