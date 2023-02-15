@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 21:50:11 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/14 19:10:06 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/15 15:44:00 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define COMMAND_H
 
 # include "astree.h"
+# include "libft.h"
 # include <stdio.h>
 
 typedef struct s_command

@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 17:06:14 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/15 14:40:23 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/15 15:43:09 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "builtins.h"
 # include "sig.h"
 # include "libft.h"
+# include <unistd.h>
 # include <fcntl.h>
 # include <stdio.h>
 # include <sys/wait.h>

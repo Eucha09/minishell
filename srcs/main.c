@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:40:03 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/15 15:13:35 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/15 15:44:55 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,3 @@ int	main(int argc, char *argv[], char *envp[])
 	}
 	free_double_array(d_envp);
 }
-// temp print lexer list
-// printf("lexer tok_cnt %d\n", lexer.tok_cnt);
-// t_token *cur = lexer.list_tok;
-// while(cur)
-// {
-// 	printf("token data %s type %d\n", cur->data, cur->type);
-// 	cur = cur->next;
-// }

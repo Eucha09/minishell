@@ -6,12 +6,11 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 14:04:20 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/13 15:00:51 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/15 15:44:03 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "command.h"
-#include "libft.h"
 
 void	find_path(t_command *cmd, char *envp[])
 {

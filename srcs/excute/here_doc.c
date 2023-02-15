@@ -6,14 +6,11 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 17:24:38 by yim               #+#    #+#             */
-/*   Updated: 2023/02/15 15:39:31 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/15 15:42:59 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execute.h"
-#include "libft.h"
-
-#include "unistd.h"
 
 int	make_here_doc3(char *limiter, int fd, char *line)
 {
