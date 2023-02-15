@@ -6,11 +6,11 @@
 /*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 15:01:52 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/14 16:23:52 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/15 14:39:21 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "sig.h"
 
 void	sig_handler1(int sig)
 {
@@ -23,7 +23,7 @@ void	sig_handler1(int sig)
 	}
 }
 
-void sig_handler2(int sig)
+void	sig_handler2(int sig)
 {
 	if (sig == SIGINT)
 	{
