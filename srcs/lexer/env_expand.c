@@ -6,7 +6,7 @@
 /*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:57:14 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/14 17:02:46 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/15 14:19:45 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*get_env_value(char *key, int len, char *envp[])
 	temp = key[len];
 	key[len] = '=';
 	i = 0;
-	while(envp[i])
+	while (envp[i])
 	{
 		if (ft_strncmp(key, envp[i], len + 1) == 0)
 		{

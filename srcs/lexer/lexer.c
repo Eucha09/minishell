@@ -6,7 +6,7 @@
 /*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:45:53 by jeong-euich       #+#    #+#             */
-/*   Updated: 2023/02/14 17:02:25 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/15 14:20:20 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	strip_quotes(char *str)
 void	lexer_build(char *str, int size, t_lexer *lexer, char *envp[])
 {
 	t_token	*cur;
-	int	i;
+	int		i;
 
 	lexer->list_tok = NULL;
 	i = 0;
@@ -67,6 +67,6 @@ void	lexer_build(char *str, int size, t_lexer *lexer, char *envp[])
 void	lexer_clear(t_lexer *lexer)
 {
 	if (lexer == NULL)
-		return;
+		return ;
 	tok_clear(lexer->list_tok);
 }

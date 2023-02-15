@@ -6,7 +6,7 @@
 /*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 20:40:31 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/13 18:22:22 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/15 14:20:56 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	term(t_token **curtok, int tok_type, char **buffer)
 {
 	int	size;
-	
+
 	if (*curtok == NULL)
 		return (0);
 	if ((*curtok)->type == tok_type)
@@ -46,13 +46,10 @@ int	parse(t_lexer *lexer, t_astnode **astree)
 	}
 	curtok = lexer->list_tok;
 	*astree = cmdline(&curtok);
-
-	// 에러처리 todo
 	if (curtok != NULL || *astree == NULL)
 	{
 		ft_printf("Syntax Error\n");
 		return (0);
 	}
-
 	return (1);
 }
