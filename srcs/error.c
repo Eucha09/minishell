@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:55:20 by yim               #+#    #+#             */
-/*   Updated: 2023/02/15 14:34:10 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/15 14:46:56 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,13 @@ int	free_code_error(char *free_str, int i)
 {
 	free(free_str);
 	return (i);
+}
+
+int	free_return(char *tmp, char *tmp2, int num)
+{
+	if (tmp != NULL)
+		free (tmp);
+	if (tmp2 != NULL)
+		free (tmp2);
+	return (num);
 }

@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 21:33:54 by yim               #+#    #+#             */
-/*   Updated: 2023/02/12 18:11:27 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/15 14:47:33 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ int	unset(char **envp, char **cmd)
 	{
 		str = cmd[i];
 		if (str == NULL)
-			return (code_error("unset: not enough arguments"));
+			return (code_error("unset: not enough arguments", 1));
 		if (ft_strchr(str, '=') || check_ep_first(str))
-			return (code_error("unset: invalid parameter name"));
+			return (code_error("unset: invalid parameter name", 1));
 		if (check_key_double(envp, str) == -1)
-			return (code_error("malloc error"));
+			return (code_error("malloc error", 1));
 		us_delete_envp(envp, str);
 		i++;
 	}

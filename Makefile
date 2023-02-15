@@ -29,7 +29,7 @@ SOURCES =   srcs/main.c\
 			srcs/excute/here_doc.c\
             srcs/signal.c\
 			srcs/utils.c\
-			srcs/builtins/builtins_error.c\
+			srcs/error.c\
 			srcs/builtins/cd.c\
 			srcs/builtins/cd2.c\
 			srcs/builtins/echo.c\

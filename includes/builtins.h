@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 15:25:26 by yim               #+#    #+#             */
-/*   Updated: 2023/02/15 14:33:53 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/15 14:44:07 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTINS_H
 # define BUILTINS_H
 
-//# include "minishell.h"
 # include "error.h"
+# include "libft.h"
+# include "command.h"
 
 # define CODE_ERROR 1
 # define CODE_OK 0
@@ -22,7 +23,6 @@
 # define FALSE 0
 
 //error
-int		code_error(char *str);
 int		free_code_error(char *free_str, int i);
 //cd
 int		cd(char **envp, char *str);
