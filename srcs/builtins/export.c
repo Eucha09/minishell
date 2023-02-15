@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/27 14:57:00 by yim               #+#    #+#             */
-/*   Updated: 2023/01/29 17:14:21by yim              ###   ########.fr       */
+/*   Created: 2023/02/15 14:09:56 by yim               #+#    #+#             */
+/*   Updated: 2023/02/15 14:11:40 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,59 +88,10 @@ int	ep_change_envp(char **envp, char *str)
 	return (CODE_OK);
 }
 
-int	check_key_double(char **envp, char *str)
+int	export2(int i, char **cmd, char **envp)
 {
-	char	*envp_key;
-	char	*str_key;
-	int		i;
-
-	str_key = find_key(str);
-	i = 0;
-	if (str_key == NULL)
-		return (-1);
-	while (envp[i])
-	{
-		envp_key = find_key(envp[i]);
-		if (envp_key == NULL)
-			free_code_error(str_key, -1);
-		if (!ft_strcmp(envp_key, str_key))
-		{
-			free(envp_key);
-			free(str_key);
-			return (i + 1);
-		}
-		free(envp_key);
-		i++;
-	}
-	free(str_key);
-	return (FALSE);
-}
-
-void	add_envp(char **envp, char *str)
-{
-	int		i;
-
-	i = 0;
-	while (envp[i])
-		i++;
-	if (i > 241)
-	{
-		printf ("envp max error");
-		g_errno = 1;
-		return ;
-	}
-	envp[i] = ft_strdup(str);
-	envp[i + 1] = NULL;
-}
-
-int	export(char **envp, char **cmd, int file_out_fd)
-{
-	int		i;
 	char	*str;
 
-	i = 1;
-	if (cmd[1] == NULL)
-		return (print_envp(envp, file_out_fd));
 	while (cmd[i])
 	{
 		str = cmd[i];
@@ -151,7 +102,10 @@ int	export(char **envp, char **cmd, int file_out_fd)
 		if (check_key_double(envp, str))
 		{
 			if (!ft_strchr(str, '='))
-				return (CODE_OK);
+			{
+				i++;
+				continue ;
+			}
 			if (ep_change_envp(envp, str) == CODE_ERROR)
 				return (CODE_ERROR);
 		}
@@ -159,5 +113,17 @@ int	export(char **envp, char **cmd, int file_out_fd)
 			add_envp(envp, str);
 		i++;
 	}
+	return (CODE_OK);
+}
+
+int	export(char **envp, char **cmd, int file_out_fd)
+{
+	int		i;
+
+	i = 1;
+	if (cmd[1] == NULL)
+		return (print_envp(envp, file_out_fd));
+	if (export2(i, cmd, envp) == CODE_ERROR)
+		return (CODE_ERROR);
 	return (CODE_OK);
 }

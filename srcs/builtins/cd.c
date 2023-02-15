@@ -6,34 +6,13 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 19:07:56 by yim               #+#    #+#             */
-/*   Updated: 2023/02/13 20:06:21 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/15 14:14:15 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-static void	free_cd(char *cwd, char *c_dir, char *str_slash, char *str)
-{
-	if (cwd != NULL)
-		free (cwd);
-	if (c_dir != NULL)
-		free (c_dir);
-	if (str)
-		free (str_slash);
-}
-
-static int	free_cd_error(char *str, char *cwd, char *str_slash)
-{
-	if (cwd != NULL)
-		free (cwd);
-	if (str_slash != NULL)
-		free(str_slash);
-	if (str != NULL)
-		perror(str);
-	return (CODE_ERROR);
-}
-
-static char	*find_home(char **envp)
+char	*find_home(char **envp)
 {
 	int		i;
 	char	*home;
@@ -49,7 +28,7 @@ static char	*find_home(char **envp)
 	return (home);
 }
 
-static int	check_cd(char **cwd, char **c_dir, char **envp, char *str)
+int	check_cd(char **cwd, char **c_dir, char **envp, char *str)
 {
 	char	*home;
 

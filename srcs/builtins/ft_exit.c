@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/13 15:50:14 by yim               #+#    #+#             */
-/*   Updated: 2023/02/14 13:02:38by yim              ###   ########.fr       */
+/*   Created: 2023/02/15 14:09:47 by yim               #+#    #+#             */
+/*   Updated: 2023/02/15 14:09:48 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	ft_exit(t_command *cmd)
 		g_errno = 1;
 		ft_putstr_fd("exit: too many arguments\n", 2);
 	}
+	if ((cmd->cmd)[1] == NULL)
+		exit(0);
 	if (check_digit(cmd) || !((cmd->cmd)[1] != NULL && (cmd->cmd)[2] != NULL))
 		exit(ft_atoi((cmd->cmd)[1]));
 }

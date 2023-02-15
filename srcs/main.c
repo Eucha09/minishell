@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:40:03 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/14 17:10:49 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/14 21:20:01 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	main(int argc, char *argv[], char *envp[])
 	print_minishell();
 	while (1)
 	{
-		line = readline(COLOR_GREEN PROMPT COLOR_RESET);
+		line = readline(PROMPT);
 		if (line == NULL)
 			sh_exit(0);
 		if (ft_strlen(line) == 0)

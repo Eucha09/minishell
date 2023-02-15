@@ -20,22 +20,26 @@ SOURCES =   srcs/main.c\
 			srcs/parser/cmd_prefix.c\
 			srcs/parser/cmd_suffix.c\
 			srcs/parser/io_redirect.c\
-			srcs/execute.c\
-			srcs/command.c\
+			srcs/excute/execute.c\
+			srcs/excute/execute2.c\
+			srcs/excute/command.c\
+			srcs/excute/path.c\
+			srcs/excute/execve.c\
+			srcs/excute/execve2.c\
+			srcs/excute/here_doc.c\
             srcs/signal.c\
 			srcs/utils.c\
-			srcs/here_doc.c\
 			srcs/builtins/builtins_error.c\
 			srcs/builtins/cd.c\
+			srcs/builtins/cd2.c\
 			srcs/builtins/echo.c\
 			srcs/builtins/env.c\
 			srcs/builtins/export.c\
 			srcs/builtins/export2.c\
+			srcs/builtins/export3.c\
 			srcs/builtins/pwd.c\
 			srcs/builtins/unset.c\
-			srcs/builtins/ft_exit.c\
-			srcs/path.c\
-			srcs/execve.c
+			srcs/builtins/ft_exit.c
 
 
 OBJECTS = $(SOURCES:.c=.o)

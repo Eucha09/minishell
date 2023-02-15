@@ -1,22 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_main.c                                        :+:      :+:    :+:   */
+/*   cd2.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/25 15:31:09 by yim               #+#    #+#             */
-/*   Updated: 2023/01/30 14:38:05by yim              ###   ########.fr       */
+/*   Created: 2023/02/15 14:13:50 by yim               #+#    #+#             */
+/*   Updated: 2023/02/15 14:14:26 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "minishell.h"
-#include <sys/wait.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
+#include "builtins.h"
 
-int	main(int argc, char **argv, char **envp)
+void	free_cd(char *cwd, char *c_dir, char *str_slash, char *str)
 {
-	unlink("dsfjk");
+	if (cwd != NULL)
+		free (cwd);
+	if (c_dir != NULL)
+		free (c_dir);
+	if (str)
+		free (str_slash);
+}
+
+int	free_cd_error(char *str, char *cwd, char *str_slash)
+{
+	if (cwd != NULL)
+		free (cwd);
+	if (str_slash != NULL)
+		free(str_slash);
+	if (str != NULL)
+		perror(str);
+	return (CODE_ERROR);
 }
