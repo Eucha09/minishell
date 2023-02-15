@@ -6,7 +6,7 @@
 /*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 15:02:19 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/14 16:22:55 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/15 14:32:39 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include "parser.h"
 # include "execute.h"
 # include "builtins.h"
+# include "error.h"
 
 # define SIG_SHELL			0
 # define SIG_EXECVE_PARENT	1
