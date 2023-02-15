@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 17:15:34 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/06 19:17:59 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/15 15:48:24 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	print_minishell(void)
 	char	*line;
 
 	fd = open("ascii_art", O_RDONLY);
+	if (fd == -1)
+		return ;
 	ft_printf("\n");
 	while (1)
 	{
