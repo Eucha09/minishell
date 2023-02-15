@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 19:07:56 by yim               #+#    #+#             */
-/*   Updated: 2023/02/15 14:14:15 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/15 14:44:50 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,17 @@ int	check_cd(char **cwd, char **c_dir, char **envp, char *str)
 	{
 		home = find_home(envp);
 		if (home == NULL)
-			return (code_error("cd: HOME not set"));
+			return (code_error("cd: HOME not set", 1));
 		*c_dir = ft_strdup(home);
 		if (*c_dir == NULL)
-			return (code_error("malloc error"));
+			return (code_error("malloc error", 1));
 	}
 	else if (str[0] == '/')
 	{
 		free (*cwd);
 		*cwd = ft_strdup("/");
 		if (cwd == NULL)
-			return (code_error("malloc error"));
+			return (code_error("malloc error", 1));
 	}
 	return (CODE_OK);
 }
@@ -103,7 +103,7 @@ int	cd(char **envp, char *str)
 
 	cwd = getcwd(NULL, 0);
 	if (cwd == NULL)
-		code_error("getcwd: cannot access parent directories");
+		code_error("getcwd: cannot access parent directories", 1);
 	old_pwd = getcwd(NULL, 0);
 	if (old_pwd == NULL)
 		free_cd_error(NULL, cwd, NULL);

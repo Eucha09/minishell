@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:45:07 by yim               #+#    #+#             */
-/*   Updated: 2023/02/14 17:11:04 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/15 14:46:59 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,6 @@
 #include "libft.h"
 
 extern int	g_errno;
-
-int	free_return(char *tmp, char *tmp2, int num)
-{
-	if (tmp != NULL)
-		free (tmp);
-	if (tmp2 != NULL)
-		free (tmp2);
-	return (num);
-}
 
 void	free_double_array(char **double_array)
 {

@@ -3,17 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   sig.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:36:53 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/15 14:38:03 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/15 14:42:06 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SIG_H
 # define SIG_H
 
+# include <stdio.h>
 # include <signal.h>
+# include "libft.h"
+# include <readline/readline.h>
+# include <readline/history.h>
 
 # define SIG_SHELL			0
 # define SIG_EXECVE_PARENT	1

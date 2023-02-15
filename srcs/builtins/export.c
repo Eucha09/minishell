@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:09:56 by yim               #+#    #+#             */
-/*   Updated: 2023/02/15 14:11:40 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/15 14:45:21 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	print_envp2(int file_out_fd, char **sort_envp)
 		{
 			tmp = find_key(sort_envp[i]);
 			if (tmp == NULL)
-				return (code_error("malloc error"));
+				return (code_error("malloc error", 1));
 			ft_putstr_fd(tmp, file_out_fd);
 			ft_putstr_fd("=\"", file_out_fd);
 			ft_putstr_fd(tmp2 + 1, file_out_fd);
@@ -49,7 +49,7 @@ int	print_envp(char **envp, int file_out_fd)
 
 	sort_envp = sorting_envp(envp);
 	if (sort_envp == NULL)
-		return (code_error("malloc error"));
+		return (code_error("malloc error", 1));
 	if (print_envp2(file_out_fd, sort_envp) == CODE_ERROR)
 	{
 		free (sort_envp);
@@ -68,12 +68,12 @@ int	ep_change_envp(char **envp, char *str)
 	i = 0;
 	str_key = find_key(str);
 	if (str_key == NULL)
-		return (code_error("malloc error"));
+		return (code_error("malloc error", 1));
 	while (envp[i])
 	{
 		envp_key = find_key(envp[i]);
 		if (str_key == NULL)
-			return (code_error("malloc error"));
+			return (code_error("malloc error", 1));
 		if (!ft_strcmp(str_key, envp_key))
 		{
 			free_return(envp_key, str_key, 0);
@@ -96,9 +96,9 @@ int	export2(int i, char **cmd, char **envp)
 	{
 		str = cmd[i];
 		if (check_ep_first(str) == CODE_ERROR)
-			return (code_error("export: not an identifier"));
+			return (code_error("export: not an identifier", 1));
 		if (check_key_double(envp, str) == -1)
-			return (code_error("malloc error"));
+			return (code_error("malloc error", 1));
 		if (check_key_double(envp, str))
 		{
 			if (!ft_strchr(str, '='))

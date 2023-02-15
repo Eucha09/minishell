@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 17:06:14 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/15 14:39:00 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/15 14:40:23 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "command.h"
 # include "builtins.h"
 # include "sig.h"
+# include "libft.h"
 # include <fcntl.h>
 # include <stdio.h>
 # include <sys/wait.h>
