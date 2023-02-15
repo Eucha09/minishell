@@ -6,7 +6,7 @@
 /*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 15:02:19 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/15 14:32:39 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/15 14:39:18 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <readline/history.h>
 # include <stdlib.h>
 # include <fcntl.h>
-# include <signal.h>
 # include "libft.h"
 # include "command.h"
 # include "lexer.h"
@@ -26,18 +25,12 @@
 # include "execute.h"
 # include "builtins.h"
 # include "error.h"
-
-# define SIG_SHELL			0
-# define SIG_EXECVE_PARENT	1
-# define SIG_EXECVE_CHILD	2
-# define SIG_HEREDOC_PARENT	3
-# define SIG_HEREDOC_CHILD	4
+# include "sig.h"
 
 # define PROMPT			"minishell $ "
 # define COLOR_GREEN	"\033[32;1m"
 # define COLOR_RESET	"\033[0m"
 
 void	print_minishell(void);
-void	set_signal(int mode);
 
 #endif
