@@ -6,12 +6,12 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 15:25:26 by yim               #+#    #+#             */
-/*   Updated: 2023/02/14 16:37:41 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/15 14:14:42 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_BUILTINS_H
-# define FT_BUILTINS_H
+#ifndef BUILTINS_H
+# define BUILTINS_H
 
 # include "minishell.h"
 
@@ -26,8 +26,10 @@ int		free_code_error(char *free_str, int i);
 //cd
 int		cd(char **envp, char *str);
 int		pwd(int file_out_fd);
+void	free_cd(char *cwd, char *c_dir, char *str_slash, char *str);
+int		free_cd_error(char *str, char *cwd, char *str_slash);
 //export
-int		print_envp(char **envp, int	file_out_fd);
+int		print_envp(char **envp, int file_out_fd);
 int		ft_strcmp(char *s1, char *s2);
 char	*find_key(char *str);
 int		check_ep_first(char *str);
@@ -36,6 +38,8 @@ int		ep_find_sort(char **envp, char *str);
 char	**sorting_envp(char **envp);
 int		ep_change_envp(char **envp, char *str);
 int		export(char **envp, char **cmd, int file_out_fd);
+void	add_envp(char **envp, char *str);
+int		check_key_double(char **envp, char *str);
 //env
 int		env(char **envp, int file_out_fd);
 //unset

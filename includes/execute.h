@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 17:06:14 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/12 16:33:56 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/15 14:05:52 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,14 @@ void	execve_command(t_command *cmd, char **envp);
 //free
 void	find_access_path(char *simplecmd, t_command *cmd);
 void	free_double_array(char **double_array);
-
+//excute2
+void	wait_all(t_command *cmd);
+void	execute_ioredirect(t_astnode *astree, t_command *cmd);
+void	execute_cmdsuffix(t_astnode *astree, t_command *cmd, char *envp[]);
+//execve2
+void	rezero_cmd(t_command *cmd);
+int		cmd_error_check(t_command *cmd);
+void	excute_builtins(t_command *cmd, char **envp);
+void	execve_child(t_command *cmd, int fd[2], char **envp);
+void	execve_child2(t_command *cmd, int fd[2], char **envp);
 #endif
