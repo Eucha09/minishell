@@ -6,7 +6,7 @@
 /*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 13:52:57 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/15 14:19:59 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/15 15:00:36 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ int	replace_errno(char **str, int pos, int size)
 
 	errno_str = ft_itoa(g_errno);
 	if (errno_str == NULL)
-		return (0);
+		return (code_error("malloc error", 1));
 	errno_len = ft_strlen(errno_str);
 	new_size = size + errno_len + 1;
 	new_str = (char *)malloc(sizeof(char) * new_size);
 	if (new_str == NULL)
-		return (0);
+		return (code_error("malloc error", 1));
 	ft_strlcpy(new_str, (*str), pos + 1);
 	ft_strlcat(new_str, errno_str, new_size);
 	ft_strlcat(new_str, (*str) + pos + 2, new_size);
@@ -86,7 +86,7 @@ int	pos_to_divide(char *str)
 void	divide_tok(t_token *tok, int size)
 {
 	t_token	*new_tok;
-	int i;
+	int		i;
 
 	i = pos_to_divide(tok->data);
 	if (i < size)

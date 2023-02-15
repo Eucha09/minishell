@@ -6,7 +6,7 @@
 /*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 20:44:20 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/02 13:49:35 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/15 15:02:04 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define ASTREE_H
 
 # include <stdlib.h>
+# include "error.h"
 
 # define NODE_PIPE			1
 # define NODE_SIMPLE_CMD	2
@@ -26,10 +27,10 @@
 
 typedef struct s_astnode
 {
-    int					type;
-    char				*data;
-    struct s_astnode*	left;
-    struct s_astnode*	right;
+	int					type;
+	char				*data;
+	struct s_astnode	*left;
+	struct s_astnode	*right;
 
 }	t_astnode;
 

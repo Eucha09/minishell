@@ -6,7 +6,7 @@
 /*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 13:36:02 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/14 14:21:43 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/15 15:00:50 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,14 @@ t_token	*toknew(int size)
 
 	tok = (t_token *)malloc(sizeof(t_token));
 	if (tok == NULL)
+	{
+		code_error("malloc error", 1);
 		return (NULL);
+	}
 	tok->data = (char *)malloc(size + 1);
 	if (tok->data == NULL)
 	{
+		code_error("malloc error", 1);
 		free(tok);
 		return (NULL);
 	}
@@ -56,4 +60,3 @@ void	lstadd_tok(t_lexer *lexer, t_token *tok)
 	}
 	cur->next = tok;
 }
-

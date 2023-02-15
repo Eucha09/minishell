@@ -6,7 +6,7 @@
 /*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 20:40:31 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/15 14:20:56 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/15 14:57:27 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	parse(t_lexer *lexer, t_astnode **astree)
 	*astree = cmdline(&curtok);
 	if (curtok != NULL || *astree == NULL)
 	{
-		ft_printf("Syntax Error\n");
+		code_error("Syntax Error", 2);
 		return (0);
 	}
 	return (1);

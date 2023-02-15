@@ -6,7 +6,7 @@
 /*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 16:03:39 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/14 17:00:14 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/15 15:01:24 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LEXER_H
 
 # include "libft.h"
+# include "error.h"
 
 # define TOKEN_WORD		0
 # define TOKEN_PIPE		1
@@ -32,7 +33,7 @@ typedef struct s_token
 typedef struct s_lexer
 {
 	t_token	*list_tok;
-	int	tok_cnt;
+	int		tok_cnt;
 }	t_lexer;
 
 void	lexer_build(char *str, int size, t_lexer *lexer, char *envp[]);

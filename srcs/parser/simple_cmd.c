@@ -6,7 +6,7 @@
 /*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 15:48:36 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/15 14:21:24 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/15 14:56:24 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ t_astnode	*simplecmd1(t_token **curtok)
 	}
 	ret = astnode_new();
 	astnode_init(ret, cmdpath, NODE_SIMPLE_CMD);
- 	astnode_attach(ret, cmdprefixnode, cmdsuffixnode);
- 	return (ret);
+	astnode_attach(ret, cmdprefixnode, cmdsuffixnode);
+	return (ret);
 }
 
 t_astnode	*simplecmd2(t_token **curtok)

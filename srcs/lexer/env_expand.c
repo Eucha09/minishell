@@ -6,7 +6,7 @@
 /*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:57:14 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/15 14:19:45 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/15 14:55:51 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	replace_env(char **str, int pos, int size, char *envp[])
 	new_size = size + value_len + 1;
 	new_str = (char *)malloc(sizeof(char) * new_size);
 	if (new_str == NULL)
-		return (0);
+		return (code_error("malloc error", 1));
 	ft_strlcpy(new_str, (*str), pos + 1);
 	ft_strlcat(new_str, env_value, new_size);
 	ft_strlcat(new_str, (*str) + pos + 1 + key_len, new_size);
