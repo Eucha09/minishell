@@ -6,16 +6,12 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:40:03 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/14 21:20:01 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/15 15:13:35 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// void leaks()
-// {	
-//   system("leaks minishell");
-// }
 int	g_errno;
 
 void	sh_exit(int code)
@@ -42,22 +38,25 @@ char	**dup_envp(char *envp[])
 	return (d_envp);
 }
 
-int	main(int argc, char *argv[], char *envp[])
+void	shell_init(int argc, char **argv, char **envp, char ***d_envp)
 {
-	//atexit(&leaks);
-	t_lexer	lexer;
-	t_astnode* astree;
-	char	*line;
-	char	**d_envp;
 	(void)argc;
 	(void)argv;
-
-	//나중에 free, return을 해야하나?
-	d_envp = dup_envp(envp);
+	*d_envp = dup_envp(envp);
 	if (d_envp == NULL)
-		return (0);
-	set_signal(0);
+		exit(1);
+	set_signal(SIG_SHELL);
 	print_minishell();
+}
+
+int	main(int argc, char *argv[], char *envp[])
+{
+	t_lexer		lexer;
+	t_astnode	*astree;
+	char		*line;
+	char		**d_envp;
+
+	shell_init(argc, argv, envp, &d_envp);
 	while (1)
 	{
 		line = readline(PROMPT);
@@ -66,25 +65,23 @@ int	main(int argc, char *argv[], char *envp[])
 		if (ft_strlen(line) == 0)
 		{
 			free(line);
-			continue;
+			continue ;
 		}
 		add_history(line);
 		lexer_build(line, ft_strlen(line), &lexer, d_envp);
 		free(line);
-
-		// temp print lexer list
-		// printf("lexer tok_cnt %d\n", lexer.tok_cnt);
-		// t_token *cur = lexer.list_tok;
-		// while(cur)
-		// {
-		// 	printf("token data %s type %d\n", cur->data, cur->type);
-		// 	cur = cur->next;
-		// }
-		
-		if (parse(&lexer, &astree)) {
+		if (parse(&lexer, &astree))
 			execute(astree, d_envp);
-		}
 		astnode_delete(astree);
 		lexer_clear(&lexer);
 	}
+	free_double_array(d_envp);
 }
+// temp print lexer list
+// printf("lexer tok_cnt %d\n", lexer.tok_cnt);
+// t_token *cur = lexer.list_tok;
+// while(cur)
+// {
+// 	printf("token data %s type %d\n", cur->data, cur->type);
+// 	cur = cur->next;
+// }

@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:10:12 by yim               #+#    #+#             */
-/*   Updated: 2023/02/15 14:10:13 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/15 15:31:43 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,5 @@ int	echo(char **cmd, int file_out_fd)
 	}
 	if (!flag)
 		ft_putstr_fd ("\n", file_out_fd);
-	return (1);
+	return (0);
 }
