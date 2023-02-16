@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:45:07 by yim               #+#    #+#             */
-/*   Updated: 2023/02/15 15:44:16 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/16 19:40:44 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	free_double_array(char **double_array)
 
 int	check_builtins(char *simplecmd)
 {
+	if (simplecmd == NULL)
+		return (0);
 	if (!ft_strcmp(simplecmd, "env"))
 		return (1);
 	if (!ft_strcmp(simplecmd, "echo"))
