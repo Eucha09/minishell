@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sig.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:36:53 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/16 19:02:20 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/16 20:46:31 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@
 
 void	set_signal(int sigint, int sigquit);
 void	termsig_handler(int sig);
+void	sig_errno(int sig);
 
 #endif

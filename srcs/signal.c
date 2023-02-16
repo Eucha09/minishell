@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 15:01:52 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/16 19:02:11 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/16 20:45:37 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,20 @@ void	sig_handler(int sig)
 	}
 }
 
+void	sig_errno(int sig)
+{
+	if (sig == SIGINT)
+		g_errno = 130;
+	else if (sig == SIGQUIT)
+		g_errno = 131;
+}
+
 void	termsig_handler(int sig)
 {
 	if (sig == SIGINT)
-	{
-		g_errno = 130;
 		printf("\n");
-	}
 	else if (sig == SIGQUIT)
-	{
-		g_errno = 131;
 		printf("Quit: 3\n");
-	}
 }
 
 void	set_signal(int sigint, int sigquit)

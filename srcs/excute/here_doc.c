@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 17:24:38 by yim               #+#    #+#             */
-/*   Updated: 2023/02/16 19:49:13 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/16 20:46:02 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	make_here_doc2(char *limiter, int fd)
 	if (WIFSIGNALED(status))
 	{
 		termsig_handler(WTERMSIG(status));
+		sig_errno(WTERMSIG(status));
 		set_signal(HDL, IGN);
 		return (-1);
 	}

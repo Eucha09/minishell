@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 13:56:48 by yim               #+#    #+#             */
-/*   Updated: 2023/02/16 20:33:36 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/16 20:50:35 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ void	wait_all(t_command *cmd)
 {
 	pid_t	pid;
 	int		status;
+	int		flag;
 
+	flag = 0;
 	pid = 1;
 	while (pid != -1)
 	{
@@ -27,7 +29,12 @@ void	wait_all(t_command *cmd)
 		{
 			g_errno = WEXITSTATUS(status);
 			if (WIFSIGNALED(status))
-				termsig_handler(WTERMSIG(status));
+				sig_errno(WTERMSIG(status));
+		}
+		if (WIFSIGNALED(status) && flag == 0)
+		{
+			flag = 1;
+			termsig_handler(WTERMSIG(status));
 		}
 	}
 }
