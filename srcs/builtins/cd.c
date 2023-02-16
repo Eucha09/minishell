@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 19:07:56 by yim               #+#    #+#             */
-/*   Updated: 2023/02/15 14:44:50 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/16 17:25:39 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,10 @@ int	cd(char **envp, char *str)
 
 	cwd = getcwd(NULL, 0);
 	if (cwd == NULL)
+	{
 		code_error("getcwd: cannot access parent directories", 1);
+		return (1);
+	}
 	old_pwd = getcwd(NULL, 0);
 	if (old_pwd == NULL)
 		free_cd_error(NULL, cwd, NULL);
