@@ -6,16 +6,19 @@
 /*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 15:01:52 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/15 14:39:21 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/15 18:42:50 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sig.h"
 
+extern int	g_errno;
+
 void	sig_handler1(int sig)
 {
 	if (sig == SIGINT)
 	{
+		g_errno = 130;
 		ft_putchar_fd('\n', 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
@@ -27,10 +30,12 @@ void	sig_handler2(int sig)
 {
 	if (sig == SIGINT)
 	{
+		g_errno = 130;
 		ft_putchar_fd('\n', 1);
 	}
 	if (sig == SIGQUIT)
 	{
+		g_errno = 131;
 		ft_putstr_fd("Quit: 3\n", 1);
 	}
 }

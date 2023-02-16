@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:08:31 by yim               #+#    #+#             */
-/*   Updated: 2023/02/15 15:44:08 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/16 15:59:22 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,7 @@ void	execute_command(t_astnode *astree, t_command *cmd, char *envp[])
 		return ;
 	ft_memset(cmd->cmd, 0, sizeof(char *) * (get_argc(astree) + 1));
 	execute_simplecmd(astree, cmd, envp);
-	if ((cmd->cmd)[0] != NULL)
-		execve_command(cmd, envp);
+	execve_command(cmd, envp);
 	rezero_cmd(cmd);
 }
 

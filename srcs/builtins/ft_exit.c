@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:09:47 by yim               #+#    #+#             */
-/*   Updated: 2023/02/15 14:09:48 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/15 17:04:23 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	ft_exit(t_command *cmd)
 	}
 	if ((cmd->cmd)[1] == NULL)
 		exit(0);
-	if (check_digit(cmd) || !((cmd->cmd)[1] != NULL && (cmd->cmd)[2] != NULL))
+	if (check_digit(cmd))
+		exit (g_errno);
+	if (!((cmd->cmd)[1] != NULL && (cmd->cmd)[2] != NULL))
 		exit(ft_atoi((cmd->cmd)[1]));
 }

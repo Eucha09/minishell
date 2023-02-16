@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:01:20 by yim               #+#    #+#             */
-/*   Updated: 2023/02/15 16:07:19 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/16 15:15:54 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ void	execve_child2(t_command *cmd, int fd[2], char **envp)
 	}
 	if (!cmd_error_check(cmd))
 		execve((cmd->cmd)[0], cmd->cmd, envp);
-	perror("");
 	exit(g_errno);
 }
 

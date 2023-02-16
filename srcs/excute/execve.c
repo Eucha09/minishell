@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/15 14:08:09 by yim               #+#    #+#             */
-/*   Updated: 2023/02/15 14:08:10 by yim              ###   ########.fr       */
+/*   Created: 2023/02/16 16:00:44 by yim               #+#    #+#             */
+/*   Updated: 2023/02/16 16:00:45 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void	execve_command(t_command *cmd, char **envp)
 		if (pipe(fd) == -1)
 			return (perror("pipe error"));
 	}
-	if (check_builtins((cmd->cmd)[0]) && \
+	if ((cmd->cmd)[0] != NULL && check_builtins((cmd->cmd)[0]) && \
 		cmd->pipe_before == 0 && cmd->pipe_after == 0)
 		excute_first_builtins(cmd, envp, fd);
 	else

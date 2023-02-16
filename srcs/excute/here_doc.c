@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 17:24:38 by yim               #+#    #+#             */
-/*   Updated: 2023/02/15 15:42:59 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/16 15:54:53 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	make_here_doc2(char *limiter, int fd)
 	if (pid == 0)
 		make_here_doc3(limiter, fd, line);
 	set_signal(SIG_HEREDOC_PARENT);
-	waitpid(-1, &status, 0);
+	waitpid(pid, &status, 0);
 	set_signal(SIG_SHELL);
 	return (0);
 }
