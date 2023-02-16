@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 19:40:03 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/15 15:44:55 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/16 19:05:56 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	shell_init(int argc, char **argv, char **envp, char ***d_envp)
 	*d_envp = dup_envp(envp);
 	if (d_envp == NULL)
 		exit(1);
-	set_signal(SIG_SHELL);
+	set_signal(HDL, IGN);
 	print_minishell();
 }
 

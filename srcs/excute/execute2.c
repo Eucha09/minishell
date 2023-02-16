@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 13:56:48 by yim               #+#    #+#             */
-/*   Updated: 2023/02/16 16:35:41 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/16 19:03:45 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,18 @@ extern int	g_errno;
 void	wait_all(t_command *cmd)
 {
 	pid_t	pid;
-	int		temp;
+	int		status;
 
 	pid = 1;
 	while (pid != -1)
 	{
-		pid = wait(&temp);
+		pid = wait(&status);
 		if (pid == cmd->pid)
-			g_errno = WEXITSTATUS(temp);
+		{
+			g_errno = WEXITSTATUS(status);
+			if (WIFSIGNALED(status))
+				termsig_handler(WTERMSIG(status));
+		}
 	}
 }
 

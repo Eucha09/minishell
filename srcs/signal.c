@@ -6,7 +6,7 @@
 /*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 15:01:52 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/15 18:42:50 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/16 19:02:11 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,57 +14,44 @@
 
 extern int	g_errno;
 
-void	sig_handler1(int sig)
+void	sig_handler(int sig)
 {
 	if (sig == SIGINT)
 	{
 		g_errno = 130;
-		ft_putchar_fd('\n', 1);
+		printf("\n");
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
 }
 
-void	sig_handler2(int sig)
+void	termsig_handler(int sig)
 {
 	if (sig == SIGINT)
 	{
 		g_errno = 130;
-		ft_putchar_fd('\n', 1);
+		printf("\n");
 	}
-	if (sig == SIGQUIT)
+	else if (sig == SIGQUIT)
 	{
 		g_errno = 131;
-		ft_putstr_fd("Quit: 3\n", 1);
+		printf("Quit: 3\n");
 	}
 }
 
-void	set_signal(int mode)
+void	set_signal(int sigint, int sigquit)
 {
-	if (mode == SIG_SHELL)
-	{
-		signal(SIGINT, sig_handler1);
-		signal(SIGQUIT, SIG_IGN);
-	}
-	else if (mode == SIG_EXECVE_PARENT)
-	{
-		signal(SIGINT, sig_handler2);
-		signal(SIGQUIT, sig_handler2);
-	}
-	else if (mode == SIG_EXECVE_CHILD)
-	{
+	if (sigint == DFL)
 		signal(SIGINT, SIG_DFL);
+	else if (sigint == IGN)
+		signal(SIGINT, SIG_IGN);
+	else if (sigint == HDL)
+		signal(SIGINT, sig_handler);
+	if (sigquit == DFL)
 		signal(SIGQUIT, SIG_DFL);
-	}
-	else if (mode == SIG_HEREDOC_PARENT)
-	{
-		signal(SIGINT, sig_handler2);
+	else if (sigquit == IGN)
 		signal(SIGQUIT, SIG_IGN);
-	}
-	else if (mode == SIG_HEREDOC_CHILD)
-	{
-		signal(SIGINT, SIG_DFL);
-		signal(SIGQUIT, SIG_IGN);
-	}
+	else if (sigquit == HDL)
+		signal(SIGQUIT, sig_handler);
 }

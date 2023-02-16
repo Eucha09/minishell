@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sig.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:36:53 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/15 14:42:06 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/16 19:02:20 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,11 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-# define SIG_SHELL			0
-# define SIG_EXECVE_PARENT	1
-# define SIG_EXECVE_CHILD	2
-# define SIG_HEREDOC_PARENT	3
-# define SIG_HEREDOC_CHILD	4
+# define DFL 1
+# define IGN 2
+# define HDL 3
 
-void	set_signal(int mode);
+void	set_signal(int sigint, int sigquit);
+void	termsig_handler(int sig);
 
 #endif

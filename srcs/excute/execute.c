@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:08:31 by yim               #+#    #+#             */
-/*   Updated: 2023/02/16 15:59:22 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/16 19:05:47 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,6 @@ void	execute(t_astnode *astree, char *envp[])
 	command_init(&cmd, envp);
 	execute_cmdline(astree, &cmd, envp);
 	wait_all(&cmd);
-	set_signal(SIG_SHELL);
+	set_signal(HDL, IGN);
 	free_double_array(cmd.path);
 }

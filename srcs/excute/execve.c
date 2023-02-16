@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 16:00:44 by yim               #+#    #+#             */
-/*   Updated: 2023/02/16 16:00:45 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/16 19:05:03 by eujeong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ void	excute_after_cmd2(t_command *cmd, pid_t pid, int fd[2])
 {
 	if (cmd->pipe_after == 0)
 		cmd->pid = (long)pid;
-	set_signal(SIG_EXECVE_PARENT);
 	if (cmd->pipe_before)
 		close(cmd->pipe_fd);
 	if (cmd->pipe_after)
@@ -83,12 +82,13 @@ void	excute_after_cmd(t_command *cmd, char **envp, int fd[2])
 {
 	pid_t	pid;
 
+	set_signal(IGN, IGN);
 	pid = fork();
 	if (pid < 0)
 		return (perror("fork error"));
 	else if (pid == 0)
 	{
-		set_signal(SIG_EXECVE_CHILD);
+		set_signal(DFL, DFL);
 		if (check_builtins((cmd->cmd)[0]))
 			excute_after_builtins(cmd, envp, fd);
 		else
