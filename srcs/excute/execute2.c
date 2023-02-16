@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 13:56:48 by yim               #+#    #+#             */
-/*   Updated: 2023/02/16 19:41:46 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/16 19:58:03 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,11 @@ void	execute_ioredirect(t_astnode *astree, t_command *cmd)
 			cmd->file_in_fd = make_here_doc(astree->data);
 		if (cmd->file_in_fd == -1 || cmd->file_out_fd == -1)
 		{
-			g_errno = 1;
-			perror("minishell");
+			if (g_errno != 130)
+			{
+				perror("minishell");
+				g_errno = 1;
+			}
 		}
 	}
 }

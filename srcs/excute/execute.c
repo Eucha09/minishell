@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:08:31 by yim               #+#    #+#             */
-/*   Updated: 2023/02/16 19:16:09 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/16 19:57:09 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void	execute(t_astnode *astree, char *envp[])
 {
 	t_command	cmd;
 
+	g_errno = 0;
 	command_init(&cmd, envp);
 	execute_cmdline(astree, &cmd, envp);
 	wait_all(&cmd);

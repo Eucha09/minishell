@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 17:24:38 by yim               #+#    #+#             */
-/*   Updated: 2023/02/16 19:07:11 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/16 19:49:13 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,12 @@ int	make_here_doc2(char *limiter, int fd)
 	if (pid == 0)
 		make_here_doc3(limiter, fd, line);
 	waitpid(pid, &status, 0);
+	if (WIFSIGNALED(status))
+	{
+		termsig_handler(WTERMSIG(status));
+		set_signal(HDL, IGN);
+		return (-1);
+	}
 	set_signal(HDL, IGN);
 	return (0);
 }
@@ -51,6 +57,7 @@ int	make_here_doc2(char *limiter, int fd)
 int	make_here_doc(char *limiter_bf)
 {
 	int		fd;
+	int		flag;
 	char	*limiter;
 
 	limiter = ft_strjoin(limiter_bf, "\n");
@@ -62,8 +69,7 @@ int	make_here_doc(char *limiter_bf)
 		free (limiter);
 		return (-1);
 	}
-	if (make_here_doc2(limiter, fd))
-		return (-1);
+	flag = make_here_doc2(limiter, fd);
 	free (limiter);
 	fd = open("tmp_here_doc", O_RDONLY);
 	if (fd == -1)
@@ -72,5 +78,7 @@ int	make_here_doc(char *limiter_bf)
 		return (-1);
 	}
 	unlink("tmp_here_doc");
+	if (flag)
+		return (flag);
 	return (fd);
 }
