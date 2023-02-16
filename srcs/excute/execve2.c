@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:01:20 by yim               #+#    #+#             */
-/*   Updated: 2023/02/16 19:41:22 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/16 20:34:38 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	rezero_cmd(t_command *cmd)
 
 int	cmd_error_check(t_command *cmd)
 {
-	if (cmd->file_in_fd == -1 || cmd->file_out_fd == -1)
+	if (cmd->file_in_fd == -1 || cmd->file_out_fd == -1 || g_errno == 130)
 	{
 		rezero_cmd(cmd);
 		return (1);
