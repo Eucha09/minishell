@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eujeong <eujeong@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 15:02:19 by eujeong           #+#    #+#             */
-/*   Updated: 2023/02/15 14:39:18 by eujeong          ###   ########.fr       */
+/*   Updated: 2023/02/17 12:56:48 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # include "error.h"
 # include "sig.h"
 
-# define PROMPT			"minishell $ "
+# define PROMPT			"minishell-4.2$ "
 # define COLOR_GREEN	"\033[32;1m"
 # define COLOR_RESET	"\033[0m"
 
