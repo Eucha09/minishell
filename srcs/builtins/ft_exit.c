@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:09:47 by yim               #+#    #+#             */
-/*   Updated: 2023/02/15 17:04:23 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/17 13:02:41 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	check_digit(t_command *cmd)
 	i = 0;
 	if ((cmd->cmd)[1] == NULL)
 		return (0);
+	if ((cmd->cmd)[1][0] == '-')
+		i++;
 	while ((cmd->cmd)[1][i])
 	{
 		if (!ft_isdigit((cmd->cmd[1][i])))
