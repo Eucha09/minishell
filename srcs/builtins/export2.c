@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 19:31:32 by yim               #+#    #+#             */
-/*   Updated: 2023/02/14 19:53:09 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/17 13:36:48 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	check_ep_first(char *str)
 		if (str[0] != '_')
 		{
 			free(tmp);
-			return (CODE_ERROR);
+			return (code_error("export: not an identifier", 1));
 		}
 	}
 	while (tmp[i])
@@ -32,7 +32,7 @@ int	check_ep_first(char *str)
 		if (!ft_isalnum(tmp[i]) && tmp[i] != '_' && tmp[i] != '=')
 		{
 			free(tmp);
-			return (CODE_ERROR);
+			return (code_error("export: not an identifier", 1));
 		}
 		i++;
 	}

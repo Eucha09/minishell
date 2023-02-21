@@ -6,7 +6,7 @@
 /*   By: yim <yim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 14:09:56 by yim               #+#    #+#             */
-/*   Updated: 2023/02/15 14:45:21 by yim              ###   ########.fr       */
+/*   Updated: 2023/02/17 13:41:12 by yim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,10 @@ int	export2(int i, char **cmd, char **envp)
 	{
 		str = cmd[i];
 		if (check_ep_first(str) == CODE_ERROR)
-			return (code_error("export: not an identifier", 1));
-		if (check_key_double(envp, str) == -1)
+			;
+		else if (check_key_double(envp, str) == -1)
 			return (code_error("malloc error", 1));
-		if (check_key_double(envp, str))
+		else if (check_key_double(envp, str))
 		{
 			if (!ft_strchr(str, '='))
 			{
@@ -113,7 +113,7 @@ int	export2(int i, char **cmd, char **envp)
 			add_envp(envp, str);
 		i++;
 	}
-	return (CODE_OK);
+	return (g_errno);
 }
 
 int	export(char **envp, char **cmd, int file_out_fd)

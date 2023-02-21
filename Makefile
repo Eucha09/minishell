@@ -1,10 +1,10 @@
 CFLAGS = -Wall -Wextra -Werror
 NAME = minishell
 INCLUDES = includes
-READLINE_LIB = -L${HOME}/.brew/opt/readline/lib
-READLINE_INC = -I${HOME}/.brew/opt/readline/include
-# READLINE_LIB = -L/opt/homebrew/opt/readline/lib
-# READLINE_INC = -I/opt/homebrew/opt/readline/include
+# READLINE_LIB = -L${HOME}/.brew/opt/readline/lib
+# READLINE_INC = -I${HOME}/.brew/opt/readline/include
+READLINE_LIB = -L/opt/homebrew/opt/readline/lib
+READLINE_INC = -I/opt/homebrew/opt/readline/include
 SOURCES =   srcs/main.c\
             srcs/lexer/lexer.c\
 			srcs/lexer/token.c\
