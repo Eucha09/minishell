@@ -13,7 +13,7 @@ bash나 zsh과 같은 간단한 쉘 만들기
 3. **구문 분석 (syntax analysis)** - 토큰들을 받아 구문이 옮바른지 검사하고 구문 트리를 생성한다.
 4. **실행 (Execution)** - 구문 트리를 순회하며 명령어들을 실행한다.
 
-코드에서는 [main.c]()를 살펴보면 흐름을 간략하게 알 수 있다.
+코드에서는 [main.c](https://github.com/Eucha09/minishell/blob/main/srcs/main.c)를 살펴보면 흐름을 간략하게 알 수 있다.
 ```c
 int	main(int argc, char *argv[], char *envp[])
 {
