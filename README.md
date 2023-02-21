@@ -189,7 +189,6 @@ void	execute_command(t_astnode *astree, t_command *cmd, char *envp[])
 		return ;
 	// ...
 	execute_simplecmd(astree, cmd, envp);
-	execve_command(cmd, envp);
 	// ...
 }
 
