@@ -8,10 +8,10 @@ bash나 zsh과 같은 간단한 쉘 만들기
 
 다음은 구현한 쉘의 동작에 대한 간략한 설명이다. 실제 bash의 동작방식을 참고하였으며 bash의 동작 방식을 알고싶다면 [[Bash Reference Manual-Shell Operation](https://www.gnu.org/software/bash/manual/bash.html#Shell-Operation)]를 참고하면 된다.
 
-1. 명령어 입력받기 (readline) - 터미널에서 사용자로부터 문자열을 입력받는다.
-2. 어휘 분석 (lexcial analysis) - 입력받은 문자열을 토큰 단위로 나눈다.
-3. 구문 분석 (syntax analysis) - 토큰들을 받아 구문이 옮바른지 검사하고 구문 트리를 생성한다.
-4. 실행 (Execution) - 구문 트리를 순회하며 명령어들을 실행한다.
+1. **명령어 입력받기 (readline)** - 터미널에서 사용자로부터 문자열을 입력받는다.
+2. **어휘 분석 (lexcial analysis)** - 입력받은 문자열을 토큰 단위로 나눈다.
+3. **구문 분석 (syntax analysis)** - 토큰들을 받아 구문이 옮바른지 검사하고 구문 트리를 생성한다.
+4. **실행 (Execution)** - 구문 트리를 순회하며 명령어들을 실행한다.
 
 코드에서는 [main.c]()를 살펴보면 흐름을 간략하게 알 수 있다.
 ```c
@@ -50,14 +50,14 @@ int	main(int argc, char *argv[], char *envp[])
 
 ## 어휘 분석 (Lexical Analysis)
 
-어휘 분석(Lexical Analysis) 단계에서는 단순히 터미널에 들어온 사용자 입력을 토큰(token) 단위로 나누는 과정이다.
+어휘 분석(Lexical Analysis) 단계에서는 단순히 터미널에 들어온 사용자 입력을 **토큰(token)** 단위로 나누는 과정이다.
 
-- token : 쉘에서 입력을 처리하기 위해 적절한 단위로 명령문을 나누어야 하는데 이때 명령문을 나누는 최소 단위   
+- **token** : 쉘에서 입력을 처리하기 위해 적절한 단위로 명령문을 나누어야 하는데 이때 명령문을 나누는 최소 단위   
 ex) echo "hello world" > file1   
--> token : ```echo```, ```hello world```, ```>```, ```file1``` 
+-> tokens : ```echo```, ```hello world```, ```>```, ```file1``` 
 
-쉘 확장(ex. 환경변수 확장)또한 여기서 이루어진다. 확장된 토큰은 명령어 및 인자로 분활될 수 있다.
-> 원래 bash에서는 구문 분석까지 수행한 후 쉘 확장을 한다.
+**쉘 확장**(ex. 환경변수 확장)또한 여기서 이루어진다. 확장된 토큰은 명령어 및 인자로 분활될 수 있다.
+> 원래 bash에서는 구문 분석 후에 쉘 확장을 한다.
 
 ex)
 ```
@@ -67,14 +67,14 @@ hello world
 minishell-4.2$ echo "$a"
 hello        world
 ```
-```echo``` ```$a``` -> ```echo``` ```hello        world``` -> ```echo``` ```hello``` ```world```   
-```echo``` ```"$a"``` -> ```echo``` ```"hello        world"```
+- ```echo``` ```$a``` -> ```echo``` ```hello        world``` -> ```echo``` ```hello``` ```world```   
+- ```echo``` ```"$a"``` -> ```echo``` ```"hello        world"```
 
 ## 구문 분석 (Syntax Analysis)
 
-어휘 분석에서 생성된 토큰들을 받아 주어진 문법에 맞는지를 검사하고, 문법에 맞으면 구문 트리를 생성하는 과정이다.
+어휘 분석에서 생성된 토큰들을 받아 주어진 문법에 맞는지를 검사하고, 문법에 맞으면 **구문 트리(Parse Tree)**를 생성하는 과정이다.
 
-구문 분석방법에는 여러가지가 있겠지만 여기에선 재귀적 하향식 구문 분석 방식을 사용하였다.
+구문 분석방법에는 여러가지가 있겠지만 여기에선 **재귀 하강 파싱** 방식을 사용하였다.
 
 ### Syntax 규칙 정의
 
